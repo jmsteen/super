@@ -37,23 +37,23 @@ Technical challenges:
 Super uses MongoDB for its database and Express as its server framework.
 
 
-
 ## Group Members and Work Breakdown
 
 **John Steen**, **Alexander Crisel**, **Josh Kim**
 
 ### Day 1
-    * User authentication (all)
+  * User authentication (all)
+
 ### Day 2
-    * Back end articles (John)
-    * Back end comments (Alexander)
-    * Back end likes (Josh)
-    * Meet and decide roles for future days. 
+  * Back end articles (John)
+  * Back end comments (Alexander)
+  * Back end likes (Josh)
+  * Meet and decide roles for future days. 
 ### Day 3
-    * Front end articles (John)
-    * Front end comments (Alexander)
-    * Front end likes (Josh)
+  * Front end articles (John)
+  * Front end comments (Alexander)
+  * Front end likes (Josh)
 ### Day 4
-    * Finalize front for respective MVP features (All)
+  * Finalize front for respective MVP features (All)
 ### Day 5
-    * Review and debug
+  * Review and debug
