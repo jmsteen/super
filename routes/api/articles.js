@@ -36,7 +36,7 @@ router.post('/',
       title: req.body.title,
       body: req.body.body,
       //baby come back!
-      author: req.user.id
+      author: req.body.authorId
     });
 
     newArticle.save().then(article => res.json(article));
