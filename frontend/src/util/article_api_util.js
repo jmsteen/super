@@ -14,4 +14,8 @@ export const getUserArticles = id => {
 
 export const writeArticle = data => {
     return axios.post('/api/articles/', data)
-}
+};
+
+export const updateArticle = data => {
+    return axios.patch('/api/articles/', data)
+};
