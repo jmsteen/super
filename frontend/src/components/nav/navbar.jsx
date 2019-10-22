@@ -31,12 +31,13 @@ class NavBar extends React.Component {
         <button onClick={this.logoutUser}>Sign Out</button>
       </div> :
       <div className="navbar-buttons">
-        <button onClick={this.loginModal}>Login</button>
-        <button onClick={this.signupModal}>Signup</button>
+        <button className="login-button" onClick={this.loginModal}>Sign in</button>
+        <button className="signup-button" onClick={this.signupModal}>Get Started</button>
       </div>
 
       return (
-        <div>
+        <div className="navbar-container">
+          <Link to='/'><span className="navbar-logo">Super</span></Link>
           {buttons}           
         </div>
       );

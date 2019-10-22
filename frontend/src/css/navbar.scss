@@ -1,0 +1,23 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1050px;
+  min-width: 500px;
+  margin: 0 auto;
+  padding-top: 15px;
+}
+
+.navbar-logo {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.login-button {
+  padding: 10px;
+}
+
+.signup-button {
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 10px;
+}
