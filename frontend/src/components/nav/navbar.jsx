@@ -31,8 +31,8 @@ class NavBar extends React.Component {
         <button onClick={this.logoutUser}>Sign Out</button>
       </div> :
       <div className="navbar-buttons">
-        <button className="login-button" onClick={this.loginModal}>Sign in</button>
-        <button className="signup-button" onClick={this.signupModal}>Get Started</button>
+        <button className="navbar-login-button" onClick={this.loginModal}>Sign in</button>
+        <button className="navbar-signup-button" onClick={this.signupModal}>Get Started</button>
       </div>
 
       return (
