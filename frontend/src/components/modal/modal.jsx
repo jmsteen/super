@@ -8,13 +8,14 @@ function Modal({ modal, closeModal }) {
   if (!modal) {
     return null;
   }
+
   let component;
   switch (modal) {
     case 'login':
-      component = <LoginUpFormContainer />;
+      component = <LoginFormContainer />;
       break;
     case 'signup':
-      component = <SignUp />;
+      component = <SignupFormContainer />;
       break;
     default:
       return null;
