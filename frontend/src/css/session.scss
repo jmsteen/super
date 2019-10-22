@@ -1,0 +1,35 @@
+.session-form-container {
+  position: absolute;
+  min-width: 400px;
+  width: 800px;
+  height: 500px;
+  background: #eee url('../assets/images/pencils.jpeg') center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.session-form {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  background-image: none;
+}
+
+.session-form input {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  background-color: white;
+  line-height: 1.5;
+}
+
+.session-button {
+  display: block;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 3px;
+  margin: 0 auto;
+}

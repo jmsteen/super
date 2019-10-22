@@ -18,7 +18,6 @@ module.exports = function validateArticleInput(data) {
         errors.title = 'Title is required';
     }
 
-
     return {
         errors,
         isValid: Object.keys(errors).length === 0
