@@ -5,5 +5,6 @@ import users from './users_reducer';
 
 export default combineReducers({
     articles,
-    users
+    users,
+    comments
 })

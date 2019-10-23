@@ -13,13 +13,13 @@ export const removeComment = comment =>({
   comment
 })
 
-export const createComment = comment => dispatch => {
+export const composeComment = comment => dispatch => {
   createComment(comment)
     .then(newComment => dispatch(receiveComment(newComment)))
     .catch(err => console.log(err))
 };
 
-export const deleteComment = id => dispatch => {
+export const eraseComment = id => dispatch => {
   deleteComment(id)
     .then(comment => dispatch(receiveComment(comment)))
     .catch(err => console.log(err))

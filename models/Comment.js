@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  user: {
+  author: {
     type: Schema.Types.ObjectId,
     ref: 'users',
     required: true
@@ -16,6 +16,7 @@ const CommentSchema = new Schema({
   article: {
     type: Schema.Types.ObjectId,
     ref: 'articles',
+    required: true
   },
 
   likes: [{

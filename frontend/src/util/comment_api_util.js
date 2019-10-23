@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const createLike = data => {
+export const createComment = data => {
   return axios.post('/api/comments/', data)
 };
 
-export const deleteLike = id => {
+export const deleteComment = id => {
   return axios.delete(`/api/comments/${id}`)
 };
