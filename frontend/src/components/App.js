@@ -8,7 +8,7 @@ import HomePage from './home/home_page';
 import Modal from './modal/modal';
 import ArticlesContainer from './articles/articles_container';
 // import ProfileContainer from './profile/profile_container';
-//import ArticleComposeContainer from './articles/article_compose_container';
+import ArticleComposeContainer from './articles/article_compose_container';
 
 const App = () => (
   <div>
@@ -18,7 +18,7 @@ const App = () => (
       <AuthRoute exact path="/" component={HomePage} />
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       {/* <ProtectedRoute exact path="/profile" component={ProfileContainer} /> */}
-      {/* <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} /> */}
+      <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />
     </Switch>
   </div>
 );
