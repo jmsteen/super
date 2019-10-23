@@ -1,0 +1,25 @@
+.home-secondary-panel {
+  display: flex;
+}
+
+.home-secondary-panel img {
+  height: 110px;
+  width: 110px;
+}
+
+.home-secondary-panel-text {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 3px;
+}
+
+.home-secondary-panel h2 {
+  font-weight: 600;
+}
+
+.home-secondary-panel p {
+}
