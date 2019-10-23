@@ -7,19 +7,19 @@ const receiveLike = like => ({
   like
 });
 
-const createLike = like => dispatch => {
+export const makeLike = like => dispatch => {
   createLike(like)
     .then(newLike => dispatch(receiveLike(newLike)))
     .catch(err => console.log(err))
 };
 
-const incrementLike = id => dispatch => {
+export const increaseLike = id => dispatch => {
   incrementLike(id)
     .then(like => dispatch(receiveLike(like)))
     .catch(err => console.log(err))
 };
 
-const deleteLike = id => dispatch => {
+export const eraseLike = id => dispatch => {
   deleteLike(id)
     .then(like => dispatch(receiveLike(like)))
     .catch(err => console.log(err))
