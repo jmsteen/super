@@ -11,35 +11,37 @@ router.post('/',
 
     const newLike = new Like({
       user: req.user.id,
-      article: req.params.articleId,
-      comment: req.params.commentId,
+      article: req.body.articleId,
+      comment: req.body.commentId,
       value: 1
     });
 
-    if (req.params.articleId) {
-      Article.findById(req.params.articleId)
+    if (req.body.articleId) {
+      Article.findById(req.body.articleId)
         .then(article => {
-          newLike.article = mongoose.Types.ObjectId(req.params.articleId)
+          newLike.article = mongoose.Types.ObjectId(req.body.articleId)
           newLike.save()
             .then(like => res.json(like), err => err = res.status(400).json(err));
-          article.likes.push(like._id);
+          article.likes.push(newLike._id);
           article.save()
             .then(() => {}, err => {});
         }).catch(err => {
           return res.status(404).json({ noarticlefound: 'No article found with that ID' });
         });
-    } else {
-      Comment.findById(req.params.commentId)
+    } else if (req.body.commentId) {
+      Comment.findById(req.body.commentId)
         .then(comment => {
-          newLike.comment = mongoose.Types.ObjectId(req.params.commentId)
+          newLike.comment = mongoose.Types.ObjectId(req.body.commentId)
           newLike.save()
             .then(like => res.json(like), err => err = res.status(400).json(err));
-          comment.likes.push(like._id);
+          comment.likes.push(newLike._id);
           comment.save()
             .then(() => { }, err => { });
         }).catch(err => {
           return res.status(404).json({ nocommentfound: 'No comment found with that ID' });
         });
+    } else {
+      res.status(404).json({ invalidparams: 'Need article or comment to create a like' });
     }
   }
 );
