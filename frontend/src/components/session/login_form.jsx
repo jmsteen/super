@@ -12,6 +12,7 @@ class LoginForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
 
@@ -35,6 +36,18 @@ class LoginForm extends React.Component {
     let user = {
       email: this.state.email,
       password: this.state.password
+    };
+
+    this.props.login(user).then(() => this.props.closeModal());
+  }
+
+  handleDemo(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    let user = {
+      email: "demo@demouser.com",
+      password: "demouser"
     };
 
     this.props.login(user).then(() => this.props.closeModal());
@@ -69,7 +82,10 @@ class LoginForm extends React.Component {
               placeholder="Password"
             />
             <br />
-            <button className="session-button">Submit</button>
+            <div className="session-button-container">
+              <button className="session-button">Login</button>
+              <button className="session-button" onClick={this.handleDemo}>Demo Login</button>
+            </div>
             {this.renderErrors()}
           </div>
         </form>
