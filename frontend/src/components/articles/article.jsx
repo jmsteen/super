@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
-import ArticleBodyEditor from './article_body_editor';
-import ArticleTitleEditor from './article_title_editor';
+import ArticleEditor from './article_editor';
 import './article.scss';
 
 export default class Article extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            title: ""
+        }
+    }
+
+    update(field) {
+        return e => {
+            this.setState({
+                [field]: e.target.value
+            });
+        };
+    };
 
     render() {
         return (
             <div>
-                <ArticleTitleEditor placeholder="Title"/>
-                <ArticleBodyEditor placeholder="Share your thoughts..."/>
-                <button className="publish-button">Publish</button>
+                <form className="title-text-editor">
+                    <input 
+                        type="text"
+                        value={this.state.title}
+                        onChange={this.update('title')}
+                        placeholder="Title"
+                    />
+                </form>
+                <ArticleEditor 
+                    handlePost={this.props.composeArticle} 
+                    placeholder="Share your thoughts..."
+                    author={this.props.author}
+                    title={this.state.title}
+                />
             </div>
         )
     }

@@ -1,0 +1,38 @@
+.home-primary-panel {
+  padding: 20px;
+  padding-top: 0;
+  object-fit: cover;
+  background-repeat: none;
+}
+
+.home-primary-panel img {
+  display: block;
+  margin: 0 auto;
+  height: 200px;
+  width: 95%;
+}
+
+.home-primary-panel-text {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.home-primary-panel h2 {
+  font-size: 24px;
+  width: 80%;
+  font-weight: 600;
+}
+
+.home-primary-panel p {
+  text-align: center;
+  width: 75%;
+}
+
+.home-primary-panel span {
+
+}
