@@ -1,0 +1,42 @@
+.body-text-editor {
+    padding: 0 20px;
+    max-width: 740px;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.body-text-editor::placeholder {
+    color: lightgray;
+    font-size: 40px;
+}
+
+.publish-button {
+    background: rgb(21, 187, 21);
+    color: white;
+    height: 30px;
+    width: 90px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 20px;
+    right: 400px;
+    font-weight: 500;
+    outline: none;
+    border-color: rgb(21, 187, 21);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.publish-button:hover {
+    background: rgb(25, 169, 25)
+}
+
+.title-text-editor {
+    padding: 0 20px;
+    max-width: 740px;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 45px;
+    margin-top: 40px;
+}
