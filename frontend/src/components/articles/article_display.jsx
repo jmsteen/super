@@ -111,7 +111,11 @@ class ArticleDisplay extends Component {
                         ref="editor"
                     /></div>)}
                 </div>
+<<<<<<< HEAD
                 <ArticleLikeContainer />
+=======
+                <commentForm/>
+>>>>>>> 19aea51... Commit before master rebase
             </div>
         )
     }
