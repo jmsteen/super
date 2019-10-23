@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const Article = require('../../models/Article');
+const Like = require('../../models/Like');
 const validateArticleInput = require('../../validation/articles');
 
 router.get('/', (req, res) => {
@@ -16,7 +17,13 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id)
-    .then(article => res.json(article))
+    .then(article => {
+      Like.find({ '_id': { $in: article.likes }})
+        .then(likes => {
+          article.likes = likes
+          return res.json(article);
+        }).catch(err => res.status(404).json({ error: "Encountered issue populating article likes"}));
+    })
     .catch(err =>
       res.status(404).json({ noarticlefound: 'No article found with that ID' })
     );

@@ -13,6 +13,14 @@ const receiveLikes = likes => ({
   likes
 });
 
+const fetchCommentLikes = id => dispatch => {
+
+};
+
+const fetchArticleLikes = id => dispatch => {
+
+};
+
 const createLike = like => dispatch => {
   createLike(like)
     .then(newLike => dispatch(receiveLike(newLike)))
