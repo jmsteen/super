@@ -3,7 +3,7 @@
   min-width: 400px;
   width: 800px;
   height: 500px;
-  background: #eee url('../assets/images/modal-background.jpg') center;
+  background: #eee url('../assets/images/modal-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -15,6 +15,7 @@
   margin-top: 100px;
   padding: 20px;
   background-image: none;
+  background-color: #eceae7;
 }
 
 .session-form input {
@@ -32,4 +33,21 @@
   border: 1px solid gray;
   border-radius: 3px;
   margin: 0 auto;
+}
+
+.session-button-container {
+  display: flex;
+  justify-content: center;
+  width: 45%;
+  margin: 0 auto;
+}
+
+.session-errors-list {
+  padding: 12px 20px;
+  padding-bottom: 10px;
+  list-style-type: disc;
+}
+
+.session-errors-list li {
+  margin-left: 50px;
 }
