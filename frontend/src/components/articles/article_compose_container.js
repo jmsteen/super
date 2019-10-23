@@ -1,10 +1,10 @@
 import Article from './article';
 import { connect } from 'react-redux';
-import { composeArticle } from '../../actions/article_actions'
+import { composeArticle } from '../../actions/article_actions';
 
 const mapStateToProps = ({session: { user }}) => ({
     author: user.id
-})
+});
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -12,4 +12,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Article)
+export default connect(mapStateToProps, mapDispatchToProps)(Article);

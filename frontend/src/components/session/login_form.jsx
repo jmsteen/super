@@ -12,15 +12,18 @@ class LoginForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
-      this.props.history.push('/');
+  componentDidUpdate() {
+    if (this.props.loggedIn) {
+      this.props.closeModal();
     }
+  }
 
-    this.setState({ errors: nextProps.errors })
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   update(field) {
@@ -37,15 +40,27 @@ class LoginForm extends React.Component {
       password: this.state.password
     };
 
+    this.props.login(user);
+  }
+
+  handleDemo(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    let user = {
+      email: "demo@demouser.com",
+      password: "demouser"
+    };
+
     this.props.login(user).then(() => this.props.closeModal());
   }
 
   renderErrors() {
     return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
+      <ul className="session-errors-list">
+        {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
-            {this.state.errors[error]}
+            {error}
           </li>
         ))}
       </ul>
@@ -69,7 +84,10 @@ class LoginForm extends React.Component {
               placeholder="Password"
             />
             <br />
-            <button className="session-button">Submit</button>
+            <div className="session-button-container">
+              <button className="session-button">Login</button>
+              <button className="session-button" onClick={this.handleDemo}>Demo Login</button>
+            </div>
             {this.renderErrors()}
           </div>
         </form>
