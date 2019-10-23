@@ -11,7 +11,11 @@ router.get('/', (req, res) => {
   Article.find()
     .limit(10)
     .sort({ date: -1 })
-    .then(articles => res.json(articles))
+    .then(articles => {
+      const responseObj = {};
+      articles.forEach(article => { responseObj[article._id] = article });
+      return res.json(responseObj)
+    })
     .catch(err => res.status(404).json({ noarticlesfound: 'No articles found' }));
 });
 

@@ -1,25 +1,11 @@
 import { createLike, incrementLike, deleteLike } from '../util/like_api_util';
 
 export const RECEIVE_LIKE = "RECEIVE_ARTICLES";
-export const RECEIVE_LIKES = "RECEIVE_ARTICLE";
 
 const receiveLike = like => ({
   type: RECEIVE_LIKE,
   like
 });
-
-const receiveLikes = likes => ({
-  type: RECEIVE_LIKES,
-  likes
-});
-
-const fetchCommentLikes = id => dispatch => {
-
-};
-
-const fetchArticleLikes = id => dispatch => {
-
-};
 
 const createLike = like => dispatch => {
   createLike(like)
