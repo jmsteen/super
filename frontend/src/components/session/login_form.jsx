@@ -16,12 +16,14 @@ class LoginForm extends React.Component {
     this.renderErrors = this.renderErrors.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentUser === true) {
-      this.props.history.push('/');
+  componentDidUpdate() {
+    if (this.props.loggedIn) {
+      this.props.closeModal();
     }
+  }
 
-    this.setState({ errors: nextProps.errors })
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   update(field) {
@@ -38,7 +40,7 @@ class LoginForm extends React.Component {
       password: this.state.password
     };
 
-    this.props.login(user).then(() => this.props.closeModal());
+    this.props.login(user);
   }
 
   handleDemo(e) {
@@ -55,10 +57,10 @@ class LoginForm extends React.Component {
 
   renderErrors() {
     return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
+      <ul className="session-errors-list">
+        {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
-            {this.state.errors[error]}
+            {error}
           </li>
         ))}
       </ul>

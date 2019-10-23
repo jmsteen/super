@@ -16,12 +16,14 @@ class SignupForm extends React.Component {
     this.clearedErrors = false;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push('/login');
+  componentDidUpdate() {
+    if (this.props.loggedIn) {
+      this.props.closeModal();
     }
+  }
 
-    this.setState({ errors: nextProps.errors })
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   update(field) {
@@ -39,15 +41,15 @@ class SignupForm extends React.Component {
       password2: this.state.password2
     };
 
-    this.props.signup(user, this.props.history).then(() => this.props.closeModal());
+    this.props.signup(user, this.props.history);
   }
 
   renderErrors() {
     return (
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
+      <ul className="session-errors-list">
+        {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
-            {this.state.errors[error]}
+            {error}
           </li>
         ))}
       </ul>
