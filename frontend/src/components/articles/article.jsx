@@ -29,12 +29,14 @@ export default class Article extends Component {
                         placeholder="Title"
                     />
                 </form>
-                <ArticleEditor 
-                    handlePost={this.props.composeArticle} 
-                    placeholder="Share your thoughts..."
-                    author={this.props.author}
-                    title={this.state.title}
-                />
+                <div>
+                    <ArticleEditor 
+                        handlePost={this.props.composeArticle} 
+                        placeholder="Share your thoughts..."
+                        author={this.props.author}
+                        title={this.state.title}
+                    />
+                </div>
             </div>
         )
     }
