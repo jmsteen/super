@@ -25,8 +25,8 @@ export const fetchArticles = () => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const fetchArticle = () => dispatch => (
-    getArticle()
+export const fetchArticle = (id) => dispatch => (
+    getArticle(id)
         .then(article => dispatch(receiveArticle(article)))
         .catch(err => console.log(err))
 );

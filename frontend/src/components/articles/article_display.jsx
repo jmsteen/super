@@ -2,21 +2,24 @@ import React, { Component } from 'react'
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { fetchArticle } from '../../actions/article_actions';
 
 const mapStateToProps = ({articles}, ownProps) => {
     return {
-        article: articles[ownProps.match.params.id]
+        
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {}
-}
+    return {
+        fetchArticle: id => dispatch(fetchArticle(id))
+    };
+};
 
 const Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
     return (
-        <a href={url} style={styles.link}>
+        <a href={url} nofollow noreferrer>
             {props.children}
         </a>
     );
@@ -43,6 +46,21 @@ const decorator = new CompositeDecorator([{
 class ArticleDisplay extends Component {
     constructor(props) {
         super(props)
+        
+        this.state = {
+            title: "",
+            body: null,
+            author: ""
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchArticle(this.props.match.params.id)
+            .then(res => this.setState({
+                title: res.article.data.title,
+                body: res.article.data.body,
+                author: res.article.data.author
+            }))
     }
 
     convertToRichText(rawContent) {
@@ -53,11 +71,16 @@ class ArticleDisplay extends Component {
 
     render() {
         return (
-            <div>
-                <Editor 
-                    editorState={convertToRichText(this.props.rawContent)}
-                    readOnly
-                />
+            <div className="article-display-container">
+                <div className="article-display">
+                    <h1 className="article-display-title">{this.state.title}</h1>
+                    <h2>{this.state.author}</h2>
+                    {this.state.body && (<div className="article-display-body">
+                    <Editor 
+                        editorState={this.convertToRichText(this.state.body)}
+                        readOnly
+                    /></div>)}
+                </div>
             </div>
         )
     }
