@@ -26,7 +26,7 @@ const plugins = [
     createMarkdownPlugin()
 ]
 
-export default class ArticleBodyEditor extends Component {
+export default class ArticleEditor extends Component {
     constructor(props) {
         super(props)
         this.state = { editorState: EditorState.createEmpty() };

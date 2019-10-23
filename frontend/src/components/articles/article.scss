@@ -1,3 +1,20 @@
+.article-display {
+    max-width: 740px;
+    padding: 0 20px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.article-display-title {
+    font-size: 40px;
+}
+
+.article-display-body {
+    font-size: 21px;
+    margin-top: 30px;
+}
+
+
 .body-text-editor {
     padding: 0 20px;
     max-width: 740px;
@@ -5,6 +22,7 @@
     width: 100%;
     font-size: 22px;
     margin-top: 20px;
+    overflow: auto;
 }
 
 .body-text-editor::placeholder {
