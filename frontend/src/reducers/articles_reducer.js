@@ -4,6 +4,7 @@ import { RECEIVE_ARTICLES, RECEIVE_USER_ARTICLES, RECEIVE_ARTICLE } from '../act
 const ArticlesReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
+    
     switch (action.type) {
         case RECEIVE_ARTICLES:
             return action.articles.data;

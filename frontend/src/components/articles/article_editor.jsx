@@ -57,7 +57,12 @@ export default class ArticleBodyEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        this.props.handlePost(contentString);
+        
+        this.props.handlePost({
+            body: contentString,
+            author: this.props.author,
+            title: this.props.title
+        });
     }
 
     renderPlaceholder(placeholder, editorState) {
@@ -94,6 +99,7 @@ export default class ArticleBodyEditor extends Component {
                             </div>
                         )
                     }</InlineToolbar>
+                    <button onClick={this.handlePost} className="publish-button">Publish</button>
                 </div>
             </div>
         )
