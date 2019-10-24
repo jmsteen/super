@@ -108,9 +108,8 @@ export default class ArticleEditor extends Component {
                         )
                     }</InlineToolbar>
                     
-                    <button onClick={this.handlePost} className="publish-button">Publish</button>
                 </div>
-                    
+                <button onClick={this.handlePost} className="publish-button">Publish</button>  
             </div>
         )
     }
