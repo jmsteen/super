@@ -6,6 +6,7 @@ import { fetchArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
+import CommentIndex from '../comments/comment_index_container';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -111,7 +112,10 @@ class ArticleDisplay extends Component {
                         ref="editor"
                     /></div>)}
                 </div>
+               
+
                 <ArticleLikeContainer />
+                    <CommentIndex />
             </div>
         )
     }
