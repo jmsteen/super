@@ -3,6 +3,7 @@ import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-j
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchArticle } from '../../actions/article_actions';
+import ArticleLikeContainer from './article_like';
 
 const mapStateToProps = ({articles}, ownProps) => {
     return {
@@ -81,9 +82,7 @@ class ArticleDisplay extends Component {
                         readOnly
                     /></div>)}
                 </div>
-                <div className="article-display-like-container">
-                    <i class="far fa-heart" />
-                </div>
+                <ArticleLikeContainer />
             </div>
         )
     }
