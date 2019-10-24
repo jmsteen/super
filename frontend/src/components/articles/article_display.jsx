@@ -81,6 +81,9 @@ class ArticleDisplay extends Component {
                         readOnly
                     /></div>)}
                 </div>
+                <div className="article-display-like-container">
+                    <i class="far fa-heart" />
+                </div>
             </div>
         )
     }
