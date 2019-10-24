@@ -91,7 +91,6 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container {
-    background-color: red;
     max-width: 740px;
     margin: 0 auto;
     height: 60px;
@@ -100,6 +99,7 @@ div.DraftEditor-root {
     justify-content: space-between;
     padding: 10px;
     box-sizing: border-box;
+    margin-bottom: 30px;
 }
 
 .article-display-like-container i {
@@ -108,12 +108,10 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container div {
-    background-color: green;
     display: flex;
 }
 
 .article-display-like-container span {
-    background-color: blue;
     margin-left: 10px;
 }
 
