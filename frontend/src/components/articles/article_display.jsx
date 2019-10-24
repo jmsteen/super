@@ -3,10 +3,12 @@ import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-j
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchArticle } from '../../actions/article_actions';
+import ArticleLikeContainer from './article_like';
+import ReactLoading from 'react-loading';
 
-const mapStateToProps = ({articles}, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        
+        currentArticle: state.entities.articles[ownProps.match.params.id]
     };
 };
 
@@ -50,17 +52,19 @@ class ArticleDisplay extends Component {
         this.state = {
             title: "",
             body: null,
-            author: ""
+            author: "",
+            loaded: false
         }
     }
 
     componentDidMount() {
         this.props.fetchArticle(this.props.match.params.id)
             .then(res => this.setState({
-                title: res.data.title,
-                body: res.data.body,
-                author: res.data.author
-            }))
+                title: res.article.data.title,
+                body: res.article.data.body,
+                author: res.article.data.author,
+                loaded: true
+            })).catch(err => this.setState({ loaded: true }));
     }
 
     convertToRichText(rawContent) {
@@ -70,6 +74,16 @@ class ArticleDisplay extends Component {
     }
 
     render() {
+        if (!this.state.loaded) {
+            return <ReactLoading
+                type={"white"}
+                color={"white"}
+                height={700}
+                width={400} />
+        } else if (!this.props.currentArticle) {
+            return <h2 className="profile-error">Article does not exist</h2>
+        }
+
         return (
             <div className="article-display-container">
                 <div className="article-display">
@@ -81,6 +95,7 @@ class ArticleDisplay extends Component {
                         readOnly
                     /></div>)}
                 </div>
+                <ArticleLikeContainer />
             </div>
         )
     }
