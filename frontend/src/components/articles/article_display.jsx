@@ -67,6 +67,19 @@ class ArticleDisplay extends Component {
             })).catch(err => this.setState({ loaded: true }));
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.setState({ loaded: false });
+            this.props.fetchArticle(this.props.match.params.id)
+                .then(res => this.setState({
+                    title: res.data.title,
+                    body: res.data.body,
+                    author: res.data.author,
+                    loaded: true
+                })).catch(err => this.setState({ loaded: true }));
+            }
+    }
+
     convertToRichText(rawContent) {
         const richContent = convertFromRaw(JSON.parse(rawContent));
         const editorState = EditorState.createWithContent(richContent, decorator);
