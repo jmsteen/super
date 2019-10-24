@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
+import { CompositeDecorator, convertFromRaw, Editor, EditorState, AtomicBlockUtils } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchArticle } from '../../actions/article_actions';
+import { mediaBlockRenderer } from './image_render';
 
 const mapStateToProps = ({articles}, ownProps) => {
     return {
@@ -79,6 +80,8 @@ class ArticleDisplay extends Component {
                     <Editor 
                         editorState={this.convertToRichText(this.state.body)}
                         readOnly
+                        blockRendererFn={mediaBlockRenderer} 
+                        ref="editor"
                     /></div>)}
                 </div>
             </div>
