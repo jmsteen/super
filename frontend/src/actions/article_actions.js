@@ -27,7 +27,10 @@ export const fetchArticles = () => dispatch => (
 
 export const fetchArticle = (id) => dispatch => (
     getArticle(id)
-        .then(article => dispatch(receiveArticle(article)))
+        .then(article => {
+            dispatch(receiveArticle(article))
+            return article
+        })
         .catch(err => console.log(err))
 );
 

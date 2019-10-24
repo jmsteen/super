@@ -9,5 +9,5 @@ export const incrementLike = id => {
 };
 
 export const deleteLike = id => {
-  return axios.patch(`/api/likes/${id}`)
+  return axios.delete(`/api/likes/${id}`)
 };

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { EditorState, RichUtils, convertToRaw } from 'draft-js';
-import Editor from 'draft-js-plugins-editor';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import createImagePlugin from 'draft-js-image-plugin';
+import ImageAdd from './image_add';
 import {
     ItalicButton,
     BoldButton,
@@ -18,12 +20,14 @@ import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
 
 const linkPlugin = createLinkPlugin({placeholder: 'Enter your link here...'});
 const { LinkButton } = linkPlugin;
+const imagePlugin = createImagePlugin();
 const inlineToolbarPlugin = createInlineToolbarPlugin();
 const { InlineToolbar } = inlineToolbarPlugin;
 const plugins = [
     inlineToolbarPlugin,
     linkPlugin,
-    createMarkdownPlugin()
+    createMarkdownPlugin(),
+    imagePlugin
 ]
 
 export default class ArticleEditor extends Component {
@@ -74,7 +78,12 @@ export default class ArticleEditor extends Component {
 
     render() {
         return (
-            <div>
+            <div className="article-compose-container">
+                <ImageAdd
+                    editorState={this.state.editorState}
+                    onChange={this.onChange}
+                    modifier={imagePlugin.addImage}
+                />
                 <div className="body-text-editor" onClick={this.focus}>
                     <Editor
                         editorState={this.state.editorState}
@@ -85,7 +94,6 @@ export default class ArticleEditor extends Component {
                         ref={(element) => { this.editor = element; }}
                     />
                     <InlineToolbar>{
-                        // may be use React.Fragment instead of div to improve perfomance after React 16
                         (externalProps) => (
                             <div>
                                 <BoldButton {...externalProps} />
@@ -99,8 +107,10 @@ export default class ArticleEditor extends Component {
                             </div>
                         )
                     }</InlineToolbar>
+                    
                     <button onClick={this.handlePost} className="publish-button">Publish</button>
                 </div>
+                    
             </div>
         )
     }

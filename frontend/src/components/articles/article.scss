@@ -1,3 +1,15 @@
+.article-compose-container {
+    display: flex;
+    align-items: center;
+     padding: 0 20px;
+    max-width: 780px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 20px;
+     overflow: auto;
+    max-height: 67vh;
+}
+
 .article-display {
     max-width: 740px;
     padding: 0 20px;
@@ -17,13 +29,13 @@
 
 .body-text-editor {
     padding: 0 20px;
-    max-width: 740px;
-    margin: 0 auto;
+    // max-width: 740px;
+    // margin: 0 auto;
     width: 100%;
     font-size: 22px;
-    margin-top: 20px;
-    overflow: auto;
-    max-height: 67vh;
+    // margin-top: 20px;
+    // overflow: auto;
+    // max-height: 67vh;
 }
 
 .body-text-editor::placeholder {
@@ -60,9 +72,41 @@ div.DraftEditor-root {
 
 .title-text-editor {
     padding: 0 20px;
-    max-width: 740px;
+    max-width: 680px;
     margin: 0 auto;
     width: 100%;
     font-size: 45px;
     margin-top: 40px;
+}
+
+.article-display-like-container {
+    background-color: red;
+    max-width: 740px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.article-display-like-container i {
+    font-size: 48px;
+    cursor: pointer;
+}
+
+.article-display-like-container div {
+    background-color: green;
+    display: flex;
+}
+
+.article-display-like-container span {
+    background-color: blue;
+    margin-left: 10px;
+}
+
+.article-display-like-container button {
+    border: 1px solid black;
+    padding: 5px;
 }
