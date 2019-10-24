@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
+import { Route, NavLink } from 'react-router-dom';
+import ProfileMainFeed from './main_feed';
+import ProfileLikeFeed from './like_feed';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -45,7 +48,12 @@ class ProfilePage extends React.Component {
           </div>
         </header>
         <main>
-
+          <div className='profile-nav'>
+            <NavLink className='profile-nav-tab' exact to={`/@${handle}`}>Profile</NavLink>
+            <NavLink className='profile-nav-tab' to={`/@${handle}/likes`}>Likes</NavLink>
+          </div>
+          <Route exact path='/@:handle' component={ProfileMainFeed} />
+          <Route path='/@:handle/likes' component={ProfileLikeFeed} />
         </main>
       </section>
     )

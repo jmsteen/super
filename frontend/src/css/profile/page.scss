@@ -50,3 +50,20 @@
   object-position: 50% 50%;
   border-radius: 50%;
 }
+
+.profile-nav {
+  max-width: 710px;
+  min-width: 420px;
+  margin: 0 auto;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.profile-nav-tab {
+  margin-right: 20px;
+  padding: 11px 0;
+}
+
+.active {
+  border-bottom: 1px solid black;
+}
