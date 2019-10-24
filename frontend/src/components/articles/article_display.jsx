@@ -60,9 +60,9 @@ class ArticleDisplay extends Component {
     componentDidMount() {
         this.props.fetchArticle(this.props.match.params.id)
             .then(res => this.setState({
-                title: res.article.data.title,
-                body: res.article.data.body,
-                author: res.article.data.author,
+                title: res.data.title,
+                body: res.data.body,
+                author: res.data.author,
                 loaded: true
             })).catch(err => this.setState({ loaded: true }));
     }
