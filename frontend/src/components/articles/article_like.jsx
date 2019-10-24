@@ -20,7 +20,7 @@ class ArticleLike extends React.Component {
     super(props);
     const { currentArticle, currentUser } = this.props;
     const currentLike = currentArticle.likes.find(like => like.user === currentUser.id);
-    
+
     this.state = { 
       articleId: this.props.articleId,
       currentLike
@@ -53,7 +53,12 @@ class ArticleLike extends React.Component {
   }
 
   handleIncrement() {
-    this.props.increaseLike(this.state.currentLike._id);
+    if (this.state.currentLike.value < 50) {
+      this.props.increaseLike(this.state.currentLike._id)
+        .then(() => this.forceUpdate());
+    } else {
+      return;
+    }
   }
 
   renderButton() {
@@ -65,9 +70,15 @@ class ArticleLike extends React.Component {
   }
 
   render() {
+    const valueArr = this.props.currentArticle.likes.map(like => like.value);
+    const likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);
+
     return (
       <div className="article-display-like-container">
-        {this.renderButton()}
+        <div>
+          {this.renderButton()}
+          <span>{`${likesValue}`} Likes</span>
+        </div>
         <button onClick={this.handleErase}>Undo Like</button>
       </div>
     )

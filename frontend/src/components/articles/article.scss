@@ -96,6 +96,16 @@ div.DraftEditor-root {
     cursor: pointer;
 }
 
+.article-display-like-container div {
+    background-color: green;
+    display: flex;
+}
+
+.article-display-like-container span {
+    background-color: blue;
+    margin-left: 10px;
+}
+
 .article-display-like-container button {
     border: 1px solid black;
     padding: 5px;
