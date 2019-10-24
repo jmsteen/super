@@ -100,22 +100,24 @@ class ArticleDisplay extends Component {
         }
 
         return (
-            <div className="article-display-container">
-                <div className="article-display">
-                    <h1 className="article-display-title">{this.state.title}</h1>
-                    <h2>{this.state.author}</h2>
-                    {this.state.body && (<div className="article-display-body">
-                    <Editor 
-                        editorState={this.convertToRichText(this.state.body)}
-                        readOnly
-                        blockRendererFn={mediaBlockRenderer} 
-                        ref="editor"
-                    /></div>)}
-                </div>
-               
+            <div className="display-article-outer">
+                <div className="display-article-inner">
+                    <div className="article-display">
+                        <h1 className="article-display-title">{this.state.title}</h1>
+                        <h2>{this.state.author}</h2>
+                        {this.state.body && (<div className="article-display-body">
+                        <Editor 
+                            editorState={this.convertToRichText(this.state.body)}
+                            readOnly
+                            blockRendererFn={mediaBlockRenderer} 
+                            ref="editor"
+                        /></div>)}
+                    </div>
+                
 
-                <ArticleLikeContainer />
-                    <CommentIndex />
+                    <ArticleLikeContainer />
+                        <CommentIndex />
+                </div>
             </div>
         )
     }
