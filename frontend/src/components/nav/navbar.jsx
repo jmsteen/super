@@ -28,6 +28,7 @@ class NavBar extends React.Component {
   render() {
     const buttons = this.props.loggedIn ?
       <div className="navbar-buttons">
+        <Link to={`/new_article`}>Create Story</Link>
         <Link to={`/@${this.props.currentUser.handle}`}>Profile</Link>
         <button onClick={this.logoutUser}>Sign Out</button>
       </div> :
