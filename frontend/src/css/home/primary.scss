@@ -9,7 +9,7 @@
   display: block;
   margin: 0 auto;
   height: 200px;
-  width: 95%;
+  width: 90%;
 }
 
 .home-primary-panel-text {
@@ -18,21 +18,27 @@
   flex-direction: column;
   height: 50%;
   justify-content: space-between;
-  align-items: center;
   padding: 15px;
 }
 
-.home-primary-panel h2 {
+.home-primary-title {
   font-size: 24px;
-  width: 80%;
-  font-weight: 600;
+  font-weight: 600;  
+  margin-left: 15%;
+  margin-bottom: 15px;
 }
 
-.home-primary-panel p {
-  text-align: center;
-  width: 75%;
+.home-primary-snippet {
+  margin-left: 15%;
 }
 
-.home-primary-panel span {
+.home-primary-author {
+  margin-left: 15%;
+}
 
+.home-primary-author a {
+}
+
+.home-primary-author a:hover {
+  border-bottom: 1px solid black;
 }

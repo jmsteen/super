@@ -26,7 +26,7 @@ class ProfilePage extends React.Component {
   render() {
     if (!this.state.loaded) {
       return <ReactLoading 
-        type={"white"} 
+        type={"bars"} 
         color={"white"} 
         height={700} 
         width={400} />

@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
 const Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
     return (
-        <a href={url} nofollow noreferrer>
+        <a href={url} nofollow="true" noreferrer="true">
             {props.children}
         </a>
     );
@@ -90,7 +90,7 @@ class ArticleDisplay extends Component {
     render() {
         if (!this.state.loaded) {
             return <ReactLoading
-                type={"white"}
+                type={"bars"}
                 color={"white"}
                 height={700}
                 width={400} />
