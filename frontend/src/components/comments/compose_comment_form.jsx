@@ -7,7 +7,7 @@ class CommentForm extends React.Component {
     this.state = {
       body: "",
       author: this.props.author,
-      article: this.props.article
+      article: "5db07ee36161c86b1e91c031"
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,10 +28,11 @@ class CommentForm extends React.Component {
   }
   
   render() {
+    console.log("It's rendering")
       return (
         <div className="response-container">
           <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()}/>
+          <input className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()}/>
           <input type="submit" value="publish"/>
           </form>
         </div>

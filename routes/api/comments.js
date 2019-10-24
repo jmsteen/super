@@ -8,15 +8,19 @@ const Article = require('../../models/Article');
 router.post('/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-
+      console.log(req);
     const newComment = new Comment({
-      user: req.user.id,
-      article: req.params.articleId,
+      author: req.user.id,
+      article: req.body.article,
+      body: req.body.body, 
+
     });
 
-    Article.findById(req.params.articleId)
+    Article.findById(req.body.article)
       .then(article => {
-        newComment.article = mongoos.Types.ObjectId(req.params.articleId)
+        console.log(article);
+        newComment.article = mongoose.Types.ObjectId(req.body.article)
+        console.log(newComment);
         newComment.save()
           .then(comment => res.json(comment), err => err = res.status(400).json(err));
           article.comments.push(comment._id);

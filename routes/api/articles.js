@@ -20,11 +20,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Article.findById(req.params.id)
+  Article.findById(req.params.id).populate("comments")
     .then(article => {
       Like.find({ '_id': { $in: article.likes }})
         .then(likes => {
           article.likes = likes
+          console.log(article);
           return res.json(article);
         }).catch(err => res.status(404).json({ error: "Encountered issue populating article likes"}));
     })

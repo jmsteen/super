@@ -8,7 +8,7 @@ const users = require("./routes/api/users");
 const articles = require("./routes/api/articles");
 const likes = require('./routes/api/likes');
 const passport = require("passport");
-
+const comments = require("./routes/api/comments")
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,6 +25,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/articles", articles);
 app.use("/api/likes", likes);
+app.use("/api/comments", comments);
 
 mongoose
     .connect(db, { useNewUrlParser: true })
