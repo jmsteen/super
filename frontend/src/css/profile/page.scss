@@ -3,10 +3,9 @@
 }
 
 .profile-page header {
-  background-color: red;
   display: flex;
   justify-content: space-between;
-  max-width: 710px;
+  max-width: 690px;
   min-width: 420px;
   height: 150px;
   margin: 0 auto;
@@ -14,7 +13,6 @@
 }
 
 .profile-name-container {
-  background-color: blue;
   height: 50px;
   width: 75%;
   display: flex;
@@ -52,7 +50,7 @@
 }
 
 .profile-nav {
-  max-width: 710px;
+  max-width: 690px;
   min-width: 420px;
   margin: 0 auto;
   padding: 10px 0;
