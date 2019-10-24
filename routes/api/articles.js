@@ -8,8 +8,8 @@ const Like = require('../../models/Like');
 const validateArticleInput = require('../../validation/articles');
 
 router.get('/', (req, res) => {
-  Article.find()
-    .limit(10)
+  Article.find().populate('author')
+    .limit(15)
     .sort({ date: -1 })
     .then(articles => {
       const responseObj = {};

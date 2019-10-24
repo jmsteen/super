@@ -1,17 +1,14 @@
 .article-compose-container {
     display: flex;
-    align-items: center;
-     padding: 0 20px;
-    max-width: 780px;
+    padding: 0 20px;
     margin: 0 auto;
     width: 100%;
     margin-top: 20px;
-     overflow: auto;
-    max-height: 67vh;
+    overflow: hidden;
 }
 
 .article-display {
-    max-width: 740px;
+    // max-width: 740px;
     padding: 0 20px;
     width: 100%;
     margin: 20px auto;
@@ -34,6 +31,7 @@
     width: 100%;
     font-size: 22px;
     // margin-top: 20px;
+    margin-bottom: 75px;
     // overflow: auto;
     // max-height: 67vh;
 }
@@ -43,24 +41,37 @@
     font-size: 40px;
 }
 
+.compose-article-outer {
+    min-height: calc(100vh - 56px);
+    position: relative;
+    overflow: hidden;
+}
+
+.compose-article-inner {
+    max-width: 740px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
 div.DraftEditor-root {
     position: relative;
     overflow: scroll;
-    max-height: 66%;
+    line-height: 1.5;
 }
 
 .publish-button {
-    background: rgb(21, 187, 21);
+    background: #15bb15;
     color: white;
     height: 30px;
     width: 90px;
     font-size: 14px;
     position: absolute;
-    bottom: 20px;
-    right: 165px;
+    bottom: 10px;
+    right: 40px;
     font-weight: 500;
     outline: none;
-    border-color: rgb(21, 187, 21);
+    border-color: #15bb15;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
@@ -71,7 +82,7 @@ div.DraftEditor-root {
 }
 
 .title-text-editor {
-    padding: 0 20px;
+    padding: 0 40px;
     max-width: 680px;
     margin: 0 auto;
     width: 100%;
@@ -80,7 +91,6 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container {
-    background-color: red;
     max-width: 740px;
     margin: 0 auto;
     height: 60px;
@@ -89,6 +99,7 @@ div.DraftEditor-root {
     justify-content: space-between;
     padding: 10px;
     box-sizing: border-box;
+    margin-bottom: 30px;
 }
 
 .article-display-like-container i {
@@ -97,12 +108,10 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container div {
-    background-color: green;
     display: flex;
 }
 
 .article-display-like-container span {
-    background-color: blue;
     margin-left: 10px;
 }
 

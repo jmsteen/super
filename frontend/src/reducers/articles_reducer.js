@@ -24,7 +24,6 @@ const ArticlesReducer = (state = {}, action) => {
             }
         case REMOVE_LIKE:
             if (action.like.article) {
-                console.log('removing!');
                 const articleId = action.like.article;
                 const article = newState[articleId];
                 article.likes = article.likes.filter(like => like._id !== action.like._id);

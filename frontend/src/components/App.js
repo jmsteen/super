@@ -6,7 +6,7 @@ import style from '../App.scss';
 
 import ArticleDisplay from './articles/article_display';
 import ProfileContainer from './profile/profile_page_container';
-import HomePage from './home/home_page';
+import HomePageContainer from './home/home_page_container';
 import Modal from './modal/modal';
 import ArticlesContainer from './articles/articles_container';
 import ArticleComposeContainer from './articles/article_compose_container';
@@ -16,7 +16,7 @@ const App = () => (
     <NavBarContainer />
     <Modal />
     <Switch>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/" component={HomePageContainer} />
       <Route path="/@:handle" component={ProfileContainer} />
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />

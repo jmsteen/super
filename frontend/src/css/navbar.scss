@@ -3,8 +3,11 @@
   justify-content: space-between;
   max-width: 1050px;
   min-width: 500px;
+  max-height: 56px;
   margin: 0 auto;
   padding-top: 15px;
+  height: 56px;
+  box-sizing: border-box;
 }
 
 .navbar-logo {
@@ -14,6 +17,10 @@
 
 .navbar-login-button {
   padding: 10px;
+}
+
+.navbar-buttons a {
+  margin-right: 18px;
 }
 
 .navbar-signup-button {
