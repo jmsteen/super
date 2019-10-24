@@ -17,7 +17,7 @@ const App = () => (
     <Modal />
     <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route path="/@:userId" component={ProfileContainer} />
+      <Route path="/@:handle" component={ProfileContainer} />
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />
       <ProtectedRoute exact path="/articles/:id" component={ArticleDisplay} />

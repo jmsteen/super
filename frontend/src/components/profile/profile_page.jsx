@@ -8,14 +8,14 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.match.params.userId)
+    this.props.fetchUserByHandle(this.props.match.params.handle)
       .then(this.setState({ loaded: true }))
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+    if (this.props.match.params.handle !== prevProps.match.params.handle) {
       this.setState({ loaded: false });
-      this.props.fetchUser(this.props.match.params.userId)
+      this.props.fetchUserByHandle(this.props.match.params.handle)
         .then(this.setState({ loaded: true }))
     }
   }
@@ -31,11 +31,13 @@ class ProfilePage extends React.Component {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
+    const { handle } = this.props.profileUser;
+
     return (
       <section className="profile-page">
         <header>
           <div className="profile-name-container">
-            <h1>Name Here</h1>
+            <h1>{handle}</h1>
             <button>Button</button>
           </div>
           <div className="profile-image-container">

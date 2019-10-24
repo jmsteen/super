@@ -30,6 +30,18 @@ router.get("/:userId", (req, res) => {
     );
 });
 
+router.get("/handle/:handle", (req, res) => {
+  User.findOne({handle: req.params.handle})
+    .then(response => {
+      res.json(response)
+    })
+    .catch(() =>
+      res
+        .status(404)
+        .json({ nouserfound: "User was not found" })
+    );
+});
+
 router.get("/:userId/articles", (req, res) => {
   Article.find({ user: req.params.userId })
     .then(articles => res.json(articles))
