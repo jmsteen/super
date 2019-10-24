@@ -23,11 +23,18 @@
     font-size: 22px;
     margin-top: 20px;
     overflow: auto;
+    max-height: 67vh;
 }
 
 .body-text-editor::placeholder {
     color: lightgray;
     font-size: 40px;
+}
+
+div.DraftEditor-root {
+    position: relative;
+    overflow: scroll;
+    max-height: 66%;
 }
 
 .publish-button {

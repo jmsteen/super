@@ -31,7 +31,6 @@ class HomePage extends React.Component {
     const aboutPanel = document.getElementById("about-panel");
     const firstCol = document.getElementById("home-feed-first-col");
     const homePos = firstCol.getBoundingClientRect();
-    console.log(homePos.top);
 
     if (homePos.top <= 0) {
       aboutPanel.setAttribute("style", "position:fixed;");

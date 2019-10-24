@@ -16,12 +16,36 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     handle: req.user.handle,
     email: req.user.email
   });
-})
+});
 
-router.get("/:user_id/articles", (req, res) => {
-  Article.find({ user: req.params.user_id })
+router.get("/:userId", (req, res) => {
+  User.findById(req.params.userId)
+    .then(response => {
+      res.json(response)
+    })
+    .catch(() =>
+      res
+        .status(404)
+        .json({ nouserfound: "User was not found" })
+    );
+});
+
+router.get("/handle/:handle", (req, res) => {
+  User.findOne({handle: req.params.handle})
+    .then(response => {
+      res.json(response)
+    })
+    .catch(() =>
+      res
+        .status(404)
+        .json({ nouserfound: "User was not found" })
+    );
+});
+
+router.get("/:userId/articles", (req, res) => {
+  Article.find({ user: req.params.userId })
     .then(articles => res.json(articles))
-    .catch(err =>
+    .catch(() =>
       res
         .status(404)
         .json({ noarticlesfound: "No articles found from that user" })
