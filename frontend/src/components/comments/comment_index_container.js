@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   let articleId = ownProps.match.params.id
-  console.log(state);
+  let comments = Object.values(state.entities.comments).reverse();
   return({
-    comments: state.entities.articles[articleId].comments
+    comments: comments
   })
 }
 

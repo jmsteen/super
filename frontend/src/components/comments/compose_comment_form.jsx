@@ -1,4 +1,5 @@
 import React from 'react';
+import './compose_comment.scss';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class CommentForm extends React.Component {
     this.state = {
       body: "",
       author: this.props.author,
-      article: "5db07ee36161c86b1e91c031"
+      article: this.props.article._id
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +29,6 @@ class CommentForm extends React.Component {
   }
   
   render() {
-    console.log("It's rendering")
       return (
         <div className="response-container">
           <form onSubmit={this.handleSubmit}>

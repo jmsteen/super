@@ -12,7 +12,6 @@ const ArticlesReducer = (state = {}, action) => {
             return action.articles.data;
         case RECEIVE_ARTICLE:
            return { [action.article.data._id]: action.article.data };
-<<<<<<< HEAD
         case RECEIVE_LIKE:
             if (action.like.article) {
                 const articleId = action.like.article;
@@ -32,18 +31,6 @@ const ArticlesReducer = (state = {}, action) => {
             } else {
                 return state;
             }
-=======
-        // case RECEIVE_LIKE:
-        //     if (action.like.articleId) {
-        //         const articleId = action.like.articleId;
-        //         newState[articleId].likes = newState[articleId].likes.filter(like => like._id !== action.like._id);
-        //         newState[articleId].likes.push(action.like);
-        //         return newState;
-        //     } else {
-        //         return state;
-        //     }
-        // Saving this until I know what the shape of 'articles' looks like!
->>>>>>> 2cdac7c... create comments index
         default:
             return state;
     }
