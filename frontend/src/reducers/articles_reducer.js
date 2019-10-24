@@ -1,5 +1,5 @@
 import { RECEIVE_ARTICLES, RECEIVE_USER_ARTICLES, RECEIVE_ARTICLE } from '../actions/article_actions';
-import { RECEIVE_LIKE } from '../actions/like_actions';
+import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/like_actions';
 
 const ArticlesReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -16,9 +16,18 @@ const ArticlesReducer = (state = {}, action) => {
             if (action.like.article) {
                 const articleId = action.like.article;
                 const article = newState[articleId];
-                console.dir(article);
                 article.likes = article.likes.filter(like => like._id !== action.like._id);
                 article.likes.push(action.like);
+                return newState;
+            } else {
+                return state;
+            }
+        case REMOVE_LIKE:
+            if (action.like.article) {
+                console.log('removing!');
+                const articleId = action.like.article;
+                const article = newState[articleId];
+                article.likes = article.likes.filter(like => like._id !== action.like._id);
                 return newState;
             } else {
                 return state;
