@@ -8,7 +8,7 @@ const receiveUser = user => ({
 });
 
 export const fetchUser = id => dispatch => {
-  getUser(id)
+  return getUser(id)
     .then(res => dispatch(receiveUser(res.data)))
     .catch(err => console.log(err))
 };

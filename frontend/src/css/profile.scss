@@ -1,0 +1,52 @@
+.profile-page {
+
+}
+
+.profile-page header {
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  max-width: 710px;
+  min-width: 420px;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+
+.profile-name-container {
+  background-color: blue;
+  height: 50px;
+  width: 75%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-name-container h1 {
+  font-size: 32px;
+  font-family: sans-serif;
+  font-weight: 600;
+}
+
+.profile-name-container button {
+  padding: 1px 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 20px;
+  background-color: green;
+  margin-left: 15px;
+}
+
+.profile-error {
+  text-align: center;
+  font-size: 48px;
+  margin: 0 auto;
+  margin-top: 15%;
+}
+
+.profile-image-container img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 50%;
+}
