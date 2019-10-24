@@ -54,6 +54,19 @@
     box-sizing: border-box;
 }
 
+.display-article-outer {
+    min-height: calc(100vh - 56px);
+    position: relative;
+    overflow: hidden;
+}
+
+.display-article-inner {
+     max-width: 740px;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
 div.DraftEditor-root {
     position: relative;
     overflow: scroll;
