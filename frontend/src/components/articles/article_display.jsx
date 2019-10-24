@@ -6,6 +6,7 @@ import { fetchArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
+import CommentIndex from '../comments/comment_index_container';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -111,11 +112,16 @@ class ArticleDisplay extends Component {
                         ref="editor"
                     /></div>)}
                 </div>
+                <CommentIndex/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 <ArticleLikeContainer />
 =======
                 <commentForm/>
 >>>>>>> 19aea51... Commit before master rebase
+=======
+                <CommentIndex/>
+>>>>>>> 2cdac7c... create comments index
             </div>
         )
     }

@@ -6,14 +6,15 @@ const commentsReducer = (state = {}, action) => {
   let newState 
     switch(action.type) {
       case RECEIVE_COMMENT: 
-        newState = Object.assign({}, state, { [action.data.comment.id]: action.data.comment});
+        newState = Object.assign({}, state, { [action.comment.data._id]: action.comment.data});
         return newState
       case REMOVE_COMMENT: 
         newState = Object.assign({}, state)
         delete newState[action.data.comment.id]
         return newState
       case RECEIVE_ARTICLE:
-        return action.comments
+        console.log(action)
+        return action.article.data.comments
       default: 
         return state;
     }

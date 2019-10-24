@@ -18,14 +18,15 @@ router.post('/',
 
     Article.findById(req.body.article)
       .then(article => {
-        console.log(article);
+        
         newComment.article = mongoose.Types.ObjectId(req.body.article)
-        console.log(newComment);
+        // console.log(newComment);
         newComment.save()
-          .then(comment => res.json(comment), err => err = res.status(400).json(err));
-          article.comments.push(comment._id);
-          article.save()
-            .then(() => {}, err => {});
+          .then(comment => {
+            res.json(comment) 
+            article.comments.push(comment._id)
+            article.save().then(() => { }, err => { });
+          }, err => err = res.status(400).json(err))         
       }).catch(err => {
         return res.status(404).json({ noarticlefound: "No article found with that ID"});
       });

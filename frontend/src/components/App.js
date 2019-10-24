@@ -10,7 +10,8 @@ import HomePageContainer from './home/home_page_container';
 import Modal from './modal/modal';
 import ArticlesContainer from './articles/articles_container';
 import ArticleComposeContainer from './articles/article_compose_container';
-import commentForm from './comments/compose_comment_container';
+
+
 const App = () => (
   <div>
     <NavBarContainer />
@@ -21,7 +22,6 @@ const App = () => (
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />
       <ProtectedRoute exact path="/articles/:id" component={ArticleDisplay} />
-      <Route  path="/comments" component={commentForm}/>
     </Switch>
   </div>
 );

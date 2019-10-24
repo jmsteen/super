@@ -27,9 +27,15 @@ export const fetchArticles = () => dispatch => (
 
 export const fetchArticle = (id) => dispatch => (
     getArticle(id)
+<<<<<<< HEAD
         .then(article => {
             dispatch(receiveArticle(article))
             return article
+=======
+        .then(article => { 
+            dispatch(receiveArticle(article))
+            return article;
+>>>>>>> 2cdac7c... create comments index
         })
         .catch(err => console.log(err))
 );
