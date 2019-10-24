@@ -78,3 +78,35 @@ div.DraftEditor-root {
     font-size: 45px;
     margin-top: 40px;
 }
+
+.article-display-like-container {
+    background-color: red;
+    max-width: 740px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.article-display-like-container i {
+    font-size: 48px;
+    cursor: pointer;
+}
+
+.article-display-like-container div {
+    background-color: green;
+    display: flex;
+}
+
+.article-display-like-container span {
+    background-color: blue;
+    margin-left: 10px;
+}
+
+.article-display-like-container button {
+    border: 1px solid black;
+    padding: 5px;
+}

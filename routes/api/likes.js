@@ -69,9 +69,9 @@ router.delete('/:id',
     Like.findByIdAndDelete(req.params.id)
       .then(deletedLike => {
         if (deletedLike) {
-          res.json({success: "Successfully deleted like"});
-          if (deletedLike.articleId) {
-            Article.findById(deletedLike.articleId)
+          res.json(deletedLike);
+          if (deletedLike.article) {
+            Article.findById(deletedLike.article)
               .then(article => {
                 article.likes.remove(deletedLike._id);
                 article.save()
@@ -83,9 +83,8 @@ router.delete('/:id',
             // Nothing yet since comments aren't implemented yet.
           }
         } else {
-          res.json({ nolikefound: "No like matches the provided query."});
+          res.status(404).json({ nolikefound: "No like matches the provided query."});
         }
-        return deletedDocument
       })
       .catch(err => res.status(404).json({ error: 'Could not find and delete like' }));
   }
