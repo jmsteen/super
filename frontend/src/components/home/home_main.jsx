@@ -5,11 +5,11 @@ import SPanel from './panels/secondary';
 const HomeMain = props => {
   return (
     <div className="home-main">
-      <PPanel />
+      <PPanel article={props.articles[0]} />
       <div className="home-secondary-panel-container">
-        <SPanel />
-        <SPanel />
-        <SPanel />
+        <SPanel article={props.articles[1]} />
+        <SPanel article={props.articles[2]} />
+        <SPanel article={props.articles[3]} />
       </div>
     </div>
   )

@@ -6,28 +6,38 @@
   min-width: 500px;
   border-top: 1px solid gray;
   padding-top: 50px;
-  grid-template-columns: 70% auto;
+  grid-template-columns: 65% auto;
 }
 
 .home-tertiary-panel {
   display: flex;
-  height: 190px;
+  justify-content: space-between;
+  min-height: 190px;
+  width: 100%;
   padding-left: 5px;
+  margin-top: 20px;
+}
+
+.home-tertiary-panel-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-sizing: border-box;
 }
 
 .home-tertiary-panel img {
-  height: 160px;
-  width: 160px;
+  height: 180px;
+  width: 180px;
 }
 
 .home-tertiary-panel h2 {
   font-size: 24px;
-  width: 75%;
+  max-width: 435px;
   font-weight: 600;
 }
 
 .home-tertiary-panel p {
-  width: 88%;
+  max-width: 435px;
   margin: 10px 0;
   margin-bottom: 15px;
 }
@@ -51,4 +61,8 @@
   margin-top: 15px;
   font-size: 17px;
   padding-right: 10px;
+}
+
+.home-tertiary-panel span a:hover {
+  border-bottom: 1px solid black;
 }

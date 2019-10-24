@@ -19,7 +19,13 @@
 
 .home-secondary-panel h2 {
   font-weight: 600;
+  font-size: 18px;
 }
 
-.home-secondary-panel p {
+.home-secondary-panel span {
+  margin-bottom: 2px;
+}
+
+.home-secondary-panel span a:hover {
+  border-bottom: 1px solid black;
 }
