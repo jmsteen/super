@@ -9,7 +9,7 @@ const validateArticleInput = require('../../validation/articles');
 
 router.get('/', (req, res) => {
   Article.find().populate('author')
-    .limit(10)
+    .limit(15)
     .sort({ date: -1 })
     .then(articles => {
       const responseObj = {};

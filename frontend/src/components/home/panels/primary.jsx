@@ -16,9 +16,9 @@ const HomePrimaryPanel = props => {
           <h2>{article.title}</h2>
         </Link>
         <Link className="home-primary-snippet" to={`/articles/${article._id}`}>  
-          <p>{text.slice(0, 150).trim()}</p>
+          <p>{text.slice(0, 125).trim(' .?!,') + '...'}</p>
         </Link>
-        <span className="home-primary-author"><Link to={`/@${article.author.handle}`}>Author: {article.author.handle}</Link></span>
+        <span className="home-primary-author">Author: <Link to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
       </div>
     </div>
   )

@@ -36,12 +36,15 @@ class HomePage extends React.Component {
   handleScroll() {
     const aboutPanel = document.getElementById("about-panel");
     const firstCol = document.getElementById("home-feed-first-col");
+
+    if (firstCol) {
     const homePos = firstCol.getBoundingClientRect();
 
-    if (homePos.top <= 0) {
-      aboutPanel.setAttribute("style", "position:fixed;");
-    } else {
-      aboutPanel.setAttribute("style", "position:static;");
+      if (homePos.top <= 0) {
+        aboutPanel.setAttribute("style", "position:fixed;");
+      } else {
+        aboutPanel.setAttribute("style", "position:static;");
+      }
     }
   }
 

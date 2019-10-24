@@ -7,19 +7,21 @@ import ProfileLikeFeed from './like_feed';
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false };
+    this.state = { profileUser: undefined, loaded: false };
   }
 
   componentDidMount() {
     this.props.fetchUserByHandle(this.props.match.params.handle)
-      .then(this.setState({ loaded: true }))
+      .then(res => this.setState({ profileUser: res.user, loaded: true }))
+      .catch(() => this.setState({ loaded: true }))
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.handle !== prevProps.match.params.handle) {
       this.setState({ loaded: false });
       this.props.fetchUserByHandle(this.props.match.params.handle)
-        .then(this.setState({ loaded: true }))
+        .then(res => this.setState({ profileUser: res.user, loaded: true }))
+        .catch(() => this.setState({ loaded: true }))
     }
   }
   
@@ -30,11 +32,11 @@ class ProfilePage extends React.Component {
         color={"white"} 
         height={700} 
         width={400} />
-    } else if (!this.props.profileUser) {
+    } else if (!this.state.profileUser) {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
-    const { handle } = this.props.profileUser;
+    const { handle } = this.state.profileUser;
 
     return (
       <section className="profile-page">
