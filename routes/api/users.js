@@ -77,6 +77,23 @@ router.get("/:userId/articles", (req, res) => {
     );
 });
 
+router.patch("/:userId/edit", (req, res) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      if (req.body.description) { user.description = req.body.description };
+      if (req.body.handle) { user.handle = req.body.handle };
+      if (req.body.displayName) { user.displayName = req.body.displayName };
+      if (req.body.image) { user.image = req.body.image };
+      user.save();
+      res.json(user);
+    })
+    .catch(errors =>
+      res
+        .status(422)
+        .json(errors)
+    );
+});
+
 router.post("/signup", (req, res) => {
   const { errors, isValid } = validateSignupInput(req.body);
 
@@ -92,7 +109,8 @@ router.post("/signup", (req, res) => {
       const newUser = new User({
         handle: req.body.handle,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        displayName: req.body.handle // displayName defaults to handle at first!
       });
 
       bcrypt.genSalt(10, (err, salt) => {

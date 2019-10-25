@@ -1,3 +1,4 @@
+import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -14,3 +15,23 @@ const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal())
 });
 
+
+class ProfileForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <div>
+        <form>
+
+        </form>
+      </div>
+    )
+  }
+}
