@@ -1,6 +1,9 @@
 .addImage {
   background: #FFF;
   display: inline-block;
+  position: absolute;
+  left: 20px;
+  bottom: 72px;
 }
 
 .addImagePopover {
