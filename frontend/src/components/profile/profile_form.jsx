@@ -3,17 +3,21 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { editUser } from '../../actions/user_actions';
+import { updateCurrentUser } from '../../actions/session_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const profileUser = Object.values(state.entities.users).find(user => user.handle === ownProps.match.params.handle);
+  const errors = state.errors.users;
   return {
-    profileUser
+    profileUser,
+    errors
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
-  editUser: user => dispatch(editUser(user))
+  editUser: user => dispatch(editUser(user)),
+  updateCurrentUser: fields => dispatch(updateCurrentUser(fields))
 });
 
 
@@ -39,10 +43,26 @@ class ProfileForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     this.props.editUser(this.state)
-      .then(this.props.closeModal())
+      .then(res => {
+        if (res.user) {
+          if (res.user.handle !== this.props.match.params.handle) {
+            this.props.updateCurrentUser({ handle: res.user.handle });
+            this.props.history.push(`/@${res.user.handle}`);
+          }
+          this.props.closeModal();
+        };
+      })
       .catch(errors => console.log(errors));
+  }
+
+  renderErrors() {
+    const errorLis = Object.values(this.props.errors).map((err, i) => {
+      return <li key={i}>{err}</li>;
+    });
+    return errorLis.length > 0 ? (
+      <ul className="profile-form-errors">{errorLis}</ul>
+    ) : null;
   }
 
   update(field) {
@@ -63,12 +83,14 @@ class ProfileForm extends React.Component {
         <form onSubmit={this.handleSubmit} className='profile-form'>
           <input 
             type="text"
+            autoComplete='off'
             onChange={ this.update('displayName') }
             value={ this.state.displayName || '' }
             placeholder='Enter your name'
           />
           <input 
             type="text"
+            autoComplete='off'
             onChange={this.updateHandle() }
             value={'@' + this.state.handle}
             placeholder='Enter your handle'
@@ -83,6 +105,7 @@ class ProfileForm extends React.Component {
           />
           <input
             onChange={this.update('image')}
+            autoComplete='off'
             value={this.state.image || ''}
             id="profile-image-input"
             type="text"
@@ -93,6 +116,7 @@ class ProfileForm extends React.Component {
             <button onClick={this.cancel} id="profile-cancel">Cancel</button>
           </div>
         </form>
+        {this.renderErrors()}
       </div>
     )
   }

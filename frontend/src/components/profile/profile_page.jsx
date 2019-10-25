@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 import { Route, NavLink } from 'react-router-dom';
 import ProfileMainFeed from './main_feed';
 import ProfileLikeFeed from './like_feed';
+import { isEqual } from 'lodash';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -19,11 +20,17 @@ class ProfilePage extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.match.params.handle !== prevProps.match.params.handle) {
+      // if url changes
       this.setState({ loaded: false });
       window.scrollTo(0, 0);
       this.props.fetchUserByHandle(this.props.match.params.handle)
         .then(res => this.setState({ profileUser: res.user, loaded: true }))
         .catch(() => this.setState({ loaded: true }))
+    } else if (this.props.profileUser && !isEqual(this.props.profileUser, prevProps.profileUser)) {
+      // if the profileUser is updated somehow
+      this.setState(
+        { profileUser: this.props.profileUser }
+      );
     }
   }
 
@@ -52,17 +59,20 @@ class ProfilePage extends React.Component {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
-    const { handle } = this.state.profileUser;
+    const { displayName, handle, description, image} = this.state.profileUser;
 
     return (
       <section className="profile-page">
         <header>
-          <div className="profile-name-container">
-            <h1>{handle}</h1>
-            {this.renderButton()}
+          <div className="profile-header-info">
+            <div className="profile-name-container">
+              <h1>{displayName || handle}</h1>
+              {this.renderButton()}
+            </div>
+            <p className="profile-header-description">{description}</p>
           </div>
           <div className="profile-image-container">
-            <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" />
+            <img src={ image || require('../../assets/images/default_profile.svg')} />
           </div>
         </header>
         <main>

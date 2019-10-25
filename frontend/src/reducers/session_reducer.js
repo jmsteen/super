@@ -1,6 +1,7 @@
 import {
     RECEIVE_CURRENT_USER,
-    RECEIVE_USER_LOGOUT
+    RECEIVE_USER_LOGOUT,
+    UPDATE_CURRENT_USER
 } from '../actions/session_actions';
 
 const initialState = {
@@ -21,6 +22,12 @@ export default function (state = initialState, action) {
                 isAuthenticated: false,
                 user: undefined
             };
+        case UPDATE_CURRENT_USER:
+            const newState = Object.assign({}, state);
+            Object.keys(action.fields).forEach(field => {
+                newState.user[field] = action.fields[field];
+            });
+            return newState;
         default:
             return state;
     }

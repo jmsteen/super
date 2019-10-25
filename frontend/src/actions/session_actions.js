@@ -5,6 +5,12 @@ export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
+export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
+
+export const updateCurrentUser = fields => ({
+    type: UPDATE_CURRENT_USER,
+    fields
+});
 
 export const clearErrors = () => ({
     type: CLEAR_SESSION_ERRORS

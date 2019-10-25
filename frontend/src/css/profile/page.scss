@@ -12,11 +12,21 @@
   margin-top: 70px;
 }
 
-.profile-name-container {
-  height: 50px;
+.profile-header-info {
   width: 75%;
   display: flex;
+  flex-direction: column;
+}
+
+.profile-name-container {
+  height: 50px;
+  width: 100%;
+  display: flex;
   align-items: center;
+}
+
+.profile-header-description {
+  font-size: 20px;
 }
 
 .profile-name-container h1 {
