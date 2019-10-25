@@ -19,9 +19,19 @@ class ProfilePage extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.handle !== prevProps.match.params.handle) {
       this.setState({ loaded: false });
+      window.scrollTo(0, 0);
       this.props.fetchUserByHandle(this.props.match.params.handle)
         .then(res => this.setState({ profileUser: res.user, loaded: true }))
         .catch(() => this.setState({ loaded: true }))
+    }
+  }
+
+  renderButton() {
+    if (!this.props.currentUser || !this.props.profileUser) { return null }
+    if (this.props.currentUser.id === this.props.profileUser._id) {
+      return <button>Edit Profile (doesn't work yet)</button>
+    } else {
+      return <button>Follow (doesn't work yet)</button>
     }
   }
   
@@ -43,7 +53,7 @@ class ProfilePage extends React.Component {
         <header>
           <div className="profile-name-container">
             <h1>{handle}</h1>
-            <button>Button</button>
+            {this.renderButton()}
           </div>
           <div className="profile-image-container">
             <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" />
@@ -54,8 +64,14 @@ class ProfilePage extends React.Component {
             <NavLink className='profile-nav-tab' exact to={`/@${handle}`}>Profile</NavLink>
             <NavLink className='profile-nav-tab' to={`/@${handle}/likes`}>Likes</NavLink>
           </div>
-          <Route exact path='/@:handle' component={ProfileMainFeed} />
-          <Route path='/@:handle/likes' component={ProfileLikeFeed} />
+          <Route 
+            exact path='/@:handle'
+            render={props => <ProfileMainFeed {...props} articles={this.state.profileUser.articles.sort((a, b) => new Date(b.date) - new Date(a.date))} />}
+          />
+          <Route 
+            exact path='/@:handle/likes' 
+            render={props => <ProfileLikeFeed {...props} likes={this.state.profileUser.likes.sort((a, b) => new Date(b.date) - new Date(a.date))} />}
+          />
         </main>
       </section>
     )

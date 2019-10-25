@@ -15,7 +15,7 @@ const CommentSchema = new Schema({
 
   article: {
     type: Schema.Types.ObjectId,
-    ref: 'articles',
+    ref: 'Article',
     required: true
   },
 

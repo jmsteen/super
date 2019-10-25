@@ -3,11 +3,19 @@ import ProfileArticlePanel from './panel';
 
 class ProfileLikeFeed extends React.Component {
   render() {
+    const likeLis = this.props.likes.map(like => {
+      if (like.article) {
+        return <ProfileArticlePanel article={like.article} key={like.article._id} />;
+      } else {
+        return;
+      }
+    });
+
     return (
       <div className='profile-feed'>
         <h3>Likes</h3>
         <ul>
-
+          {likeLis}
         </ul>
       </div>
     )
