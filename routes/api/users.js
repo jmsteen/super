@@ -30,10 +30,12 @@ router.get("/:userId", (req, res) => {
     );
 });
 
+// Added so that the user can be fetched by the handle
 router.get("/handle/:handle", (req, res) => {
-  User.findOne({handle: req.params.handle})
+  User.findOne({handle: req.params.handle}).populate('articles')
     .then(response => {
-      res.json(response)
+      console.dir(response);
+      res.json(response);
     })
     .catch(() =>
       res
