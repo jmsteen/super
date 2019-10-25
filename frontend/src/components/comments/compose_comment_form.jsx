@@ -47,10 +47,8 @@ class CommentForm extends React.Component {
         clicked: true
       })
     } 
-    
   }
 
-  
   render() {
     if( this.state.clicked === true) {
       return (
