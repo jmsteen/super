@@ -3,21 +3,58 @@
   padding: 0 20px;
   border: 1px solid rgba(0,0,0,.09);
   box-shadow: 0 1px 4px rgba(0,0,0,.03);
-  width: 60%;
+  width: fit-content;
   border-radius: 3px;
-  margin-left: 20px;
- 
+  margin-bottom: 20px;
+  display: flex;
 }
+
+
 
 .comment-submit {
   color: #03a87c;
   border: 1px solid #03a87c;
   border-radius: 4px;
-  padding: 5px;
-  
+  padding: 5px 10px;
+  width: fit-content;
 }
 
 .comment-submit:hover {
   color: #018f69;
   border-color: #018f69;
+}
+
+.response-container form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.large-response-container {
+  border: 1px solid rgba(0,0,0,.09);
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  
+  border-radius: 3px;
+  margin-left: 20px;
+  display: flex;
+  height: 200px;
+}
+
+.large-response {
+  height: 200px;
+  display: block;
+}
+
+.large-response-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.response-author {
+ display: block;
+}
+
+.response-inner-container {
+  padding: 15px;
+  display: flex;
 }
