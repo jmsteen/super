@@ -7,6 +7,15 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
+  displayName: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  image: {
+    type: String
+  },
   email: {
     type: String,
     required: true
