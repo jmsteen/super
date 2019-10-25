@@ -7,6 +7,7 @@ const keys = require("../../config/keys");
 const passport = require("passport");
 const validateSignupInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
+const validateProfileEditInput = require("../../validation/user");
 
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -77,6 +78,73 @@ router.get("/:userId/articles", (req, res) => {
     );
 });
 
+router.patch("/:userId", (req, res) => {
+  const { errors, isValid } = validateProfileEditInput(req.body);
+
+  if (!isValid) {
+    return res.status(422).json(errors);
+  }
+
+  User.findById(req.params.userId)
+    .populate({
+      path: 'articles',
+      populate: {
+        path: 'author'
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'article',
+        populate: {
+          path: 'author'
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'author'
+        }
+      }
+    })
+    .then(user => {
+
+      user.description = req.body.description;
+      user.handle = req.body.handle;
+      user.displayName = req.body.displayName;
+      user.image = req.body.image;
+      user.save((err, user) => {
+        if (err) {
+          res.status(422).json(err)
+        } else{ 
+          const payload = { id: user.id, handle: user.handle, email: user.email };
+
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 36000 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token,
+                user
+              });
+            }
+          );
+          //res.json(user)
+        }
+      })
+    })
+    .catch(errors =>
+      res
+        .status(422)
+        .json(errors)
+    );
+});
+
 router.post("/signup", (req, res) => {
   const { errors, isValid } = validateSignupInput(req.body);
 
@@ -92,7 +160,8 @@ router.post("/signup", (req, res) => {
       const newUser = new User({
         handle: req.body.handle,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        displayName: req.body.handle // displayName defaults to handle at first!
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -107,7 +176,7 @@ router.post("/signup", (req, res) => {
               jwt.sign(
                 payload,
                 keys.secretOrKey,
-                { expiresIn: 3600 },
+                { expiresIn: 36000 },
                 (err, token) => {
                   res.json({
                     success: true,
