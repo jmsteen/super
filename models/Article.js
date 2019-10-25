@@ -18,15 +18,19 @@ const ArticleSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    },
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }],
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Like'
-    }]
+    }
+});
+
+ArticleSchema.virtual('likes', {
+    ref: 'Like',
+    localField: '_id',
+    foreignField: 'article'
+});
+
+ArticleSchema.virtual('comments', {
+    ref: 'Like',
+    localField: '_id',
+    foreignField: 'article'
 });
 
 ArticleSchema.set('toObject', {

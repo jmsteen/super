@@ -19,14 +19,24 @@ const CommentSchema = new Schema({
     required: true
   },
 
-  likes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Like'
-  }],
-
   date: {
     type: Date,
     default: Date.now
   }
 });
+
+CommentSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'comment'
+});
+
+CommentSchema.set('toObject', {
+  virtuals: true
+});
+
+CommentSchema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = Comment = mongoose.model("Comment", CommentSchema);
