@@ -116,7 +116,7 @@ class ArticleDisplay extends Component {
                 
 
                     <ArticleLikeContainer />
-                        <CommentIndex />
+                    <CommentIndex/>
                 </div>
             </div>
         )
