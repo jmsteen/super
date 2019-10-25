@@ -5,13 +5,12 @@ import CommentForm from './compose_comment_container';
 class CommentsIndex extends React.Component {
   constructor(props) {
     super(props)
-
   }
 
   render() {
     const comments = this.props.comments.map(comment => {
       return(
-        <CommentIndexItem key={comment.id} comment={comment}/>
+        <CommentIndexItem key={comment._id} comment={comment}/>
       )
     })
     return(

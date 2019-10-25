@@ -28,7 +28,7 @@ ArticleSchema.virtual('likes', {
 });
 
 ArticleSchema.virtual('comments', {
-    ref: 'Like',
+    ref: 'Comment',
     localField: '_id',
     foreignField: 'article'
 });
