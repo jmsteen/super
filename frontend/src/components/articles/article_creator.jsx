@@ -138,8 +138,8 @@ class ArticleCreator extends Component {
                         )
                     }</InlineToolbar>
                     
-                </div>
                 <button onClick={this.handlePost} className="publish-button">Publish</button>  
+                </div>
             </div>
         )
     }

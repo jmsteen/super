@@ -19,12 +19,12 @@ import {
     BlockquoteButton,
     CodeBlockButton
 } from 'draft-js-buttons';
-import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
 import createLinkPlugin from 'draft-js-anchor-plugin';
 import 'draft-js/dist/Draft.css';
 import createMarkdownPlugin from 'draft-js-markdown-plugin';
 import './article.scss';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
+import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
 
 const linkPlugin = createLinkPlugin({ placeholder: 'Enter your link here...' });
 const { LinkButton } = linkPlugin;
@@ -47,7 +47,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchArticle: id => dispatch(fetchArticle(id)),
-        updateArticle: data => dispatch(reviseArticle(data))
+        handlePost: data => dispatch(reviseArticle(data))
     };
 };
 
@@ -81,12 +81,13 @@ const decorator = new CompositeDecorator([{
 class ArticleEditor extends Component {
     constructor(props) {
         super(props)
-        
+      
         this.state = {
             article: {
                 title: "",
                 body: null,
                 author: "",
+                id: this.props.match.params.id
             },
             editorState: EditorState.createEmpty(decorator),
             loaded: false
@@ -98,18 +99,19 @@ class ArticleEditor extends Component {
     }
 
     componentDidMount() {
+        this.focus();
         this.props.fetchArticle(this.props.match.params.id)
             .then(res => this.setState({
                 article: {
                     title: res.data.title,
                     body: res.data.body,
-                    author: res.data.author
+                    author: res.data.author,
+                    id: this.props.match.params.id
                 },
                 editorState: this.convertToRichText(res.data.body),
                 loaded: true
             }))
             .catch(err => this.setState({ loaded: true }))
-            .then(this.focus());
     }
 
     componentDidUpdate(prevProps) {
@@ -117,9 +119,12 @@ class ArticleEditor extends Component {
             this.setState({ loaded: false });
             this.props.fetchArticle(this.props.match.params.id)
                 .then(res => this.setState({
-                    title: res.data.title,
-                    body: res.data.body,
-                    author: res.data.author,
+                    article: {
+                        title: res.data.title,
+                        body: res.data.body,
+                        author: res.data.author,
+                        id: this.props.match.params.id
+                    },
                     loaded: true
                 })).catch(err => this.setState({ loaded: true }));
             }
@@ -149,12 +154,15 @@ class ArticleEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-
+        debugger
         this.props.handlePost({
             body: contentString,
-            author: this.props.author,
-            title: this.props.title
-        }).then(res => this.props.history.push(`/articles/${res.data._id}`));
+            author: this.state.article.author,
+            title: this.state.article.title,
+            id: this.state.article.id
+        }).then(res => {
+            return this.props.history.push(`/articles/${res.data._id}`)
+        });
     }
 
     render() {
@@ -171,10 +179,10 @@ class ArticleEditor extends Component {
         return (
             <div className="display-article-outer">
                 <div className="display-article-inner">
-                    <div className="article-display">
+                    <div className="article-edit">
                         <h1 className="article-display-title">{this.state.article.title}</h1>
                         <h2>{this.state.article.author}</h2>
-                        {this.state.article.body && (<div className="article-display-body">
+                        <div className="article-display-body">
                         <ImageAdd
                             editorState={this.state.editorState}
                             onChange={this.onChange}
@@ -189,26 +197,26 @@ class ArticleEditor extends Component {
                             plugins={plugins}
                             ref={(element) => { this.editor = element; }}
                         />
-                        < InlineToolbar > {
-                            (externalProps) => (
-                                <div>
-                                    <BoldButton {...externalProps} />
-                                    <ItalicButton {...externalProps} />
-                                    <UnderlineButton {...externalProps} />
-                                    <LinkButton {...externalProps} />
-                                    <Separator {...externalProps} />
-                                    <CodeButton {...externalProps} />
-                                    <BlockquoteButton {...externalProps} />
-                                    <CodeBlockButton {...externalProps} />
-                                </div>
-                            )
-                        }</InlineToolbar>
-                        </div>)}
+                            <InlineToolbar>{
+                                (externalProps) => (
+                                    <div>
+                                        <BoldButton {...externalProps} />
+                                        <ItalicButton {...externalProps} />
+                                        <UnderlineButton {...externalProps} />
+                                        <LinkButton {...externalProps} />
+                                        <Separator {...externalProps} />
+                                        <CodeButton {...externalProps} />
+                                        <BlockquoteButton {...externalProps} />
+                                        <CodeBlockButton {...externalProps} />
+                                    </div>
+                                )
+                            }</InlineToolbar>
+                        </div>
+                    <button onClick={this.handlePost} className="publish-button">Publish</button>  
                     </div>
-                
 
                     <ArticleLikeContainer />
-                        <CommentIndex />
+                    <CommentIndex />
                 </div>
             </div>
         )
