@@ -9,6 +9,7 @@ import ProfileContainer from './profile/profile_page_container';
 import HomePageContainer from './home/home_page_container';
 import Modal from './modal/modal';
 import ArticlesContainer from './articles/articles_container';
+import ArticleEditor from './articles/article_editor';
 import ArticleComposeContainer from './articles/article_compose_container';
 
 
@@ -22,6 +23,7 @@ const App = () => (
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />
       <ProtectedRoute exact path="/articles/:id" component={ArticleDisplay} />
+      <ProtectedRoute exact path="/articles/:id/edit" component={ArticleEditor} />
     </Switch>
   </div>
 );

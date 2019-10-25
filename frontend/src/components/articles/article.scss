@@ -73,6 +73,12 @@ div.DraftEditor-root {
     line-height: 1.5;
 }
 
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+    color:rgb(0, 0, 72)
+}
+
 .publish-button {
     background: #15bb15;
     color: white;

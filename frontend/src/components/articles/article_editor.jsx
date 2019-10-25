@@ -1,116 +1,130 @@
-import React, { Component } from 'react';
-import { EditorState, RichUtils, convertToRaw } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
-import createImagePlugin from 'draft-js-image-plugin';
-import ImageAdd from './image_add';
-import {
-    ItalicButton,
-    BoldButton,
-    UnderlineButton,
-    CodeButton,
-    BlockquoteButton,
-    CodeBlockButton
-} from 'draft-js-buttons';
-import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
-import createLinkPlugin from 'draft-js-anchor-plugin';
-import 'draft-js/dist/Draft.css';
-import createMarkdownPlugin from 'draft-js-markdown-plugin';
+import React, { Component } from 'react'
+import { CompositeDecorator, convertFromRaw, Editor, EditorState, AtomicBlockUtils } from 'draft-js';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { fetchArticle, reviseArticle } from '../../actions/article_actions';
+import { mediaBlockRenderer } from './image_render';
+import ArticleLikeContainer from './article_like';
+import ReactLoading from 'react-loading';
+import CommentIndex from '../comments/comment_index_container';
 import './article.scss';
-import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
 
-const linkPlugin = createLinkPlugin({placeholder: 'Enter your link here...'});
-const { LinkButton } = linkPlugin;
-const imagePlugin = createImagePlugin();
-const inlineToolbarPlugin = createInlineToolbarPlugin();
-const { InlineToolbar } = inlineToolbarPlugin;
-const plugins = [
-    inlineToolbarPlugin,
-    linkPlugin,
-    createMarkdownPlugin(),
-    imagePlugin
-]
+const mapStateToProps = (state, ownProps) => {
+    return {
+        currentArticle: state.entities.articles[ownProps.match.params.id]
+    };
+};
 
-export default class ArticleEditor extends Component {
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchArticle: id => dispatch(fetchArticle(id)),
+        updateArticle: data => dispatch(reviseArticle(data))
+    };
+};
+
+const Link = (props) => {
+    const { url } = props.contentState.getEntity(props.entityKey).getData();
+    return (
+        <a className='link' href={url} nofollow="true" noreferrer="true">
+            {props.children}
+        </a>
+    );
+};
+
+function findLinkEntities(contentBlock, callback, contentState) {
+    contentBlock.findEntityRanges(
+        (character) => {
+            const entityKey = character.getEntity();
+            return (
+                entityKey !== null &&
+                contentState.getEntity(entityKey).getType() === 'LINK'
+            );
+        },
+        callback
+    );
+}
+
+const decorator = new CompositeDecorator([{
+    strategy: findLinkEntities,
+    component: Link
+}]);
+
+class ArticleEditor extends Component {
     constructor(props) {
         super(props)
-        this.state = { editorState: EditorState.createEmpty() };
-        this.onChange = (editorState) => this.setState({ editorState });
-        this.handleKeyCommand = this.handleKeyCommand.bind(this);
-        this.handlePost = this.handlePost.bind(this);
-        this.renderPlaceholder = this.renderPlaceholder.bind(this);
-        this.focus = this.focus.bind(this);
-    }
-
-    focus = () => {
-        this.editor.focus();
-    };
-
-    componentDidMount () {
-        this.focus();
-    }
-
-    handleKeyCommand(command, editorState) {
-        const newState = RichUtils.handleKeyCommand(editorState, command);
-        if (newState) {
-            this.onChange(newState);
-            return 'handled';
-        }
-        return 'not-handled';
-    }
-
-    handlePost() {
-        const content = this.state.editorState.getCurrentContent();
-        const contentString = JSON.stringify(convertToRaw(content));
         
-        this.props.handlePost({
-            body: contentString,
-            author: this.props.author,
-            title: this.props.title
-        });
+        this.state = {
+            article: {
+                title: "",
+                body: null,
+                author: "",
+            },
+            loaded: false
+        }
+        this.onChange = (editorState) => this.setState({ editorState });
     }
 
-    renderPlaceholder(placeholder, editorState) {
-        const currentContent = editorState.getCurrentContent();
-        const hideContent = currentContent.hasText() || currentContent.getBlockMap()
-            .first().getType() !== "unstyled";
-        return hideContent ? '' : placeholder;
+    componentDidMount() {
+        this.props.fetchArticle(this.props.match.params.id)
+            .then(res => this.setState({
+                title: res.data.title,
+                body: res.data.body,
+                author: res.data.author,
+                loaded: true
+            })).catch(err => this.setState({ loaded: true }));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
+            this.setState({ loaded: false });
+            this.props.fetchArticle(this.props.match.params.id)
+                .then(res => this.setState({
+                    title: res.data.title,
+                    body: res.data.body,
+                    author: res.data.author,
+                    loaded: true
+                })).catch(err => this.setState({ loaded: true }));
+            }
+    }
+
+    convertToRichText(rawContent) {
+        const richContent = convertFromRaw(JSON.parse(rawContent));
+        const editorState = EditorState.createWithContent(richContent, decorator);
+        return editorState;
     }
 
     render() {
+        if (!this.state.loaded) {
+            return <ReactLoading
+                type={"bars"}
+                color={"white"}
+                height={700}
+                width={400} />
+        } else if (!this.props.currentArticle) {
+            return <h2 className="profile-error">Article does not exist</h2>
+        }
+
         return (
-            <div className="article-compose-container">
-                <ImageAdd
-                    editorState={this.state.editorState}
-                    onChange={this.onChange}
-                    modifier={imagePlugin.addImage}
-                />
-                <div className="body-text-editor" onClick={this.focus}>
-                    <Editor
-                        editorState={this.state.editorState}
-                        placeholder={this.renderPlaceholder(this.props.placeholder, this.state.editorState)}
-                        onChange={this.onChange}
-                        handleKeyCommand={this.handleKeyCommand}
-                        plugins={plugins}
-                        ref={(element) => { this.editor = element; }}
-                    />
-                    <InlineToolbar>{
-                        (externalProps) => (
-                            <div>
-                                <BoldButton {...externalProps} />
-                                <ItalicButton {...externalProps} />
-                                <UnderlineButton {...externalProps} />
-                                <LinkButton {...externalProps} />
-                                <Separator {...externalProps} />
-                                <CodeButton {...externalProps} />
-                                <BlockquoteButton {...externalProps} />
-                                <CodeBlockButton {...externalProps} />
-                            </div>
-                        )
-                    }</InlineToolbar>
-                    
+            <div className="display-article-outer">
+                <div className="display-article-inner">
+                    <div className="article-display">
+                        <h1 className="article-display-title">{this.state.article.title}</h1>
+                        <h2>{this.state.article.author}</h2>
+                        {this.state.article.body && (<div className="article-display-body">
+                        <Editor 
+                            editorState={this.convertToRichText(this.state.article.body)}
+                            blockRendererFn={mediaBlockRenderer} 
+                            ref="editor"
+                        /></div>)}
+                    </div>
+                
+
+                    <ArticleLikeContainer />
+                        <CommentIndex />
                 </div>
-                <button onClick={this.handlePost} className="publish-button">Publish</button>  
             </div>
         )
     }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArticleEditor));
