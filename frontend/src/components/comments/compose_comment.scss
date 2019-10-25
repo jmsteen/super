@@ -1,4 +1,23 @@
 .response-container {
   height: 50px;
+  padding: 0 20px;
+  border: 1px solid rgba(0,0,0,.09);
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  width: 60%;
+  border-radius: 3px;
+  margin-left: 20px;
+ 
+}
+
+.comment-submit {
+  color: #03a87c;
+  border: 1px solid #03a87c;
+  border-radius: 4px;
+  padding: 5px;
   
+}
+
+.comment-submit:hover {
+  color: #018f69;
+  border-color: #018f69;
 }

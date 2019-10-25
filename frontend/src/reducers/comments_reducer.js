@@ -13,7 +13,7 @@ const commentsReducer = (state = {}, action) => {
         delete newState[action.data.comment.id]
         return newState
       case RECEIVE_ARTICLE:
-        return action.article.data.comments
+        return action.article.data.comments || {}
       default: 
         return state;
     }
