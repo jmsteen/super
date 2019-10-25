@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const LikeSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'User',
     required: true
   },
 
@@ -15,12 +15,12 @@ const LikeSchema = new Schema({
 
   article: {
     type: Schema.Types.ObjectId,
-    ref: 'articles',
+    ref: 'Article',
   },
 
   comment: {
     type: Schema.Types.ObjectId,
-    ref: 'comments',
+    ref: 'Comment',
   },
 
   date: {
@@ -29,4 +29,4 @@ const LikeSchema = new Schema({
   }
 });
 
-module.exports = Like = mongoose.model("likes", LikeSchema);
+module.exports = Like = mongoose.model("Like", LikeSchema);
