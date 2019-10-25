@@ -7,6 +7,7 @@ import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
+import './article.scss';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -23,7 +24,7 @@ const mapDispatchToProps = dispatch => {
 const Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
     return (
-        <a href={url} nofollow="true" noreferrer="true">
+        <a className='link' href={url} nofollow="true" noreferrer="true">
             {props.children}
         </a>
     );

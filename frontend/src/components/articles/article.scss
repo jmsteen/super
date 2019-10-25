@@ -13,6 +13,12 @@
     width: 100%;
     margin: 20px auto;
 }
+.article-edit {
+    position: relative;
+    padding: 0 20px 75px 20px;
+    width: 100%;
+    margin: 20px auto;
+}
 
 .article-display-title {
     font-size: 40px;
@@ -71,6 +77,12 @@ div.DraftEditor-root {
     position: relative;
     overflow: scroll;
     line-height: 1.5;
+}
+
+.link {
+    text-decoration: underline;
+    cursor: pointer;
+    color:rgb(0, 0, 72)
 }
 
 .publish-button {

@@ -15,9 +15,9 @@ export const receiveUserArticles = articles => ({
 });
 
 export const receiveArticle = article => ({
-    type: RECEIVE_ARTICLE,
-    article
-})
+        type: RECEIVE_ARTICLE,
+        article
+});
 
 export const fetchArticles = () => dispatch => (
     getArticles()
@@ -42,12 +42,18 @@ export const fetchUserArticles = id => dispatch => (
 
 export const composeArticle = data => dispatch => (
     writeArticle(data)
-        .then(article => dispatch(receiveArticle(article)))
+        .then(article => {
+            dispatch(receiveArticle(article))
+            return article
+        })
         .catch(err => console.log(err))
 );
 
-export const reviseArticle = data => dispatch => (
-    updateArticle(data)
-        .then(article => dispatch(receiveArticle(article)))
+export const reviseArticle = data => dispatch => {
+    return updateArticle(data)
+        .then(article => {
+            dispatch(receiveArticle(article))
+            return article
+        })
         .catch(err => console.log(err))
-);
+    };

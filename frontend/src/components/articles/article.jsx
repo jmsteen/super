@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ArticleEditor from './article_editor';
+import ArticleCreator from './article_creator';
 import './article.scss';
 
 export default class Article extends Component {
@@ -31,7 +31,7 @@ export default class Article extends Component {
                         />
                     </form>
                     <div>
-                        <ArticleEditor 
+                        <ArticleCreator 
                             handlePost={this.props.composeArticle} 
                             placeholder="Share your thoughts..."
                             author={this.props.author}
