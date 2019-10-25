@@ -17,6 +17,8 @@
   border-radius: 4px;
   padding: 5px 10px;
   width: fit-content;
+  margin-left: 20px;
+  margin-bottom: 5px;
 }
 
 .comment-submit:hover {
@@ -33,25 +35,33 @@
 .large-response-container {
   border: 1px solid rgba(0,0,0,.09);
   box-shadow: 0 1px 4px rgba(0,0,0,.03);
-  
+  margin-bottom: 20px;
   border-radius: 3px;
   margin-left: 20px;
   display: flex;
   height: 200px;
+  flex-direction: column;
 }
 
 .large-response {
-  height: 200px;
-  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+
+  
 }
 
 .large-response-container form {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .response-author {
- display: block;
+  margin-top: 5px;
+ margin-left: 10px;
+ height: fit-content;
 }
 
 .response-inner-container {

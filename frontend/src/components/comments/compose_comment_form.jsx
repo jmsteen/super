@@ -57,8 +57,8 @@ class CommentForm extends React.Component {
         <div className="large-response-container">
           <div className="response-author">{this.state.author}</div>
           <form onSubmit={this.handleSubmit}>
-          <input onClick={this.largeForm} className="large-response" type="text" value={this.state.body} onChange={this.update()}/>
-          <input className="comment-submit"type="submit" value="publish"/>
+            <textarea className="large-response" cols="30" rows="10" value={this.state.body} onChange={this.update()}></textarea>
+          <input className="comment-submit"type="submit" value="Publish"/>
           </form>
         </div>
       )
@@ -67,9 +67,7 @@ class CommentForm extends React.Component {
         <div className="response-container">
           <div className="response-inner-container">
             <div>{this.state.author}</div>
-            <form onSubmit={this.handleSubmit}>
             <input onClick={this.largeForm} className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()} />
-            </form>
           </div>
         </div>
       )
