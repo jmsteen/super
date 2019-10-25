@@ -2,6 +2,7 @@ import Article from './article';
 import { connect } from 'react-redux';
 import { composeArticle } from '../../actions/article_actions';
 
+
 const mapStateToProps = ({session: { user }}) => ({
     author: user.id
 });
