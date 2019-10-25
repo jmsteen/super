@@ -8,6 +8,7 @@ import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
 import './article.scss';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -21,7 +22,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const Link = (props) => {
+const _Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
     return (
         <a className='link' href={url} nofollow="true" noreferrer="true">
@@ -45,7 +46,7 @@ function findLinkEntities(contentBlock, callback, contentState) {
 
 const decorator = new CompositeDecorator([{
     strategy: findLinkEntities,
-    component: Link
+    component: _Link
 }]);
 
 class ArticleDisplay extends Component {
@@ -66,6 +67,7 @@ class ArticleDisplay extends Component {
                 title: res.data.title,
                 body: res.data.body,
                 author: res.data.author,
+                date: res.data.date,
                 loaded: true
             })).catch(err => this.setState({ loaded: true }));
     }
@@ -78,6 +80,7 @@ class ArticleDisplay extends Component {
                     title: res.data.title,
                     body: res.data.body,
                     author: res.data.author,
+                    date: res.data.date,
                     loaded: true
                 })).catch(err => this.setState({ loaded: true }));
             }
@@ -100,12 +103,28 @@ class ArticleDisplay extends Component {
             return <h2 className="profile-error">Article does not exist</h2>
         }
 
+        const date = new Date(this.state.date);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        var year = date.getFullYear();
+
         return (
             <div className="display-article-outer">
                 <div className="display-article-inner">
                     <div className="article-display">
                         <h1 className="article-display-title">{this.state.title}</h1>
-                        <h2>{this.state.author}</h2>
+                        <div className="article-display-meta">
+                            <Link className="article-display-meta-image-link" to={`/@${this.state.author.handle}`}><img src={ this.state.author.image || require('../../assets/images/default_profile.svg') }/></Link>
+                            
+                            <div className="article-display-meta-top">
+                                <h2><Link to={`/@${this.state.author.handle}`}>{this.state.author.displayName || this.state.author.handle}</Link></h2>
+                                <button>Follow (not functional)</button>
+                            </div>
+                            
+                            <div className="article-display-meta-bottom">
+                                <span>{month + "/" + day + "/" + year}</span>
+                            </div>
+                        </div>
                         {this.state.body && (<div className="article-display-body">
                         <Editor 
                             editorState={this.convertToRichText(this.state.body)}
