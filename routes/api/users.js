@@ -32,9 +32,37 @@ router.get("/:userId", (req, res) => {
 
 // Added so that the user can be fetched by the handle
 router.get("/handle/:handle", (req, res) => {
-  User.findOne({handle: req.params.handle}).populate('articles')
+  User.findOne({handle: req.params.handle})
+    .populate({
+      path: 'articles',
+      populate: {
+        path: 'author',
+        model: 'users'
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'article',
+        model: 'articles',
+        populate: {
+          path: 'author',
+          model: 'users'
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        model: 'comments',
+        populate: {
+          path: 'author',
+          model: 'users'
+        }
+      }
+    })
     .then(response => {
-      console.dir(response);
       res.json(response);
     })
     .catch(() =>

@@ -2,18 +2,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProfileArticlePanel = props => {
+  const article = props.article;
+  const date = new Date(article.date);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  var year = date.getFullYear();
+
   return (
     <li className="profile-article-panel">
       <div className="profile-panel-top">
-        <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" />
+        <Link to={`/@${article.author.handle}`}><img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" /></Link>
         <div className="profile-panel-info">
-          <span>Name Here</span>
-          <span>Date</span>
+          <span><Link className="author-link" to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
+          <span>{month + "/" + day + "/" + year}</span>
         </div>
       </div>
-      <Link to='/' className="profile-panel-link">
+      <Link to={`/articles/${article._id}`} className="profile-panel-link">
         <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" />
-        <h3>This is supposed to be a relatively long title here.</h3>
+        <h3>{article.title}</h3>
       </Link>
 
     </li>

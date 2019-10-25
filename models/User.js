@@ -35,6 +35,12 @@ UserSchema.virtual('articles', {
   foreignField: 'author'
 });
 
+UserSchema.virtual('likes', {
+  ref: 'likes',
+  localField: '_id',
+  foreignField: 'user'
+});
+
 UserSchema.set('toObject', {
   virtuals: true
 });
