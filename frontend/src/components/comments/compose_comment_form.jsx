@@ -33,7 +33,7 @@ class CommentForm extends React.Component {
         <div className="response-container">
           <form onSubmit={this.handleSubmit}>
           <input className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()}/>
-          <input type="submit" value="publish"/>
+          <input className="comment-submit"type="submit" value="publish"/>
           </form>
         </div>
       )
