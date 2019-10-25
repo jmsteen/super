@@ -2,34 +2,96 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { editUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
   const profileUser = Object.values(state.entities.users).find(user => user.handle === ownProps.match.params.handle);
-  
   return {
     profileUser
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  closeModal: () => dispatch(closeModal())
+  closeModal: () => dispatch(closeModal()),
+  editUser: user => dispatch(editUser(user))
 });
 
 
 class ProfileForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = props.profileUser;
+    this.cancel = this.cancel.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.resizeTextarea = this.resizeTextarea.bind(this);
+  }
+
+  cancel(e) {
+    e.stopPropagation();
+    this.props.closeModal();
+  }
+
+  resizeTextarea(e) {
+    const textarea = e.target;
+    textarea.style.height = "";
+    textarea.style.height = textarea.scrollHeight + "px"
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state);
+    this.props.editUser(this.state)
+      .then(this.props.closeModal())
+      .catch(errors => console.log(errors));
+  }
+
+  update(field) {
+    return e => {
+      this.setState({ [field]: e.target.value });
+    };
+  }
+
+  updateHandle() {
+    return e => {
+      this.setState({ handle: e.target.value.slice(1) })
+    }
   }
 
   render() {
     return (
-      <div>
-        <form>
-
+      <div className="profile-form-container">
+        <form onSubmit={this.handleSubmit} className='profile-form'>
+          <input 
+            type="text"
+            onChange={ this.update('displayName') }
+            value={ this.state.displayName || '' }
+            placeholder='Enter your name'
+          />
+          <input 
+            type="text"
+            onChange={this.updateHandle() }
+            value={'@' + this.state.handle}
+            placeholder='Enter your handle'
+          />
+          <textarea 
+            onInput={this.resizeTextarea}
+            onChange={this.update('description')}
+            value={this.state.description || ''}
+            id="profile-description-input" 
+            maxLength='160' 
+            placeholder='Enter your description here'
+          />
+          <input
+            onChange={this.update('image')}
+            value={this.state.image || ''}
+            id="profile-image-input"
+            type="text"
+            placeholder='Enter your profile image url'
+          />
+          <div className="profile-button-container">
+            <button id="profile-save">Save</button>
+            <button onClick={this.cancel} id="profile-cancel">Cancel</button>
+          </div>
         </form>
       </div>
     )

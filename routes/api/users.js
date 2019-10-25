@@ -77,7 +77,7 @@ router.get("/:userId/articles", (req, res) => {
     );
 });
 
-router.patch("/:userId/edit", (req, res) => {
+router.patch("/:userId", (req, res) => {
   User.findById(req.params.userId)
     .then(user => {
       if (req.body.description) { user.description = req.body.description };
