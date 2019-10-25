@@ -54,4 +54,24 @@ router.post('/',
   }
 );
 
+router.patch('/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateArticleInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const newArticle = new Article({
+      title: req.body.title,
+      body: req.body.body,
+      //baby come back!
+      author: req.user.id
+    });
+
+    newArticle.save().then(article => res.json(article));
+  }
+);
+
 module.exports = router;

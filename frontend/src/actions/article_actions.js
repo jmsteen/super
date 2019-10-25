@@ -49,8 +49,11 @@ export const composeArticle = data => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const reviseArticle = data => dispatch => (
-    updateArticle(data)
-        .then(article => dispatch(receiveArticle(article)))
+export const reviseArticle = data => dispatch => {
+    return updateArticle(data)
+        .then(article => {
+            dispatch(receiveArticle(article))
+            return article
+        })
         .catch(err => console.log(err))
-);
+    };
