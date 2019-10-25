@@ -44,7 +44,7 @@ class CommentForm extends React.Component {
       author: this.state.author,
       article: this.state.article
     });
-    this.setState({body: ""})
+    this.setState({body: "", clicked: false})
   }
 
   largeForm() {
@@ -53,6 +53,7 @@ class CommentForm extends React.Component {
       this.setState({
         clicked: true
       })
+     
     } 
   }
 
@@ -63,7 +64,7 @@ class CommentForm extends React.Component {
           <div className="response-author">{this.state.author}</div>
           <form onSubmit={this.handleSubmit}>
             <textarea className="large-response" cols="30" rows="10" value={this.state.body} onChange={this.update()}></textarea>
-          <input className="comment-submit"type="submit" value="Publish"/>
+          <input className="comment-submit" type="submit" value="Publish"/>
           </form>
         </div>
       )
