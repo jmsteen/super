@@ -8,6 +8,7 @@ class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { profileUser: undefined, loaded: false };
+    this.openModal = this.openModal.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +27,15 @@ class ProfilePage extends React.Component {
     }
   }
 
+  openModal(e) {
+    e.preventDefault();
+    this.props.openModal('profileEdit');
+  }
+
   renderButton() {
     if (!this.props.currentUser || !this.props.profileUser) { return null }
     if (this.props.currentUser.id === this.props.profileUser._id) {
-      return <button>Edit Profile (doesn't work yet)</button>
+      return <button onClick={this.openModal}>Edit Profile (doesn't work yet)</button>
     } else {
       return <button>Follow (doesn't work yet)</button>
     }

@@ -35,3 +35,8 @@ class ProfileForm extends React.Component {
     )
   }
 }
+
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileForm));
