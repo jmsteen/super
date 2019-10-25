@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const CommentSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'User',
     required: true
   },
 
@@ -21,7 +21,7 @@ const CommentSchema = new Schema({
 
   likes: [{
     type: Schema.Types.ObjectId,
-    ref: 'likes'
+    ref: 'Like'
   }],
 
   date: {
@@ -29,4 +29,4 @@ const CommentSchema = new Schema({
     default: Date.now
   }
 });
-module.exports = Comment = mongoose.model("comments", CommentSchema);
+module.exports = Comment = mongoose.model("Comment", CommentSchema);

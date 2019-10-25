@@ -30,13 +30,13 @@ const UserSchema = new Schema({
 });
 
 UserSchema.virtual('articles', {
-  ref: 'articles',
+  ref: 'Article',
   localField: '_id',
   foreignField: 'author'
 });
 
 UserSchema.virtual('likes', {
-  ref: 'likes',
+  ref: 'Like',
   localField: '_id',
   foreignField: 'user'
 });
@@ -49,4 +49,4 @@ UserSchema.set('toJSON', {
   virtuals: true
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = User = mongoose.model("User", UserSchema);

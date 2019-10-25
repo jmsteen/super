@@ -36,18 +36,15 @@ router.get("/handle/:handle", (req, res) => {
     .populate({
       path: 'articles',
       populate: {
-        path: 'author',
-        model: 'users'
+        path: 'author'
       }
     })
     .populate({
       path: 'likes',
       populate: {
         path: 'article',
-        model: 'articles',
         populate: {
-          path: 'author',
-          model: 'users'
+          path: 'author'
         }
       }
     })
@@ -55,10 +52,8 @@ router.get("/handle/:handle", (req, res) => {
       path: 'likes',
       populate: {
         path: 'comment',
-        model: 'comments',
         populate: {
-          path: 'author',
-          model: 'users'
+          path: 'author'
         }
       }
     })

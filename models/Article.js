@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'User',
         required: true
     },
     body: {
@@ -21,12 +21,20 @@ const ArticleSchema = new Schema({
     },
     comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'comments'
+        ref: 'Comment'
     }],
     likes: [{
         type: Schema.Types.ObjectId,
-        ref: 'likes'
+        ref: 'Like'
     }]
 });
 
-module.exports = Article = mongoose.model('articles', ArticleSchema);
+ArticleSchema.set('toObject', {
+    virtuals: true
+});
+
+ArticleSchema.set('toJSON', {
+    virtuals: true
+});
+
+module.exports = Article = mongoose.model('Article', ArticleSchema);
