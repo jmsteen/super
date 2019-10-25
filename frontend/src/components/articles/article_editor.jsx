@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CompositeDecorator, convertFromRaw, Editor, EditorState, AtomicBlockUtils } from 'draft-js';
+import { CompositeDecorator, RichUtils, convertToRaw, convertFromRaw, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchArticle, reviseArticle } from '../../actions/article_actions';
@@ -8,6 +8,35 @@ import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
 import './article.scss';
+import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import createImagePlugin from 'draft-js-image-plugin';
+import ImageAdd from './image_add';
+import {
+    ItalicButton,
+    BoldButton,
+    UnderlineButton,
+    CodeButton,
+    BlockquoteButton,
+    CodeBlockButton
+} from 'draft-js-buttons';
+import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
+import createLinkPlugin from 'draft-js-anchor-plugin';
+import 'draft-js/dist/Draft.css';
+import createMarkdownPlugin from 'draft-js-markdown-plugin';
+import './article.scss';
+import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
+
+const linkPlugin = createLinkPlugin({ placeholder: 'Enter your link here...' });
+const { LinkButton } = linkPlugin;
+const imagePlugin = createImagePlugin();
+const inlineToolbarPlugin = createInlineToolbarPlugin();
+const { InlineToolbar } = inlineToolbarPlugin;
+const plugins = [
+    inlineToolbarPlugin,
+    linkPlugin,
+    createMarkdownPlugin(),
+    imagePlugin
+]
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -59,19 +88,28 @@ class ArticleEditor extends Component {
                 body: null,
                 author: "",
             },
+            editorState: EditorState.createEmpty(decorator),
             loaded: false
         }
         this.onChange = (editorState) => this.setState({ editorState });
+        this.handleKeyCommand = this.handleKeyCommand.bind(this);
+        this.handlePost = this.handlePost.bind(this);
+        this.focus = this.focus.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchArticle(this.props.match.params.id)
             .then(res => this.setState({
-                title: res.data.title,
-                body: res.data.body,
-                author: res.data.author,
+                article: {
+                    title: res.data.title,
+                    body: res.data.body,
+                    author: res.data.author
+                },
+                editorState: this.convertToRichText(res.data.body),
                 loaded: true
-            })).catch(err => this.setState({ loaded: true }));
+            }))
+            .catch(err => this.setState({ loaded: true }))
+            .then(this.focus());
     }
 
     componentDidUpdate(prevProps) {
@@ -93,6 +131,32 @@ class ArticleEditor extends Component {
         return editorState;
     }
 
+    focus = () => {
+        if (this.editor) {
+            this.editor.focus();
+        };
+    };
+
+    handleKeyCommand(command, editorState) {
+        const newState = RichUtils.handleKeyCommand(editorState, command);
+        if (newState) {
+            this.onChange(newState);
+            return 'handled';
+        }
+        return 'not-handled';
+    }
+
+    handlePost() {
+        const content = this.state.editorState.getCurrentContent();
+        const contentString = JSON.stringify(convertToRaw(content));
+
+        this.props.handlePost({
+            body: contentString,
+            author: this.props.author,
+            title: this.props.title
+        }).then(res => this.props.history.push(`/articles/${res.data._id}`));
+    }
+
     render() {
         if (!this.state.loaded) {
             return <ReactLoading
@@ -111,11 +175,35 @@ class ArticleEditor extends Component {
                         <h1 className="article-display-title">{this.state.article.title}</h1>
                         <h2>{this.state.article.author}</h2>
                         {this.state.article.body && (<div className="article-display-body">
+                        <ImageAdd
+                            editorState={this.state.editorState}
+                            onChange={this.onChange}
+                            modifier={imagePlugin.addImage}
+                        />
                         <Editor 
-                            editorState={this.convertToRichText(this.state.article.body)}
+                            editorState={this.state.editorState}
                             blockRendererFn={mediaBlockRenderer} 
-                            ref="editor"
-                        /></div>)}
+                            // ref="editor"
+                            onChange={this.onChange}
+                            handleKeyCommand={this.handleKeyCommand}
+                            plugins={plugins}
+                            ref={(element) => { this.editor = element; }}
+                        />
+                        < InlineToolbar > {
+                            (externalProps) => (
+                                <div>
+                                    <BoldButton {...externalProps} />
+                                    <ItalicButton {...externalProps} />
+                                    <UnderlineButton {...externalProps} />
+                                    <LinkButton {...externalProps} />
+                                    <Separator {...externalProps} />
+                                    <CodeButton {...externalProps} />
+                                    <BlockquoteButton {...externalProps} />
+                                    <CodeBlockButton {...externalProps} />
+                                </div>
+                            )
+                        }</InlineToolbar>
+                        </div>)}
                     </div>
                 
 
