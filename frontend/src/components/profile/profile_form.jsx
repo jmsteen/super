@@ -49,6 +49,7 @@ class ProfileForm extends React.Component {
           if (res.user.handle !== this.props.match.params.handle) {
             this.props.updateCurrentUser({ handle: res.user.handle });
             this.props.history.push(`/@${res.user.handle}`);
+            window.location.reload();
           }
           this.props.closeModal();
         };
