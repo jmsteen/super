@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Article.findById(req.params.id).populate("comments").populate("author")
+  Article.findById(req.params.id).populate({ path: "comments", populate: { path: "likes" } }).populate("author")
     .then(article => {
       Like.find({ '_id': { $in: article.likes }})
         .then(likes => {
