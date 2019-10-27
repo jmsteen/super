@@ -6,8 +6,11 @@ const usersReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_USER:
-      newState[action.user._id] = action.user;
-      return newState;
+      if (action.user) {
+        return { [action.user._id]: action.user };
+      } else {
+        return {};
+      }
     default:
       return state;
   }

@@ -121,7 +121,6 @@ router.patch("/:userId", (req, res) => {
           res.status(422).json(err)
         } else{ 
           const payload = { id: user.id, handle: user.handle, email: user.email };
-
           jwt.sign(
             payload,
             keys.secretOrKey,

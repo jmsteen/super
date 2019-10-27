@@ -4,8 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { makeLike, increaseLike, eraseLike } from '../../actions/like_actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  articleId: ownProps.match.params.id,
-  currentArticle: state.entities.articles[ownProps.match.params.id],
   currentUser: state.session.user
 });
 
@@ -15,21 +13,20 @@ const mapDispatchToProps = dispatch => ({
   eraseLike: id => dispatch(eraseLike(id))
 });
 
-class ArticleLike extends React.Component {
+class CommentLike extends React.Component {
   constructor(props) {
     super(props);
-    const { currentArticle, currentUser } = props;
-    const currentLike = currentArticle.likes.find(like => like.user === currentUser.id);
+    const currentLike = this.props.comment.likes.find(like => like.user === props.currentUser.id);
 
-    this.state = { 
-      articleId: props.articleId,
-      currentLike,
-      loadingLike: false
+    this.state = {
+      commentId: props.comment._id,
+      currentLike
     };
-    
+
     this.handleErase = this.handleErase.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
+
   }
 
   handleErase() {
@@ -38,13 +35,12 @@ class ArticleLike extends React.Component {
       if (this.state.currentLike) {
         this.props.eraseLike(this.state.currentLike._id)
           .then(() => {
-            this.setState({ 
+            this.setState({
               currentLike: undefined,
               loadingLike: false
-            })});
-      }
-    }
-
+            })
+          });
+      }}
   }
 
   handleCreate() {
@@ -57,7 +53,7 @@ class ArticleLike extends React.Component {
             loadingLike: false
           })
         });
-      }
+    }
   }
 
   handleIncrement() {
@@ -69,29 +65,28 @@ class ArticleLike extends React.Component {
             loadingLike: false,
             currentLike: res.like
           }));
-      }
-    }
+      }}
   }
 
   renderButton() {
     if (this.state.currentLike) {
-      return <i className="fas fa-heart" onClick={this.handleIncrement}/>
+      return <i className="fas fa-thumbs-up" onClick={this.handleIncrement} />
     } else {
-      return <i className="far fa-heart" onClick={this.handleCreate} />
+      return <i className="far fa-thumbs-up" onClick={this.handleCreate} />
     }
   }
 
   render() {
-    const valueArr = this.props.currentArticle.likes.map(like => like.value);
+    const valueArr = this.props.comment.likes.map(like => like.value);
     const likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);
 
     return (
-      <div className="article-display-like-container">
+      <div className="comment-like-container">
         <div>
           {this.renderButton()}
           <span>{`${likesValue}`} Likes</span>
         </div>
-        <button onClick={this.handleErase}>Undo Like</button>
+        <button onClick={this.handleErase}>Undo Upvote</button>
       </div>
     )
   }
@@ -100,4 +95,4 @@ class ArticleLike extends React.Component {
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ArticleLike));
+)(CommentLike));
