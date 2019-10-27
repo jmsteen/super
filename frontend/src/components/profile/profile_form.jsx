@@ -29,6 +29,7 @@ class ProfileForm extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resizeTextarea = this.resizeTextarea.bind(this);
+    this.updateImage = this.updateImage.bind(this);
   }
 
   cancel(e) {
@@ -68,9 +69,13 @@ class ProfileForm extends React.Component {
   }
 
   update(field) {
-    return e => {
+    return (e => {
       this.setState({ [field]: e.target.value });
-    };
+    });
+  }
+
+  updateImage(url) {
+    this.setState({ image: url })
   }
 
   updateHandle() {
@@ -119,7 +124,7 @@ class ProfileForm extends React.Component {
           </div>
           {this.renderErrors()}
         </form>
-        <ProfileImageForm />
+        <ProfileImageForm updateImage={ this.updateImage } />
       </div>
     )
   }
