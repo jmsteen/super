@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { editUser } from '../../actions/user_actions';
 import { updateCurrentUser } from '../../actions/session_actions';
+import ProfileImageForm from './profile_image_form';
 
 const mapStateToProps = (state, ownProps) => {
   const profileUser = Object.values(state.entities.users).find(user => user.handle === ownProps.match.params.handle);
@@ -116,8 +117,9 @@ class ProfileForm extends React.Component {
             <button id="profile-save">Save</button>
             <button onClick={this.cancel} id="profile-cancel">Cancel</button>
           </div>
+          {this.renderErrors()}
         </form>
-        {this.renderErrors()}
+        <ProfileImageForm />
       </div>
     )
   }

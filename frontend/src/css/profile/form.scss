@@ -1,8 +1,9 @@
 .profile-form-container {
+  display: flex;
   background-color: white;
   position: absolute;
-  min-width: 400px;
-  width: 800px;
+  min-width: 450px;
+  width: 900px;
   height: 400px;
   font-family: sans-serif;
   box-sizing: border-box;
@@ -10,15 +11,24 @@
 }
 
 .profile-form {
-  height: 70%;
-  width: 80%;
+  height: 90%;
+  width: 60%;
   margin: 0 auto;
+  margin-left: 5%;
+  margin-right: 5px;
+}
+
+.profile-image-form {
+  background-color: blue;
+  height: 90%;
+  width: 30%;
 }
 
 .profile-form input {
   display: block;
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
+  margin-left: 10%;
   background-color: white;
   font-size: 30px;
   font-weight: 700;
@@ -28,9 +38,10 @@
 
 #profile-description-input {
   display: block;
-  width: 80%;
+  width: 85%;
   height: 28px;
   margin: 0 auto;
+  margin-left: 10%;
   font-size: 20px;
   resize: none;
   background-color: white;
@@ -67,4 +78,45 @@
   list-style: disc;
   width: 30%;
   margin-left: 20%;
+  margin-top: 20px;
 }
+
+.profile-file-input-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 30px;
+  border: 1px solid black;
+}
+
+.fa-camera-retro {
+  font-size: 62px;
+}
+
+@mixin react-md-file-inputs {
+  .md-file-input {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+  }
+  
+  .md-file-input-container {
+    position: relative;
+    
+    .md-btn {
+      display: block;
+      width: 65px;
+      height: 65px;
+      margin-left: 5px;
+    }
+
+    .md-btn:hover {
+      color: gray;
+    }
+  }
+};
