@@ -113,7 +113,7 @@ s
           <ReactCrop
             src={src}
             crop={crop}
-
+            imageStyle={{ maxHeight: '320px' }}
             keepSelection
             onImageLoaded={this.onImageLoaded}
             onComplete={this.onCropComplete}
