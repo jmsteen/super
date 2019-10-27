@@ -85,8 +85,6 @@ s
   };
 
   onCropChange(crop, percentCrop) {
-    // You could also use percentCrop:
-    // this.setState({ crop: percentCrop });
     this.setState({ crop });
   };
 
@@ -109,7 +107,6 @@ s
           <i className="fas fa-camera-retro" onClick={ this.delegateClick } />
           <input onChange={this.onSelectFile} id="profile-file-input" type="file" accept="image/*" />
         </div>
-        <button onClick={ this.handleTest } className="test-button">Test</button>
         {src && (
           <ReactCrop
             src={src}
