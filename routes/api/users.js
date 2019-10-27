@@ -111,7 +111,7 @@ router.patch("/:userId", (req, res) => {
       }
     })
     .then(user => {
-
+      console.dir(req.body);
       user.description = req.body.description;
       user.handle = req.body.handle;
       user.displayName = req.body.displayName;

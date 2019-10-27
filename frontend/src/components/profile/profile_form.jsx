@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { editUser } from '../../actions/user_actions';
 import { updateCurrentUser } from '../../actions/session_actions';
+import ProfileImageForm from './profile_image_form';
+import { uploadImage } from '../../util/image_api_util';
 
 const mapStateToProps = (state, ownProps) => {
   const profileUser = Object.values(state.entities.users).find(user => user.handle === ownProps.match.params.handle);
@@ -28,6 +30,7 @@ class ProfileForm extends React.Component {
     this.cancel = this.cancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resizeTextarea = this.resizeTextarea.bind(this);
+    this.updateImage = this.updateImage.bind(this);
   }
 
   cancel(e) {
@@ -43,18 +46,23 @@ class ProfileForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.editUser(this.state)
-      .then(res => {
-        if (res.user) {
-          if (res.user.handle !== this.props.match.params.handle) {
-            this.props.updateCurrentUser({ handle: res.user.handle });
-            this.props.history.push(`/@${res.user.handle}`);
-            window.location.reload();
-          }
-          this.props.closeModal();
-        };
-      })
-      .catch(errors => console.log(errors));
+    uploadImage(this.state.imageFile).then(res => {
+      const data = Object.assign({}, this.state);
+      if (res) { data.image = res.data.imageUrl }
+      console.dir(data);
+      this.props.editUser(data)
+        .then(res => {
+          if (res.user) {
+            if (res.user.handle !== this.props.match.params.handle) {
+              this.props.updateCurrentUser({ handle: res.user.handle });
+              this.props.history.push(`/@${res.user.handle}`);
+              window.location.reload();
+            }
+            this.props.closeModal();
+          };
+        })
+        .catch(errors => console.log(errors));
+    })
   }
 
   renderErrors() {
@@ -67,9 +75,18 @@ class ProfileForm extends React.Component {
   }
 
   update(field) {
-    return e => {
+    return (e => {
       this.setState({ [field]: e.target.value });
-    };
+    });
+  }
+
+  updateImage(url) {
+    this.setState({ image: url }, () => {
+      fetch(url)
+        .then(r => r.blob())
+        .then(blobFile => new File([blobFile], `${this.props.profileUser.handle}`, { type: "image/png" }))
+        .then(f => this.setState({ imageFile: f }));
+    })
   }
 
   updateHandle() {
@@ -104,20 +121,13 @@ class ProfileForm extends React.Component {
             maxLength='160' 
             placeholder='Enter your description here'
           />
-          <input
-            onChange={this.update('image')}
-            autoComplete='off'
-            value={this.state.image || ''}
-            id="profile-image-input"
-            type="text"
-            placeholder='Enter your profile image url'
-          />
           <div className="profile-button-container">
             <button id="profile-save">Save</button>
             <button onClick={this.cancel} id="profile-cancel">Cancel</button>
           </div>
+          {this.renderErrors()}
         </form>
-        {this.renderErrors()}
+        <ProfileImageForm updateImage={ this.updateImage } originalImage={ this.state.image } />
       </div>
     )
   }
