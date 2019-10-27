@@ -20,6 +20,14 @@ class ProfileImageForm extends React.Component {
     this.makeClientCrop = this.makeClientCrop.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.originalImage) {
+      console.log('here');
+      const div = document.getElementById('profile-file-input-container');
+      div.style.backgroundImage = `url('${this.props.originalImage}')`;
+    }
+  }
+
   delegateClick() {
     const input = document.getElementById("profile-file-input");
     input.click();
@@ -76,7 +84,6 @@ s
     }
   }
 
-  // If you setState the crop in here you should return false.
   onImageLoaded(image) {
     this.imageRef = image;
     document.getElementsByClassName('ReactCrop__image').ondragstart = function () { return false; };

@@ -127,7 +127,7 @@ class ProfileForm extends React.Component {
           </div>
           {this.renderErrors()}
         </form>
-        <ProfileImageForm updateImage={ this.updateImage } />
+        <ProfileImageForm updateImage={ this.updateImage } originalImage={ this.state.image } />
       </div>
     )
   }
