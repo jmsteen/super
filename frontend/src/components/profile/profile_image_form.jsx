@@ -4,6 +4,7 @@ import ReactCrop from 'react-image-crop';
 class ProfileImageForm extends React.Component {
   constructor(props) {
     super(props);
+    this.cropper = React.createRef();
     this.state = {
       src: null,
       crop: {
@@ -78,6 +79,7 @@ s
   // If you setState the crop in here you should return false.
   onImageLoaded(image) {
     this.imageRef = image;
+    document.getElementsByClassName('ReactCrop__image').ondragstart = function () { return false; };
   };
 
   onCropComplete(crop) {
@@ -113,7 +115,6 @@ s
             crop={crop}
             imageStyle={{ border: '1px solid black' }}
             keepSelection
-            ruleOfThirds
             onImageLoaded={this.onImageLoaded}
             onComplete={this.onCropComplete}
             onChange={this.onCropChange}

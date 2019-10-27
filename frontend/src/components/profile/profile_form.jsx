@@ -121,14 +121,6 @@ class ProfileForm extends React.Component {
             maxLength='160' 
             placeholder='Enter your description here'
           />
-          <input
-            onChange={this.update('image')}
-            autoComplete='off'
-            value={this.state.image || ''}
-            id="profile-image-input"
-            type="text"
-            placeholder='Enter your profile image url'
-          />
           <div className="profile-button-container">
             <button id="profile-save">Save</button>
             <button onClick={this.cancel} id="profile-cancel">Cancel</button>
