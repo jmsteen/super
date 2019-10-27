@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = ({ session: { user }, entities: { articles }}, ownProps) => (
   {
-  author: user.id,
+    author: user.image || require('../../assets/images/default_profile.svg'),
   article: articles[ownProps.match.params.id]
 })
 
