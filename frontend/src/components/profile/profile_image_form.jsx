@@ -113,7 +113,7 @@ s
           <ReactCrop
             src={src}
             crop={crop}
-            imageStyle={{ border: '1px solid black' }}
+
             keepSelection
             onImageLoaded={this.onImageLoaded}
             onComplete={this.onCropComplete}
