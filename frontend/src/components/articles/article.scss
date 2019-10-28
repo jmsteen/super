@@ -164,6 +164,27 @@ div.DraftEditor-root {
     text-align: center;
 }
 
+.image-publish-button {
+    background: blue;
+    border-color: blue;
+    color: white;
+    height: 30px;
+    width: 90px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 10px;
+    right: 140px;
+    font-weight: 500;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#image-publish-input {
+    display: none;
+}
+
 .publish-button:hover {
     background: rgb(25, 169, 25)
 }

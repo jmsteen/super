@@ -99,6 +99,11 @@ class ArticleCreator extends Component {
         }).then(res => this.props.history.push(`/articles/${res.data._id}`));
     }
 
+    delegateClick() {
+        console.log('here');
+        document.getElementById('image-publish-input').click();
+    }
+
     renderPlaceholder(placeholder, editorState) {
         const currentContent = editorState.getCurrentContent();
         const hideContent = currentContent.hasText() || currentContent.getBlockMap()
@@ -137,8 +142,9 @@ class ArticleCreator extends Component {
                             </div>
                         )
                     }</InlineToolbar>
-                    
-                <button onClick={this.handlePost} className="publish-button">Publish</button>  
+                    <button onClick={this.delegateClick} className="image-publish-button">Main Image</button>
+                    <button onClick={this.handlePost} className="publish-button">Publish</button>
+                    <input type="file" id="image-publish-input"/>  
                 </div>
             </div>
         )
