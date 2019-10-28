@@ -7,6 +7,15 @@ const UserSchema = new Schema({
     required: true,
     unique: true
   },
+  displayName: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  image: {
+    type: String
+  },
   email: {
     type: String,
     required: true
@@ -31,6 +40,12 @@ const UserSchema = new Schema({
 
 UserSchema.virtual('articles', {
   ref: 'Article',
+  localField: '_id',
+  foreignField: 'author'
+});
+
+UserSchema.virtual('comments', {
+  ref: 'Comment',
   localField: '_id',
   foreignField: 'author'
 });

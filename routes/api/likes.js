@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Like = require('../../models/Like');
 const Article = require('../../models/Article');
+//const Comment = require('../../models/Comment');
 
 router.post('/',
   passport.authenticate('jwt', { session: false }),
@@ -62,7 +63,11 @@ router.delete('/:id',
   (req, res) => {
     Like.findByIdAndDelete(req.params.id)
       .then(deletedLike => {
-        res.json(deletedLike);
+        if (deletedLike) {
+          res.json(deletedLike);
+        } else {
+          res.json({ nolikefound: "No like matches the provided query."});
+        }
       })
       .catch(err => res.status(404).json({ error: 'Could not find and delete like' }));
   }

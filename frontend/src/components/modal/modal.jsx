@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { closeModal } from '../../actions/modal_actions';
 import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
+import ProfileFormContainer from '../profile/profile_form';
+import { Route } from 'react-router-dom';
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
@@ -16,6 +18,9 @@ function Modal({ modal, closeModal }) {
       break;
     case 'signup':
       component = <SignupFormContainer />;
+      break;
+    case 'profileEdit':
+      component = <Route path='/@:handle' component={ProfileFormContainer} />;
       break;
     default:
       return null;

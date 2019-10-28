@@ -12,11 +12,21 @@
   margin-top: 70px;
 }
 
-.profile-name-container {
-  height: 50px;
+.profile-header-info {
   width: 75%;
   display: flex;
+  flex-direction: column;
+}
+
+.profile-name-container {
+  height: 50px;
+  width: 100%;
+  display: flex;
   align-items: center;
+}
+
+.profile-header-description {
+  font-size: 20px;
 }
 
 .profile-name-container h1 {
@@ -46,6 +56,7 @@
   object-fit: cover;
   object-position: 50% 50%;
   border-radius: 50%;
+  border: 1px solid lightgray;
 }
 
 .profile-nav {
@@ -63,4 +74,8 @@
 
 .active {
   border-bottom: 1px solid black;
+}
+
+.profile-page main {
+  margin-bottom: 50px;
 }

@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const users = require("./routes/api/users");
 const articles = require("./routes/api/articles");
 const likes = require('./routes/api/likes');
+const images = require('./routes/api/images');
 const passport = require("passport");
 const comments = require("./routes/api/comments")
 
@@ -26,6 +27,7 @@ app.use("/api/users", users);
 app.use("/api/articles", articles);
 app.use("/api/likes", likes);
 app.use("/api/comments", comments);
+app.use("/api/images", images);
 
 mongoose
     .connect(db, { useNewUrlParser: true })
