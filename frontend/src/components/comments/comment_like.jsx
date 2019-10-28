@@ -16,7 +16,12 @@ const mapDispatchToProps = dispatch => ({
 class CommentLike extends React.Component {
   constructor(props) {
     super(props);
-    const currentLike = this.props.comment.likes.find(like => like.user === props.currentUser.id);
+    let currentLike
+    if (this.props.comment.likes) {
+      currentLike = this.props.comment.likes.find(like => like.user === props.currentUser.id);
+    } else {
+      currentLike = undefined;
+    }
 
     this.state = {
       commentId: props.comment._id,
@@ -77,7 +82,7 @@ class CommentLike extends React.Component {
   }
 
   render() {
-    const valueArr = this.props.comment.likes.map(like => like.value);
+    const valueArr = this.props.comment.likes ? this.props.comment.likes.map(like => like.value) : [];
     const likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);
 
     return (
