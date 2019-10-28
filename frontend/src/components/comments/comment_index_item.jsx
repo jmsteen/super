@@ -10,10 +10,8 @@ class CommentIndexItem extends React.Component {
 
   render() {
     let deleteButton
-
-    if (this.props.currentUser && this.props.currentUser.id === this.props.comment.author.id) {
+    if (this.props.currentUser.id === this.props.comment.author.id) {
      deleteButton = <button onClick={() => { this.props.removeComment(this.props.comment.id) }}>Delete Comment</button>
-
     }
     return( 
      
