@@ -11,8 +11,8 @@ const images = require('./routes/api/images');
 const passport = require("passport");
 const comments = require("./routes/api/comments")
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: '16mb', extended: true }));
+app.use(bodyParser.json({ limit: '16mb', extended: true }));
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
