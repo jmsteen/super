@@ -22,7 +22,7 @@ const App = () => (
       <Route path="/@:handle" component={ProfileContainer} />
       <ProtectedRoute exact path="/articles" component={ArticlesContainer} />
       <ProtectedRoute exact path="/new_article" component={ArticleComposeContainer} />
-      <ProtectedRoute exact path="/articles/:id" component={ArticleDisplay} />
+      <Route exact path="/articles/:id" component={ArticleDisplay} />
       <ProtectedRoute exact path="/articles/:id/edit" component={ArticleEditor} />
     </Switch>
   </div>

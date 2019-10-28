@@ -57,7 +57,7 @@ export default class ImageAdd extends Component {
             'addImageButton';
 
         return (
-            <div className='addImage'>
+            <div className={`addImage ${this.props.addClass ? this.props.addClass : ""}`}>
                 <button
                     className={buttonClassName}
                     onMouseUp={this.openPopover}

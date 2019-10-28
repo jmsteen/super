@@ -15,7 +15,7 @@ const ProfileCommentPanel = props => {
   return (
     <li className="profile-comment-panel">
       <div className="profile-panel-top">
-        <Link to={`/@${comment.author.handle}`}><img alt="profile" src={comment.author.image} /></Link>
+        <Link to={`/@${comment.author.handle}`}><img alt="profile" src={comment.author.image || require('../../assets/images/default_profile.svg')} /></Link>
         <div className="profile-panel-info">
           <span><Link className="author-link" to={`/@${comment.author.handle}`}>{comment.author.handle}</Link></span>
           <span>{month + "/" + day + "/" + year}</span>

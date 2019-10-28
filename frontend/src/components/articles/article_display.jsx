@@ -62,6 +62,7 @@ class ArticleDisplay extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
         this.props.fetchArticle(this.props.match.params.id)
             .then(res => this.setState({
                 title: res.data.title,
@@ -76,13 +77,16 @@ class ArticleDisplay extends Component {
         if (this.props.match.params.id !== prevProps.match.params.id) {
             this.setState({ loaded: false });
             this.props.fetchArticle(this.props.match.params.id)
-                .then(res => this.setState({
-                    title: res.data.title,
-                    body: res.data.body,
-                    author: res.data.author,
-                    date: res.data.date,
-                    loaded: true
-                })).catch(err => this.setState({ loaded: true }));
+                .then(res => {
+                    this.setState({
+                        title: res.data.title,
+                        body: res.data.body,
+                        author: res.data.author,
+                        date: res.data.date,
+                        loaded: true
+                    });
+                    window.scrollTo(0, 0);
+                }).catch(err => this.setState({ loaded: true }));
             }
     }
 
