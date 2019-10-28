@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const HomePrimaryPanel = props => {
   const article = props.article;
   const text = rawToPlain(article.body);
-  console.dir(article);
 
   return (
     <div className="home-primary-panel">
