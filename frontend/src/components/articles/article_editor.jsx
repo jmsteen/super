@@ -198,36 +198,38 @@ class ArticleEditor extends Component {
                                 <span>{month + "/" + day + "/" + year}</span>
                             </div>
                         </div>                        
-                        <div className="article-display-body">
+                        <div className="article-compose-container">
                             <ImageAdd
                                 editorState={this.state.editorState}
                                 onChange={this.onChange}
                                 modifier={imagePlugin.addImage}
+                                addClass={"add-edit-image"}
                             />
-                            <div className="body-text-editor" onClick={this.focus}></div>
-                            <Editor 
-                                editorState={this.state.editorState}
-                                blockRendererFn={mediaBlockRenderer} 
-                                // ref="editor"
-                                onChange={this.onChange}
-                                handleKeyCommand={this.handleKeyCommand}
-                                plugins={plugins}
-                                ref={(element) => { this.editor = element; }}
-                            />
-                            <InlineToolbar>{
-                                (externalProps) => (
-                                    <div>
-                                        <BoldButton {...externalProps} />
-                                        <ItalicButton {...externalProps} />
-                                        <UnderlineButton {...externalProps} />
-                                        <LinkButton {...externalProps} />
-                                        <Separator {...externalProps} />
-                                        <CodeButton {...externalProps} />
-                                        <BlockquoteButton {...externalProps} />
-                                        <CodeBlockButton {...externalProps} />
-                                    </div>
-                                )
-                            }</InlineToolbar>
+                            <div className="body-text-editor" onClick={this.focus}>
+                                <Editor 
+                                    editorState={this.state.editorState}
+                                    blockRendererFn={mediaBlockRenderer} 
+                                    // ref="editor"
+                                    onChange={this.onChange}
+                                    handleKeyCommand={this.handleKeyCommand}
+                                    plugins={plugins}
+                                    ref={(element) => { this.editor = element; }}
+                                />
+                                <InlineToolbar>{
+                                    (externalProps) => (
+                                        <div>
+                                            <BoldButton {...externalProps} />
+                                            <ItalicButton {...externalProps} />
+                                            <UnderlineButton {...externalProps} />
+                                            <LinkButton {...externalProps} />
+                                            <Separator {...externalProps} />
+                                            <CodeButton {...externalProps} />
+                                            <BlockquoteButton {...externalProps} />
+                                            <CodeBlockButton {...externalProps} />
+                                        </div>
+                                    )
+                                }</InlineToolbar>
+                            </div>
                         </div>
                     <button onClick={this.handlePost} className="publish-button">Publish</button>  
                     </div>
