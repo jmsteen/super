@@ -151,7 +151,7 @@ class ArticleDisplay extends Component {
                             
                             <div className="article-display-meta-top">
                                 <h2><Link to={`/@${this.state.author.handle}`}>{this.state.author.displayName || this.state.author.handle}</Link></h2>
-                                { this.props.currentUser && <AuthorFollow />}
+                                { (this.props.currentUser && this.props.currentUser.id !== this.state.author._id) && <AuthorFollow />}
                             </div>
                             
                             <div className="article-display-meta-bottom">
