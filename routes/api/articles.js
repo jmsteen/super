@@ -61,6 +61,14 @@ router.post('/',
   }
 );
 
+router.delete('/:id', (req, res) => {
+  Article.findByIdAndDelete(req.params.id)
+    .then(like => res.json(like))
+    .catch(err =>
+      res.status(404).json({ couldnotdelete: 'Article could not be located and deleted' })
+    );
+});
+
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
