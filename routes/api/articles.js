@@ -46,7 +46,6 @@ router.post('/',
     const newArticle = new Article({
       title: req.body.title,
       body: req.body.body,
-      //baby come back!
       author: req.user.id
     });
 
@@ -66,7 +65,6 @@ router.patch('/:id',
     const newArticle = new Article({
       title: req.body.title,
       body: req.body.body,
-      //baby come back!
       author: req.user.id
     });
 

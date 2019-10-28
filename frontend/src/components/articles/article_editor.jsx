@@ -7,6 +7,7 @@ import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
+import { Link } from 'react-router-dom';
 import './article.scss';
 import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
@@ -51,7 +52,7 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const Link = (props) => {
+const _Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
     return (
         <a className='link' href={url} nofollow="true" noreferrer="true">
@@ -75,7 +76,7 @@ function findLinkEntities(contentBlock, callback, contentState) {
 
 const decorator = new CompositeDecorator([{
     strategy: findLinkEntities,
-    component: Link
+    component: _Link
 }]);
 
 class ArticleEditor extends Component {
@@ -106,7 +107,8 @@ class ArticleEditor extends Component {
                     title: res.data.title,
                     body: res.data.body,
                     author: res.data.author,
-                    id: this.props.match.params.id
+                    id: this.props.match.params.id,
+                    date: res.data.date
                 },
                 editorState: this.convertToRichText(res.data.body),
                 loaded: true
@@ -176,27 +178,43 @@ class ArticleEditor extends Component {
             return <h2 className="profile-error">Article does not exist</h2>
         }
 
+        const date = new Date(this.state.article.date);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        var year = date.getFullYear();
+
         return (
             <div className="display-article-outer">
                 <div className="display-article-inner">
                     <div className="article-edit">
                         <h1 className="article-display-title">{this.state.article.title}</h1>
-                        <h2>{this.state.article.author}</h2>
+                        <div className="article-display-meta">
+                            <Link className="article-display-meta-image-link" to={`/@${this.state.article.author.handle}`}><img alt="author" src={this.state.article.author.image || require('../../assets/images/default_profile.svg')} /></Link>
+
+                            <div className="article-display-meta-top">
+                                <h2><Link to={`/@${this.state.article.author.handle}`}>{this.state.article.author.displayName || this.state.article.author.handle}</Link></h2>
+                            </div>
+
+                            <div className="article-display-meta-bottom">
+                                <span>{month + "/" + day + "/" + year}</span>
+                            </div>
+                        </div>                        
                         <div className="article-display-body">
-                        <ImageAdd
-                            editorState={this.state.editorState}
-                            onChange={this.onChange}
-                            modifier={imagePlugin.addImage}
-                        />
-                        <Editor 
-                            editorState={this.state.editorState}
-                            blockRendererFn={mediaBlockRenderer} 
-                            // ref="editor"
-                            onChange={this.onChange}
-                            handleKeyCommand={this.handleKeyCommand}
-                            plugins={plugins}
-                            ref={(element) => { this.editor = element; }}
-                        />
+                            <ImageAdd
+                                editorState={this.state.editorState}
+                                onChange={this.onChange}
+                                modifier={imagePlugin.addImage}
+                            />
+                            <div className="body-text-editor" onClick={this.focus}></div>
+                            <Editor 
+                                editorState={this.state.editorState}
+                                blockRendererFn={mediaBlockRenderer} 
+                                // ref="editor"
+                                onChange={this.onChange}
+                                handleKeyCommand={this.handleKeyCommand}
+                                plugins={plugins}
+                                ref={(element) => { this.editor = element; }}
+                            />
                             <InlineToolbar>{
                                 (externalProps) => (
                                     <div>
@@ -214,9 +232,6 @@ class ArticleEditor extends Component {
                         </div>
                     <button onClick={this.handlePost} className="publish-button">Publish</button>  
                     </div>
-
-                    <ArticleLikeContainer />
-                    <CommentIndex />
                 </div>
             </div>
         )
