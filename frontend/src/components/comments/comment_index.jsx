@@ -1,7 +1,7 @@
 import React from 'react';
 import CommentIndexItem from './comment_index_item';
 import CommentForm from './compose_comment_container';
-
+import './comments_index.scss'
 class CommentsIndex extends React.Component {
   constructor(props) {
     super(props)

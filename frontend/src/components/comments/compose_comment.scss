@@ -1,23 +1,69 @@
 .response-container {
-  height: 50px;
+  height: 80px;
   padding: 0 20px;
   border: 1px solid rgba(0,0,0,.09);
   box-shadow: 0 1px 4px rgba(0,0,0,.03);
-  width: 60%;
   border-radius: 3px;
-  margin-left: 20px;
- 
+  margin-bottom: 20px;
+  display: flex;
 }
+
+
 
 .comment-submit {
   color: #03a87c;
   border: 1px solid #03a87c;
   border-radius: 4px;
-  padding: 5px;
-  
+  padding: 5px 10px;
+  width: fit-content;
+  margin-left: 20px;
+  margin-bottom: 5px;
 }
 
 .comment-submit:hover {
   color: #018f69;
   border-color: #018f69;
+}
+
+.response-container form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.large-response-container {
+  border: 1px solid rgba(0,0,0,.09);
+  box-shadow: 0 1px 4px rgba(0,0,0,.03);
+  margin-bottom: 20px;
+  border-radius: 3px;
+  margin-left: 20px;
+  display: flex;
+  height: 200px;
+  flex-direction: column;
+}
+
+.large-response {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+ 
+  
+}
+
+.large-response-container form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.response-author {
+  margin-top: 5px;
+ margin-left: 10px;
+ height: fit-content;
+}
+
+.response-inner-container {
+  padding: 15px;
+  display: flex;
 }
