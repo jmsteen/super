@@ -8,6 +8,10 @@ const ProfileCommentPanel = props => {
   const day = date.getDate();
   var year = date.getFullYear();
 
+  if (!comment.article) {
+    return null;
+  }
+
   return (
     <li className="profile-comment-panel">
       <div className="profile-panel-top">
