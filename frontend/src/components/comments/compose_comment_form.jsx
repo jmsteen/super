@@ -74,7 +74,7 @@ class CommentForm extends React.Component {
     } else {
       return(
         <div className="response-container">
-          <img  src={this.props.image || require('../../assets/images/default_profile.svg')} /> 
+          <img  src={this.props.image || require('../../assets/images/default_profile.svg')} alt="profile-pic" /> 
           <div className="response-inner-container">
             <div>{this.state.author}</div>
             <input onClick={this.largeForm} className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()} />
