@@ -30,7 +30,7 @@ const commentsReducer = (state = {}, action) => {
         }
       case REMOVE_COMMENT: 
         newState = Object.assign({}, state)
-        delete newState[action.data.comment.id]
+        delete newState[action.comment.data.id]
         return newState
       case RECEIVE_ARTICLE:
         if (action.article.data.comments) {
