@@ -8,11 +8,12 @@
   padding-top: 15px;
   height: 56px;
   box-sizing: border-box;
+  align-items: center;
 }
 
 .navbar-logo {
-  font-size: 36px;
-  font-weight: 600;
+  height: 56px;
+  width: 140px;
 }
 
 .navbar-login-button {
