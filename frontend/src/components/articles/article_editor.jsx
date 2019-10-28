@@ -181,13 +181,17 @@ class ArticleEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        this.props.handlePost({
-            body: contentString,
-            author: this.state.article.author,
-            title: this.state.article.title,
-            id: this.state.article.id
-        }).then(res => {
-            return this.props.history.push(`/articles/${this.state.article.id}`)
+        uploadImage(this.props.image).then(res => {
+            const entry = {
+                body: contentString,
+                title: this.props.currentArticle.title,
+                id: this.props.currentArticle._id
+            };
+            if (res && res.data) { entry.image = res.data.imageUrl };
+
+            this.props.handlePost(entry).then(() => {
+                return this.props.history.push(`/articles/${this.state.article.id}`)
+            });
         });
     }
 

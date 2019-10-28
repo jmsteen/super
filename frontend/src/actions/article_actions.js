@@ -44,7 +44,6 @@ export const composeArticle = data => dispatch => {
     return writeArticle(data)
         .then(article => {
             dispatch(receiveArticle(article));
-            console.dir(article);
             return article;
         })
         .catch(err => console.log(err))
