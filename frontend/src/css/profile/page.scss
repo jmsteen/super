@@ -79,3 +79,21 @@
 .profile-page main {
   margin-bottom: 50px;
 }
+
+#profile-edit-button {
+  padding: 8px;
+  padding-right: 5px;
+  padding-top: 5px;
+  text-align: center;
+  border: 1px solid green;
+  color: green;
+}
+
+#profile-edit-button:hover {
+  color: gray;
+  border: 1px solid gray;
+}
+
+#profile-edit-button i {
+  font-size: 24px;
+}
