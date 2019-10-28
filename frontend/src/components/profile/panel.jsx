@@ -21,7 +21,9 @@ const ProfileArticlePanel = props => {
         <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" alt=""/>
         <h3>{article.title}</h3>
       </Link>
-
+      <div className="profile-panel-bottom">
+        { props.selfArticle && <Link to={`/articles/${article._id}/edit`}>Edit Article</Link>}
+      </div>
     </li>
   );
 };

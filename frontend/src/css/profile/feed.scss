@@ -112,3 +112,13 @@
   margin-left: 2%;
   font-size: 19px;
 }
+
+.profile-panel-bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-panel-bottom a:hover {
+  border-bottom: 1px solid black;
+}

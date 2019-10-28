@@ -10,7 +10,7 @@ class ProfileMainFeed extends React.Component {
   render() {
 
     const articleLis = this.state.articles.map(article => (
-      <ProfileArticlePanel article={article} key={article._id} />
+      <ProfileArticlePanel article={article} key={article._id} selfArticle={true} />
     ))
 
     return (
