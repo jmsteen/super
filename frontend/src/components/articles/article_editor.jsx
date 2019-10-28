@@ -3,6 +3,7 @@ import { CompositeDecorator, RichUtils, convertToRaw, convertFromRaw, EditorStat
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { receiveImage, clearImage } from '../../actions/image_actions';
+import { uploadImage } from '../../util/image_api_util';
 import { openModal } from '../../actions/modal_actions';
 import { fetchArticle, reviseArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';

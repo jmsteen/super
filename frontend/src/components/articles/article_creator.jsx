@@ -4,7 +4,9 @@ import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './image_add';
 import { withRouter } from 'react-router-dom';
+import { composeArticle } from '../../actions/article_actions';
 import { receiveImage, clearImage } from '../../actions/image_actions';
+import { uploadImage } from '../../util/image_api_util';
 import { openModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import {
@@ -43,7 +45,8 @@ const mapStateToProps = state => ({
 const mapDispatchtoProps = dispatch => ({
     receiveImage: image => dispatch(receiveImage(image)),
     clearImage: () => dispatch(clearImage()),
-    openModal: modal => dispatch(openModal(modal))
+    openModal: modal => dispatch(openModal(modal)),
+    handlePost: data => dispatch(composeArticle(data))
 });
 
 const Link = (props) => {
@@ -111,12 +114,16 @@ class ArticleCreator extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        
-        this.props.handlePost({
-            body: contentString,
-            author: this.props.author,
-            title: this.props.title
-        }).then(res => this.props.history.push(`/articles/${res.data._id}`));
+        uploadImage(this.props.image).then(res => {
+            const entry = {
+                body: contentString,
+                author: this.props.author,
+                title: this.props.title,
+            };
+            if (res && res.data) { entry.image = res.data.imageUrl };
+            this.props.handlePost(entry)
+                .then(res => console.dir(res));
+        });
     }
 
     delegateClick() {

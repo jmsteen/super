@@ -40,19 +40,19 @@ export const fetchUserArticles = id => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const composeArticle = data => dispatch => (
-    writeArticle(data)
+export const composeArticle = data => dispatch => {
+    return writeArticle(data)
         .then(article => {
-            dispatch(receiveArticle(article))
+            dispatch(receiveArticle(article));
             return article
         })
         .catch(err => console.log(err))
-);
+};
 
 export const reviseArticle = data => dispatch => {
     return updateArticle(data)
         .then(article => {
-            dispatch(receiveArticle(article))
+            dispatch(receiveArticle(article));
             return article
         })
         .catch(err => console.log(err))

@@ -40,7 +40,7 @@ router.post('/',
     const { errors, isValid } = validateArticleInput(req.body);
 
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(422).json(errors);
     }
 
     const newArticle = new Article({

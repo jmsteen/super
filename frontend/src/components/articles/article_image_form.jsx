@@ -35,8 +35,13 @@ class ArticleImageForm extends React.Component {
   }
 
   handleSubmit() {
-    this.props.receiveImage(this.state.croppedImageUrl);
-    this.props.closeModal();
+    fetch(this.state.croppedImageUrl)
+      .then(r => r.blob())
+      .then(blobFile => new File([blobFile], 'imageFileName', { type: "image/png" }))
+      .then(f => {
+        this.props.receiveImage(f);
+        this.props.closeModal();
+      })
   }
 
   onCropComplete(crop) {
@@ -59,7 +64,6 @@ class ArticleImageForm extends React.Component {
     canvas.width = 600;
     canvas.height = 300;
     const ctx = canvas.getContext('2d');
-    console.dir(image);
 
     ctx.drawImage(
       image,
