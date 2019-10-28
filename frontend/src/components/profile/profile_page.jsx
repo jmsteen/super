@@ -47,7 +47,7 @@ class ProfilePage extends React.Component {
   renderButton() {
     if (!this.props.currentUser || !this.props.profileUser) { return null }
     if (this.props.currentUser.id === this.props.profileUser._id) {
-      return <button onClick={this.openModal}>Edit Profile</button>
+      return <button id="profile-edit-button" onClick={this.openModal}><i className="fas fa-user-edit" /></button>
     } else {
       return <button>Follow (doesn't work yet)</button>
     }
