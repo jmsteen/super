@@ -59,16 +59,15 @@ router.patch('/:id',
     const { errors, isValid } = validateArticleInput(req.body);
 
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(422).json(errors);
     }
 
-    const newArticle = new Article({
-      title: req.body.title,
-      body: req.body.body,
-      author: req.user.id
-    });
-
-    newArticle.save().then(article => res.json(article));
+    Article.findById(req.body.id)
+      .then(article => {
+        article.title = req.body.title;
+        article.body = req.body.body;
+        article.save().then(article => res.json(article));
+      }).catch(err => res.status(404).json(err));
   }
 );
 

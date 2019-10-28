@@ -17,6 +17,5 @@ export const writeArticle = data => {
 };
 
 export const updateArticle = data => {
-    debugger
     return axios.patch(`/api/articles/${data.id}`, data)
 };

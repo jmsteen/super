@@ -156,14 +156,13 @@ class ArticleEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        debugger
         this.props.handlePost({
             body: contentString,
             author: this.state.article.author,
             title: this.state.article.title,
             id: this.state.article.id
         }).then(res => {
-            return this.props.history.push(`/articles/${res.data._id}`)
+            return this.props.history.push(`/articles/${this.state.article.id}`)
         });
     }
 
