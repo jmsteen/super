@@ -20,7 +20,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 });
 
 router.get("/:userId", (req, res) => {
-  User.findById(req.params.userId)
+  User.findById(req.params.userId).populate('follows')
     .then(response => {
       res.json(response)
     })

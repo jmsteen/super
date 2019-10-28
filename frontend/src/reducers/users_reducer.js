@@ -1,4 +1,5 @@
 import { RECEIVE_USER } from '../actions/user_actions';
+import { RECEIVE_FOLLOW, REMOVE_FOLLOW } from '../actions/follow_actions';
 
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
