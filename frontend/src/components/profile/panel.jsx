@@ -18,7 +18,7 @@ const ProfileArticlePanel = props => {
         </div>
       </div>
       <Link to={`/articles/${article._id}`} className="profile-panel-link">
-        <img src="https://d17fnq9dkz9hgj.cloudfront.net/breed-uploads/2018/09/dog-landing-hero-lg.jpg?bust=1536935129&width=1080" alt=""/>
+        <img src={article.image || require('../../assets/images/default_article.png')} alt=""/>
         <h3>{article.title}</h3>
       </Link>
       <div className="profile-panel-bottom">

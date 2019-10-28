@@ -250,3 +250,15 @@ div.DraftEditor-root {
     padding: 8px;
     margin-left: 20px;
 }
+
+.article-edit-link {
+    border: 1px solid black;
+    padding: 8px;
+    height: 50%;
+}
+
+.article-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -12,7 +12,8 @@ import { Link } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        currentArticle: state.entities.articles[ownProps.match.params.id]
+        currentArticle: state.entities.articles[ownProps.match.params.id],
+        currentUser: state.session.user
     };
 };
 
@@ -69,7 +70,8 @@ class ArticleDisplay extends Component {
                 body: res.data.body,
                 author: res.data.author,
                 date: res.data.date,
-                loaded: true
+                loaded: true,
+                id: res.data.id
             })).catch(err => this.setState({ loaded: true }));
     }
 
@@ -83,7 +85,8 @@ class ArticleDisplay extends Component {
                         body: res.data.body,
                         author: res.data.author,
                         date: res.data.date,
-                        loaded: true
+                        loaded: true,
+                        id: res.data._id
                     });
                     window.scrollTo(0, 0);
                 }).catch(err => this.setState({ loaded: true }));
@@ -116,7 +119,14 @@ class ArticleDisplay extends Component {
             <div className="display-article-outer">
                 <div className="display-article-inner">
                     <div className="article-display">
-                        <h1 className="article-display-title">{this.state.title}</h1>
+                        <div className="article-title-container">
+                            <h1 className="article-display-title">{this.state.title}</h1>
+                            { (this.props.currentUser && this.props.currentUser.id === this.state.author._id) && 
+                                <Link 
+                                    className="article-edit-link"
+                                    to={`/articles/${this.state.id}/edit`}
+                                >Edit</Link> }
+                        </div>
                         <div className="article-display-meta">
                             <Link className="article-display-meta-image-link" to={`/@${this.state.author.handle}`}><img alt="author" src={ this.state.author.image || require('../../assets/images/default_profile.svg') }/></Link>
                             
