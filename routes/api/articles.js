@@ -21,13 +21,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Article.findById(req.params.id).populate({ path: "comments", populate: [{ path: "likes" }, { path: "author" }] }).populate("author")
+  Article.findById(req.params.id)
+    .populate({ path: "comments", populate: { path: "likes" } })
+    .populate({ path: "author", populate: { path: "follows" }})
     .then(article => {
-      User.findById(article.author)
-        .populate('follows')
-        .then(author => {
-          article.author = author;
-        })
       Like.find({ '_id': { $in: article.likes }})
         .then(likes => {
           article.likes = likes
@@ -37,7 +34,6 @@ router.get('/:id', (req, res) => {
     .catch(err =>
       res.status(404).json({ noarticlefound: 'No article found with that ID' })
     )
-  
 });
 
 
@@ -60,6 +56,14 @@ router.post('/',
     newArticle.save().then(article => res.json(article));
   }
 );
+
+router.delete('/:id', (req, res) => {
+  Article.findByIdAndDelete(req.params.id)
+    .then(like => res.json(like))
+    .catch(err =>
+      res.status(404).json({ couldnotdelete: 'Article could not be located and deleted' })
+    );
+});
 
 router.patch('/:id',
   passport.authenticate('jwt', { session: false }),

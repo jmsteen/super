@@ -15,7 +15,11 @@ class ProfilePage extends React.Component {
 
   componentDidMount() {
     this.props.fetchUserByHandle(this.props.match.params.handle)
-      .then(res => this.setState({ profileUser: res.user, loaded: true }))
+      .then(res => this.setState({ 
+        profileUser: res.user, 
+        loaded: true,
+        selfPage: res.user._id === this.props.currentUser.id
+       }))
       .catch(() => this.setState({ loaded: true }))
   }
 
@@ -43,7 +47,7 @@ class ProfilePage extends React.Component {
   renderButton() {
     if (!this.props.currentUser || !this.props.profileUser) { return null }
     if (this.props.currentUser.id === this.props.profileUser._id) {
-      return <button onClick={this.openModal}>Edit Profile</button>
+      return <button id="profile-edit-button" onClick={this.openModal}><i className="fas fa-user-edit" /></button>
     } else {
       return <button>Follow (doesn't work yet)</button>
     }
@@ -84,15 +88,15 @@ class ProfilePage extends React.Component {
           </div>
           <Route 
             exact path='/@:handle'
-            render={props => <ProfileMainFeed {...props} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
+            render={props => <ProfileMainFeed {...props} selfPage={this.state.selfPage} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
           />
           <Route 
             exact path='/@:handle/likes' 
-            render={props => <ProfileLikeFeed {...props} likes={ likes ? likes.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+            render={props => <ProfileLikeFeed {...props} selfPage={this.state.selfPage} likes={ likes ? likes.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
           />
           <Route
             exact path='/@:handle/comments'
-            render={props => <ProfileCommentFeed {...props} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+            render={props => <ProfileCommentFeed {...props} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
           />
         </main>
       </section>

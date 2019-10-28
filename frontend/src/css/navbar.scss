@@ -3,28 +3,93 @@
   justify-content: space-between;
   max-width: 1050px;
   min-width: 500px;
-  max-height: 56px;
   margin: 0 auto;
   padding-top: 15px;
-  height: 56px;
+  height: 75px;
   box-sizing: border-box;
+  align-items: center;
 }
 
 .navbar-logo {
-  font-size: 36px;
+  height: 56px;
+  width: 140px;
+}
+
+.navbar-buttons a {
+  margin-right: 25px;
+  font-size: 24px;
+  padding: 10px 20px;
+  padding-left: 25px;
+  border-radius: 10px;
+}
+
+.navbar-buttons a:first-of-type:hover i:after{
+    content: 'New Story';
+    margin-left: 8px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.navbar-buttons a:last-of-type:hover i:after{
+    content: 'Profile';
+    margin-left: 8px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.navbar-buttons a:hover{
+  background-color: lightsteelblue;
+}
+
+.navbar-signout-button {
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.navbar-signout-button:hover{
+  background-color: lightsteelblue;
+}
+
+.navbar-signout-button:hover:after {
+  content: 'Sign Out';
+  margin-left: 8px;
+  font-size: 19px;
   font-weight: 600;
 }
 
 .navbar-login-button {
-  padding: 10px;
-}
-
-.navbar-buttons a {
-  margin-right: 18px;
+  font-size: 24px;
+  padding: 10px 20px;
+  padding-left: 25px;
+  border-radius: 10px;
+  margin-right: 40px;
 }
 
 .navbar-signup-button {
-  border: 1px solid green;
-  border-radius: 5px;
-  padding: 10px;
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.navbar-login-button:hover:after {
+  content: 'Log In';
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.navbar-login-button:hover{
+  background-color: lightsteelblue;
+}
+
+.navbar-signup-button:hover:after {
+  content: 'New User';
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.navbar-signup-button:hover{
+  background-color: lightsteelblue;
 }

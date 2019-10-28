@@ -17,8 +17,8 @@ class CommentLike extends React.Component {
   constructor(props) {
     super(props);
     let currentLike
-    if (this.props.comment.likes) {
-      currentLike = this.props.comment.likes.find(like => like.user === props.currentUser.id);
+    if (props.currentUser && props.comment.likes) {
+      currentLike = props.comment.likes.find(like => like.user === props.currentUser.id);
     } else {
       currentLike = undefined;
     }
@@ -50,7 +50,7 @@ class CommentLike extends React.Component {
   }
 
   handleCreate() {
-    if (!this.state.loadingLike) {
+    if (this.props.currentUser && !this.state.loadingLike) {
       this.setState({ loadingLike: true })
       this.props.makeLike(this.state)
         .then(res => {

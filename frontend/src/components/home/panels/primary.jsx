@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const HomePrimaryPanel = props => {
   const article = props.article;
   const text = rawToPlain(article.body);
-  console.dir(article);
 
   return (
     <div className="home-primary-panel">
@@ -19,7 +18,7 @@ const HomePrimaryPanel = props => {
         <Link className="home-primary-snippet" to={`/articles/${article._id}`}>  
           <p>{text.slice(0, 125).trim(' .?!,') + '...'}</p>
         </Link>
-        <span className="home-primary-author">Author: <Link to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
+        <span className="home-primary-author">Author: <Link to={`/@${article.author.handle}`}>{ article.author.displayName || article.author.handle}</Link></span>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { getArticle, getArticles, getUserArticles, writeArticle, updateArticle } from '../util/article_api_util';
+import { getArticle, getArticles, getUserArticles, writeArticle, updateArticle, deleteArticle } from '../util/article_api_util';
 
 export const RECEIVE_ARTICLES = "RECEIVE_ARTICLES";
 export const RECEIVE_ARTICLE = "RECEIVE_ARTICLE";
@@ -33,6 +33,10 @@ export const fetchArticle = (id) => dispatch => (
         })
         .catch(err => console.log(err))
 );
+
+export const eraseArticle = id => dispatch => {
+    return deleteArticle(id)
+};
 
 export const fetchUserArticles = id => dispatch => (
     getUserArticles(id)
