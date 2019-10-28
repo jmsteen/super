@@ -46,6 +46,7 @@ router.post('/',
     const newArticle = new Article({
       title: req.body.title,
       body: req.body.body,
+      image: req.body.image,
       author: req.user.id
     });
 
@@ -66,6 +67,7 @@ router.patch('/:id',
       .then(article => {
         article.title = req.body.title;
         article.body = req.body.body;
+        if (req.body.image) { article.image = req.body.image };
         article.save().then(article => res.json(article));
       }).catch(err => res.status(404).json(err));
   }

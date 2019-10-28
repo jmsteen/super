@@ -232,3 +232,21 @@ div.DraftEditor-root {
     margin-bottom: 90px;
     margin-left: 20px;
 }
+
+.article-image-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: lightgray;
+    top: -20px;
+    left: -100px;
+    width: 1000px;
+    height: 550px;
+}
+
+.article-image-form button {
+    border: 1px solid black;
+    padding: 8px;
+    margin-left: 20px;
+}

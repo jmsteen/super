@@ -4,6 +4,7 @@ import { closeModal } from '../../actions/modal_actions';
 import LoginFormContainer from '../session/login_form_container';
 import SignupFormContainer from '../session/signup_form_container';
 import ProfileFormContainer from '../profile/profile_form';
+import ArticleImageFormContainer from '../articles/article_image_form';
 import { Route } from 'react-router-dom';
 
 function Modal({ modal, closeModal }) {
@@ -21,6 +22,9 @@ function Modal({ modal, closeModal }) {
       break;
     case 'profileEdit':
       component = <Route path='/@:handle' component={ProfileFormContainer} />;
+      break;
+    case 'articleImage':
+      component = <ArticleImageFormContainer />;
       break;
     default:
       return null;

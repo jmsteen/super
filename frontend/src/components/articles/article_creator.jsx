@@ -4,6 +4,9 @@ import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './image_add';
 import { withRouter } from 'react-router-dom';
+import { receiveImage, clearImage } from '../../actions/image_actions';
+import { openModal } from '../../actions/modal_actions';
+import { connect } from 'react-redux';
 import {
     ItalicButton,
     BoldButton,
@@ -29,7 +32,19 @@ const plugins = [
     linkPlugin,
     createMarkdownPlugin(),
     imagePlugin
-]
+];
+
+
+
+const mapStateToProps = state => ({
+    image: state.image.pub
+});
+
+const mapDispatchtoProps = dispatch => ({
+    receiveImage: image => dispatch(receiveImage(image)),
+    clearImage: () => dispatch(clearImage()),
+    openModal: modal => dispatch(openModal(modal))
+});
 
 const Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
@@ -69,6 +84,7 @@ class ArticleCreator extends Component {
         this.handlePost = this.handlePost.bind(this);
         this.renderPlaceholder = this.renderPlaceholder.bind(this);
         this.focus = this.focus.bind(this);
+        this.onSelectFile = this.onSelectFile.bind(this);
     }
 
     focus = () => {
@@ -77,6 +93,10 @@ class ArticleCreator extends Component {
 
     componentDidMount () {
         this.focus();
+    }
+
+    componentWillUnmount() {
+        this.props.clearImage();
     }
 
     handleKeyCommand(command, editorState) {
@@ -100,9 +120,19 @@ class ArticleCreator extends Component {
     }
 
     delegateClick() {
-        console.log('here');
         document.getElementById('image-publish-input').click();
     }
+
+    onSelectFile(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                this.props.receiveImage(reader.result);
+                this.props.openModal('articleImage');
+            });
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
 
     renderPlaceholder(placeholder, editorState) {
         const currentContent = editorState.getCurrentContent();
@@ -144,11 +174,14 @@ class ArticleCreator extends Component {
                     }</InlineToolbar>
                     <button onClick={this.delegateClick} className="image-publish-button">Main Image</button>
                     <button onClick={this.handlePost} className="publish-button">Publish</button>
-                    <input type="file" id="image-publish-input"/>  
+                    <input type="file" onChange={this.onSelectFile} id="image-publish-input" accept="image/*"/>  
                 </div>
             </div>
         )
     }
 }
 
-export default withRouter(ArticleCreator);
+export default withRouter(connect(
+    mapStateToProps,
+    mapDispatchtoProps
+)(ArticleCreator));
