@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchArticle } from '../../actions/article_actions';
+import { fetchArticle, eraseArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
 import AuthorFollow from '../profile/author_follow';
@@ -20,7 +20,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchArticle: id => dispatch(fetchArticle(id))
+        fetchArticle: id => dispatch(fetchArticle(id)),
+        eraseArticle: id => dispatch(eraseArticle(id))
     };
 };
 
@@ -61,6 +62,7 @@ class ArticleDisplay extends Component {
             author: "",
             loaded: false
         }
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -100,6 +102,15 @@ class ArticleDisplay extends Component {
         return editorState;
     }
 
+    handleDelete(e) {
+        e.preventDefault();
+        if (window.confirm('Are you sure you wish to delete this article?')) {
+            this.props.eraseArticle(this.state.id).then(() => {
+                this.props.history.push('/');
+            })
+        }
+    }
+
     render() {
         if (!this.state.loaded) {
             return <ReactLoading
@@ -122,11 +133,18 @@ class ArticleDisplay extends Component {
                     <div className="article-display">
                         <div className="article-title-container">
                             <h1 className="article-display-title">{this.state.title}</h1>
-                            { (this.props.currentUser && this.props.currentUser.id === this.state.author._id) && 
-                                <Link 
-                                    className="article-edit-link"
-                                    to={`/articles/${this.state.id}/edit`}
-                                >Edit</Link> }
+                            <div className="article-display-button-container">
+                                { (this.props.currentUser && this.props.currentUser.id === this.state.author._id) && 
+                                    <Link 
+                                        className="article-edit-link"
+                                        to={`/articles/${this.state.id}/edit`}
+                                    >Edit</Link> }
+                                {(this.props.currentUser && this.props.currentUser.id === this.state.author._id) &&
+                                    <button
+                                        className="article-edit-link"
+                                        onClick={this.handleDelete}
+                                    >Delete</button>}
+                            </div>
                         </div>
                         <div className="article-display-meta">
                             <Link className="article-display-meta-image-link" to={`/@${this.state.author.handle}`}><img alt="author" src={ this.state.author.image || require('../../assets/images/default_profile.svg') }/></Link>
