@@ -12,7 +12,7 @@ class CommentsIndex extends React.Component {
     })
     return(
       <div>
-        <CommentForm/>
+        { this.props.currentUser && <CommentForm/>}
         <ul>
           {comments}
         </ul>
