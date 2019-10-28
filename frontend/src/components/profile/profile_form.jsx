@@ -48,16 +48,15 @@ class ProfileForm extends React.Component {
     e.preventDefault();
     uploadImage(this.state.imageFile).then(res => {
       const data = Object.assign({}, this.state);
-      if (res) { data.image = res.data.imageUrl }
-      console.dir(data);
+      if (res) { data.image = res.data.imageUrl };
       this.props.editUser(data)
         .then(res => {
           if (res.user) {
             if (res.user.handle !== this.props.match.params.handle) {
               this.props.updateCurrentUser({ handle: res.user.handle });
               this.props.history.push(`/@${res.user.handle}`);
-              window.location.reload();
             }
+            window.location.reload();
             this.props.closeModal();
           };
         })

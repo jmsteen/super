@@ -22,7 +22,6 @@ class ProfileImageForm extends React.Component {
 
   componentDidMount() {
     if (this.props.originalImage) {
-      console.log('here');
       const div = document.getElementById('profile-file-input-container');
       div.style.backgroundImage = `url('${this.props.originalImage}')`;
     }
