@@ -4,7 +4,7 @@ import ProfileArticlePanel from './panel';
 class ProfileMainFeed extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { articles: this.props.articles }
+    this.state = { articles: this.props.articles };
   }
 
   render() {

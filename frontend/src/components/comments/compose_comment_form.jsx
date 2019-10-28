@@ -13,15 +13,22 @@ class CommentForm extends React.Component {
     }
     this.largeForm = this.largeForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clickListener = this.clickListener.bind(this);
+  }
+
+  clickListener(e) {
+    e.stopPropagation();
+    if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response") {
+      this.setState({ clicked: false })
+    }
   }
 
   componentDidMount() {
-    document.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response") {
-        this.setState({ clicked: false })
-      }
-    })
+    document.addEventListener("click", this.clickListener);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.clickListener);
   }
  
   update() {
@@ -42,7 +49,7 @@ class CommentForm extends React.Component {
 
   largeForm() {
     if(this.state.clicked === false) {
-      console.log(this.state.clicked)
+      //console.log(this.state.clicked)
       this.setState({
         clicked: true
       })
