@@ -35,6 +35,30 @@ router.get("/:userId", (req, res) => {
 router.get("/handle/:handle", (req, res) => {
   User.findOne({handle: req.params.handle})
     .populate({
+      path: 'comments',
+      populate: {
+        path: 'author'
+      }
+    })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'article',
+        populate: {
+          path: 'author'
+        }
+      }
+    })
+    .populate({
+      path: 'articles',
+      populate: {
+        path: 'article',
+        populate: {
+          path: 'author'
+        }
+      }
+    })
+    .populate({
       path: 'articles',
       populate: {
         path: 'author'
@@ -55,6 +79,42 @@ router.get("/handle/:handle", (req, res) => {
         path: 'comment',
         populate: {
           path: 'author'
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'author'
+          }
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'likes'
+          }
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'comments'
+          }
         }
       }
     })
@@ -87,6 +147,21 @@ router.patch("/:userId", (req, res) => {
 
   User.findById(req.params.userId)
     .populate({
+      path: 'comments',
+      populate: {
+        path: 'author'
+      }
+    })
+    .populate({
+      path: 'comments',
+      populate: {
+        path: 'article',
+        populate: {
+          path: 'author'
+        }
+      }
+    })
+    .populate({
       path: 'articles',
       populate: {
         path: 'author'
@@ -110,8 +185,43 @@ router.patch("/:userId", (req, res) => {
         }
       }
     })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'author'
+          }
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'likes'
+          }
+        }
+      }
+    })
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'comment',
+        populate: {
+          path: 'article',
+          populate: {
+            path: 'comments'
+          }
+        }
+      }
+    })
     .then(user => {
-      console.dir(req.body);
       user.description = req.body.description;
       user.handle = req.body.handle;
       user.displayName = req.body.displayName;

@@ -3,6 +3,7 @@ import ReactLoading from 'react-loading';
 import { Route, NavLink } from 'react-router-dom';
 import ProfileMainFeed from './main_feed';
 import ProfileLikeFeed from './like_feed';
+import ProfileCommentFeed from './comment_feed';
 import { isEqual } from 'lodash';
 
 class ProfilePage extends React.Component {
@@ -59,7 +60,7 @@ class ProfilePage extends React.Component {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
-    const { displayName, handle, description, image} = this.state.profileUser;
+    const { displayName, handle, description, image, comments, likes, articles } = this.state.profileUser;
 
     return (
       <section className="profile-page">
@@ -79,14 +80,19 @@ class ProfilePage extends React.Component {
           <div className='profile-nav'>
             <NavLink className='profile-nav-tab' exact to={`/@${handle}`}>Profile</NavLink>
             <NavLink className='profile-nav-tab' to={`/@${handle}/likes`}>Likes</NavLink>
+            <NavLink className='profile-nav-tab' to={`/@${handle}/comments`}>Comments</NavLink>
           </div>
           <Route 
             exact path='/@:handle'
-            render={props => <ProfileMainFeed {...props} articles={this.state.profileUser.articles.sort((a, b) => new Date(b.date) - new Date(a.date))} />}
+            render={props => <ProfileMainFeed {...props} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
           />
           <Route 
             exact path='/@:handle/likes' 
-            render={props => <ProfileLikeFeed {...props} likes={this.state.profileUser.likes.sort((a, b) => new Date(b.date) - new Date(a.date))} />}
+            render={props => <ProfileLikeFeed {...props} likes={ likes ? likes.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+          />
+          <Route
+            exact path='/@:handle/comments'
+            render={props => <ProfileCommentFeed {...props} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
           />
         </main>
       </section>

@@ -44,6 +44,12 @@ UserSchema.virtual('articles', {
   foreignField: 'author'
 });
 
+UserSchema.virtual('comments', {
+  ref: 'Comment',
+  localField: '_id',
+  foreignField: 'author'
+});
+
 UserSchema.virtual('likes', {
   ref: 'Like',
   localField: '_id',
