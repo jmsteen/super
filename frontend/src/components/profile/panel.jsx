@@ -11,7 +11,7 @@ const ProfileArticlePanel = props => {
   return (
     <li className="profile-article-panel">
       <div className="profile-panel-top">
-        <Link to={`/@${article.author.handle}`}><img alt="author" src={article.author.image} /></Link>
+        <Link to={`/@${article.author.handle}`}><img alt="author" src={article.author.image || require('../../assets/images/default_profile.svg')} /></Link>
         <div className="profile-panel-info">
           <span><Link className="author-link" to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
           <span>{month + "/" + day + "/" + year}</span>
