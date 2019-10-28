@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { CompositeDecorator, RichUtils, convertToRaw, convertFromRaw, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { receiveImage, clearImage } from '../../actions/image_actions';
+import { uploadImage } from '../../util/image_api_util';
+import { openModal } from '../../actions/modal_actions';
 import { fetchArticle, reviseArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';
-import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
-import CommentIndex from '../comments/comment_index_container';
 import { Link } from 'react-router-dom';
 import './article.scss';
 import Editor from 'draft-js-plugins-editor';
@@ -41,14 +42,18 @@ const plugins = [
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        currentArticle: state.entities.articles[ownProps.match.params.id]
+        currentArticle: state.entities.articles[ownProps.match.params.id],
+        image: state.image.pub
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchArticle: id => dispatch(fetchArticle(id)),
-        handlePost: data => dispatch(reviseArticle(data))
+        handlePost: data => dispatch(reviseArticle(data)),
+        receiveImage: image => dispatch(receiveImage(image)),
+        clearImage: () => dispatch(clearImage()),
+        openModal: modal => dispatch(openModal(modal))
     };
 };
 
@@ -97,6 +102,7 @@ class ArticleEditor extends Component {
         this.handleKeyCommand = this.handleKeyCommand.bind(this);
         this.handlePost = this.handlePost.bind(this);
         this.focus = this.focus.bind(this);
+        this.onSelectFile = this.onSelectFile.bind(this);
     }
 
     componentDidMount() {
@@ -132,11 +138,30 @@ class ArticleEditor extends Component {
             }
     }
 
+    componentWillUnmount() {
+        this.props.clearImage();
+    }
+
     convertToRichText(rawContent) {
         const richContent = convertFromRaw(JSON.parse(rawContent));
         const editorState = EditorState.createWithContent(richContent, decorator);
         return editorState;
     }
+
+    delegateClick() {
+        document.getElementById('image-publish-input').click();
+    }
+
+    onSelectFile(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                this.props.receiveImage(reader.result);
+                this.props.openModal('articleImage');
+            });
+            reader.readAsDataURL(e.target.files[0]);       
+        }
+    };
 
     focus = () => {
         if (this.editor) {
@@ -156,13 +181,17 @@ class ArticleEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        this.props.handlePost({
-            body: contentString,
-            author: this.state.article.author,
-            title: this.state.article.title,
-            id: this.state.article.id
-        }).then(res => {
-            return this.props.history.push(`/articles/${this.state.article.id}`)
+        uploadImage(this.props.image).then(res => {
+            const entry = {
+                body: contentString,
+                title: this.props.currentArticle.title,
+                id: this.props.currentArticle._id
+            };
+            if (res && res.data) { entry.image = res.data.imageUrl };
+
+            this.props.handlePost(entry).then(() => {
+                return this.props.history.push(`/articles/${this.state.article.id}`)
+            });
         });
     }
 
@@ -231,7 +260,9 @@ class ArticleEditor extends Component {
                                 }</InlineToolbar>
                             </div>
                         </div>
-                    <button onClick={this.handlePost} className="publish-button">Publish</button>  
+                        <button onClick={this.delegateClick} className="image-publish-button">Main Image</button>
+                        <button onClick={this.handlePost} className="publish-button">Publish</button>
+                        <input type="file" onChange={this.onSelectFile} id="image-publish-input" accept="image/*" />    
                     </div>
                 </div>
             </div>

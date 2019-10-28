@@ -32,6 +32,7 @@ export default class ImageAdd extends Component {
     closePopover = () => {
         if (!this.preventNextClose && this.state.open) {
             this.setState({
+                url: '',
                 open: false,
             });
         }

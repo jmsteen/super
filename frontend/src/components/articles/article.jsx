@@ -32,7 +32,6 @@ export default class Article extends Component {
                     </form>
                     <div>
                         <ArticleCreator 
-                            handlePost={this.props.composeArticle} 
                             placeholder="Share your thoughts..."
                             author={this.props.author}
                             title={this.state.title}

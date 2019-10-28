@@ -40,12 +40,13 @@ router.post('/',
     const { errors, isValid } = validateArticleInput(req.body);
 
     if (!isValid) {
-      return res.status(400).json(errors);
+      return res.status(422).json(errors);
     }
 
     const newArticle = new Article({
       title: req.body.title,
       body: req.body.body,
+      image: req.body.image,
       author: req.user.id
     });
 
@@ -62,10 +63,13 @@ router.patch('/:id',
       return res.status(422).json(errors);
     }
 
+    console.dir(req.body);
+
     Article.findById(req.body.id)
       .then(article => {
         article.title = req.body.title;
         article.body = req.body.body;
+        if (req.body.image) { article.image = req.body.image };
         article.save().then(article => res.json(article));
       }).catch(err => res.status(404).json(err));
   }

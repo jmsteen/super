@@ -85,7 +85,7 @@ s
 
   onImageLoaded(image) {
     this.imageRef = image;
-    document.getElementsByClassName('ReactCrop__image').ondragstart = function () { return false; };
+    document.getElementsByClassName('ReactCrop__image')[0].ondragstart = function () { return false; };
   };
 
   onCropComplete(crop) {
