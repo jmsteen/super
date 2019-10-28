@@ -13,7 +13,7 @@ const HomeTertiaryPanel = props => {
         <p><Link to={`/articles/${article._id}`}>{text.slice(0, 125).trim(' .?!,') + '...'}</Link></p>
         <span>Author: <Link to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
       </div>
-      <Link to={`/articles/${article._id}`}><img src="https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" /></Link>
+      <Link to={`/articles/${article._id}`}><img alt="" src={article.image || require('../../../assets/images/default_article.png')} /></Link>
     </div>
   )
 }

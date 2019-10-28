@@ -1,12 +1,13 @@
 import React from 'react';
+import './comments_index.scss';
 import CommentLikeContainer from './comment_like';
 
 const CommentIndexItem =({comment}) => (
-  <div className="comment-index">
-    <li className="comment-author">{comment.author}</li>
+  <li className="comment-index-item">
+    <div className="comment-author">{comment.author}</div>
     <p className="comment-body">{comment.body}</p>
     <CommentLikeContainer comment={comment} />
-  </div>
+  </li>
 )
   
 

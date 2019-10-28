@@ -56,6 +56,7 @@
   object-fit: cover;
   object-position: 50% 50%;
   border-radius: 50%;
+  border: 1px solid lightgray;
 }
 
 .profile-nav {
@@ -73,4 +74,8 @@
 
 .active {
   border-bottom: 1px solid black;
+}
+
+.profile-page main {
+  margin-bottom: 50px;
 }

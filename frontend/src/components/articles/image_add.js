@@ -32,6 +32,7 @@ export default class ImageAdd extends Component {
     closePopover = () => {
         if (!this.preventNextClose && this.state.open) {
             this.setState({
+                url: '',
                 open: false,
             });
         }
@@ -57,7 +58,7 @@ export default class ImageAdd extends Component {
             'addImageButton';
 
         return (
-            <div className='addImage'>
+            <div className={`addImage ${this.props.addClass ? this.props.addClass : ""}`}>
                 <button
                     className={buttonClassName}
                     onMouseUp={this.openPopover}

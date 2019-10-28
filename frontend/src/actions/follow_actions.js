@@ -15,7 +15,10 @@ const removeFollow = follow => ({
 
 export const makeFollow = follow => dispatch => {
   return createFollow(follow)
-    .then(res => dispatch(receiveFollow(res.data)))
+    .then(follow => {
+      dispatch(receiveFollow(follow.data))
+      return follow;
+    })
     .catch(err => console.log(err))
 };
 

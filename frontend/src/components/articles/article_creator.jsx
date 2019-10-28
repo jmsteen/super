@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { EditorState, RichUtils, convertToRaw, CompositeDecorator } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './image_add';
 import { withRouter } from 'react-router-dom';
+import { composeArticle } from '../../actions/article_actions';
+import { receiveImage, clearImage } from '../../actions/image_actions';
+import { uploadImage } from '../../util/image_api_util';
+import { openModal } from '../../actions/modal_actions';
+import { connect } from 'react-redux';
 import {
     ItalicButton,
     BoldButton,
@@ -29,7 +34,20 @@ const plugins = [
     linkPlugin,
     createMarkdownPlugin(),
     imagePlugin
-]
+];
+
+
+
+const mapStateToProps = state => ({
+    image: state.image.pub
+});
+
+const mapDispatchtoProps = dispatch => ({
+    receiveImage: image => dispatch(receiveImage(image)),
+    clearImage: () => dispatch(clearImage()),
+    openModal: modal => dispatch(openModal(modal)),
+    handlePost: data => dispatch(composeArticle(data))
+});
 
 const Link = (props) => {
     const { url } = props.contentState.getEntity(props.entityKey).getData();
@@ -69,6 +87,7 @@ class ArticleCreator extends Component {
         this.handlePost = this.handlePost.bind(this);
         this.renderPlaceholder = this.renderPlaceholder.bind(this);
         this.focus = this.focus.bind(this);
+        this.onSelectFile = this.onSelectFile.bind(this);
     }
 
     focus = () => {
@@ -77,6 +96,10 @@ class ArticleCreator extends Component {
 
     componentDidMount () {
         this.focus();
+    }
+
+    componentWillUnmount() {
+        this.props.clearImage();
     }
 
     handleKeyCommand(command, editorState) {
@@ -91,13 +114,32 @@ class ArticleCreator extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
-        
-        this.props.handlePost({
-            body: contentString,
-            author: this.props.author,
-            title: this.props.title
-        }).then(res => this.props.history.push(`/articles/${res.data._id}`));
+        uploadImage(this.props.image).then(res => {
+            const entry = {
+                body: contentString,
+                author: this.props.author,
+                title: this.props.title,
+            };
+            if (res && res.data) { entry.image = res.data.imageUrl };
+            this.props.handlePost(entry)
+                .then(res => this.props.history.push(`/articles/${res.data._id}`));
+        });
     }
+
+    delegateClick() {
+        document.getElementById('image-publish-input').click();
+    }
+
+    onSelectFile(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                this.props.receiveImage(reader.result);
+                this.props.openModal('articleImage');
+            });
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
 
     renderPlaceholder(placeholder, editorState) {
         const currentContent = editorState.getCurrentContent();
@@ -137,12 +179,16 @@ class ArticleCreator extends Component {
                             </div>
                         )
                     }</InlineToolbar>
-                    
-                <button onClick={this.handlePost} className="publish-button">Publish</button>  
+                    <button onClick={this.delegateClick} className="image-publish-button">Cover Image</button>
+                    <button onClick={this.handlePost} className="publish-button">Publish</button>
+                    <input type="file" onChange={this.onSelectFile} id="image-publish-input" accept="image/*"/>  
                 </div>
             </div>
         )
     }
 }
 
-export default withRouter(ArticleCreator);
+export default withRouter(connect(
+    mapStateToProps,
+    mapDispatchtoProps
+)(ArticleCreator));

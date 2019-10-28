@@ -1,24 +1,34 @@
 .profile-form-container {
+  display: flex;
+  left: -100px;
   background-color: white;
   position: absolute;
-  min-width: 400px;
-  width: 800px;
-  height: 400px;
+  min-width: 550px;
+  width: 1000px;
+  height: 500px;
   font-family: sans-serif;
   box-sizing: border-box;
   padding: 20px;
 }
 
 .profile-form {
-  height: 70%;
-  width: 80%;
+  height: 90%;
+  width: 60%;
   margin: 0 auto;
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.profile-image-form {
+  height: 90%;
+  width: 35%;
 }
 
 .profile-form input {
   display: block;
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
+  margin-left: 5%;
   background-color: white;
   font-size: 30px;
   font-weight: 700;
@@ -28,9 +38,10 @@
 
 #profile-description-input {
   display: block;
-  width: 80%;
+  width: 85%;
   height: 28px;
   margin: 0 auto;
+  margin-left: 5%;
   font-size: 20px;
   resize: none;
   background-color: white;
@@ -46,7 +57,7 @@
 .profile-button-container {
   margin-top: 20px;
   width: 30%;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 .profile-button-container button {
@@ -67,4 +78,40 @@
   list-style: disc;
   width: 30%;
   margin-left: 20%;
+  margin-top: 20px;
+}
+
+#profile-file-input-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-left: 30px;
+  border: 1px solid black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-bottom: 20px;
+}
+
+.fa-camera-retro {
+  font-size: 62px;
+  color: gray;
+  background-image: none;
+  background-color: Transparent;
+  opacity: 0.5;
+}
+
+.fa-camera-retro:hover {
+  color: white;
+}
+
+.ReactCrop__crop-selection {
+  opacity: 0.5;
+}
+
+#profile-file-input {
+  display: none;
 }
