@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { fetchArticle } from '../../actions/article_actions';
 import { mediaBlockRenderer } from './image_render';
 import ArticleLikeContainer from './article_like';
+import AuthorFollow from '../profile/author_follow';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
 import './article.scss';
@@ -132,7 +133,7 @@ class ArticleDisplay extends Component {
                             
                             <div className="article-display-meta-top">
                                 <h2><Link to={`/@${this.state.author.handle}`}>{this.state.author.displayName || this.state.author.handle}</Link></h2>
-                                <button>Follow (not functional)</button>
+                                <AuthorFollow />
                             </div>
                             
                             <div className="article-display-meta-bottom">

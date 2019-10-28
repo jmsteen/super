@@ -18,7 +18,10 @@ router.post('/',
       .then(() => {
         newFollow.author = mongoose.Types.ObjectId(req.body.authorId)
         newFollow.save()
-          .then(follow => res.json(follow), err => err = res.status(400).json(err));
+          .then(follow => {
+            follow.author = User.findById(req.body.authorId)
+            res.json(follow)
+          }, err => err = res.status(400).json(err));
       }).catch(err => {
         return res.status(404).json({ noauthorfound: 'No author found with that ID' });
       });
