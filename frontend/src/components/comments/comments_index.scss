@@ -11,8 +11,23 @@
   padding: 15px;
 }
 
+.comment-links {
+  display: flex;
+  justify-self: flex-start;
+}
+
+.comment-container {
+  display: flex;
+}
+
 
 .comment-body {
   margin-left: 10px;
 
+}
+
+.comment-author {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
 }

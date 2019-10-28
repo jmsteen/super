@@ -3,7 +3,9 @@ import CommentIndexItem from './index_item_container';
 import CommentForm from './compose_comment_container';
 import './comments_index.scss'
 class CommentsIndex extends React.Component {
+  // componentDidUpdate() {
 
+  // }
   render() {
     const comments = this.props.comments.map(comment => {
       return(
