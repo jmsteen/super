@@ -23,8 +23,8 @@ class CommentIndexItem extends React.Component {
     return( 
      
       <div>
-        {/* <img src={} alt=""/> */}
-        <img className="comment-author" src={this.props.comment.author.image}/> 
+
+        <img className="comment-author" src={this.props.comment.author.image || require('../../assets/images/default_profile.svg')}/> 
         <p className="comment-body">{this.props.comment.body}</p>
         {deleteButton}
         <CommentLikeContainer comment={this.props.comment} />

@@ -23,20 +23,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id).populate({ path: "comments", populate: [{ path: "likes" }, { path: "author" }] }).populate("author")
     .then(article => {
-<<<<<<< HEAD
       User.findById(article.author)
         .populate('follows')
         .then(author => {
           article.author = author;
         })
-=======
-      // let commentAuthors = article.comments.map(comment => comment.author);
-      // User.find({ '_id' : { $in: commentAuthors}})
-      //   .then(users => {
-      //     console.log(users)
-      //   })
-      console.log(article);
->>>>>>> d212bdb... Add user pic by comment
       Like.find({ '_id': { $in: article.likes }})
         .then(likes => {
           article.likes = likes

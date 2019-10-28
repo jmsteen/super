@@ -18,7 +18,7 @@ class CommentForm extends React.Component {
 
   clickListener(e) {
     e.stopPropagation();
-    if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response") {
+    if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response" && e.target.classList[0] !=='comment-submit') {
       this.setState({ clicked: false })
     }
   }
@@ -44,7 +44,10 @@ class CommentForm extends React.Component {
       author: this.state.author,
       article: this.state.article
     });
-    this.setState({body: "", clicked: false})
+    
+      this.setState({ body: "", clicked: false })
+  
+    
   }
 
   largeForm() {
@@ -61,9 +64,9 @@ class CommentForm extends React.Component {
     if( this.state.clicked === true) {
       return (
         <div className="large-response-container">
+          <div className="response-author">{this.state.author}</div>
           <form onSubmit={this.handleSubmit}>
-            <div>{this.props.handle}</div>
-            <textarea className="large-response" cols="30" rows="10" value={this.state.body} onChange={this.update()} placeholder="Write a response..."></textarea>
+            <textarea className="large-response" cols="30" rows="10" value={this.state.body} onChange={this.update()}></textarea>
           <input className="comment-submit" type="submit" value="Publish"/>
           </form>
         </div>
@@ -71,7 +74,7 @@ class CommentForm extends React.Component {
     } else {
       return(
         <div className="response-container">
-          <img className="response-author" src={this.props.image || require('../../assets/images/default_profile.svg')} alt="user-profile" />
+          <img  src={this.props.image || require('../../assets/images/default_profile.svg')} /> 
           <div className="response-inner-container">
             <div>{this.state.author}</div>
             <input onClick={this.largeForm} className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()} />

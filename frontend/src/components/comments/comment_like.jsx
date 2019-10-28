@@ -83,10 +83,6 @@ class CommentLike extends React.Component {
   }
 
   render() {
-<<<<<<< HEAD
-    const valueArr = this.props.comment.likes ? this.props.comment.likes.map(like => like.value) : [];
-    const likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);
-=======
     let valueArr;
     let likesValue;
     if(this.props.comment.likes) {
@@ -94,7 +90,6 @@ class CommentLike extends React.Component {
       likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);
     }
     
->>>>>>> d212bdb... Add user pic by comment
 
     return (
       <div className="comment-like-container">
