@@ -29,13 +29,13 @@ class NavBar extends React.Component {
   render() {
     const buttons = this.props.loggedIn ?
       <div className="navbar-buttons">
-        <Link to={`/new_article`}>Create Story</Link>
-        <Link to={`/@${this.props.currentUser.handle}`}>Profile</Link>
-        <button onClick={this.logoutUser}>Sign Out</button>
+        <Link to={`/new_article`}><i className="fas fa-book" /></Link>
+        <Link to={`/@${this.props.currentUser.handle}`}><i className="fas fa-user" /></Link>
+        <button className="navbar-signout-button" onClick={this.logoutUser}><i className="fas fa-sign-out-alt" /></button>
       </div> :
       <div className="navbar-buttons">
-        <button className="navbar-login-button" onClick={this.loginModal}>Sign in</button>
-        <button className="navbar-signup-button" onClick={this.signupModal}>Get Started</button>
+        <button className="navbar-login-button" onClick={this.loginModal}><i className="fas fa-sign-in-alt" /></button>
+        <button className="navbar-signup-button" onClick={this.signupModal}><i className="fas fa-user-plus" /></button>
       </div>
 
       return (
