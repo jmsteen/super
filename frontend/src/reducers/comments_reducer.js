@@ -33,7 +33,9 @@ const commentsReducer = (state = {}, action) => {
         delete newState[action.data.comment.id]
         return newState
       case RECEIVE_ARTICLE:
-        action.article.data.comments.forEach(comment => newState[comment._id] = comment);
+        if (action.article.data.comments) {
+          action.article.data.comments.forEach(comment => newState[comment._id] = comment);
+        };
         return newState || {}
       default: 
         return state;

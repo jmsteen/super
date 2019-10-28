@@ -122,7 +122,7 @@ class ArticleCreator extends Component {
             };
             if (res && res.data) { entry.image = res.data.imageUrl };
             this.props.handlePost(entry)
-                .then(res => console.dir(res));
+                .then(res => this.props.history.push(`/articles/${res.data._id}`));
         });
     }
 
