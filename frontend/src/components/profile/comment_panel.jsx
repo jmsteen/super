@@ -15,7 +15,7 @@ const ProfileCommentPanel = props => {
   return (
     <li className="profile-comment-panel">
       <div className="profile-panel-top">
-        <Link to={`/@${comment.author.handle}`}><img src={comment.author.image} /></Link>
+        <Link to={`/@${comment.author.handle}`}><img alt="profile" src={comment.author.image} /></Link>
         <div className="profile-panel-info">
           <span><Link className="author-link" to={`/@${comment.author.handle}`}>{comment.author.handle}</Link></span>
           <span>{month + "/" + day + "/" + year}</span>

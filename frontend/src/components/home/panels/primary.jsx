@@ -9,7 +9,7 @@ const HomePrimaryPanel = props => {
   return (
     <div className="home-primary-panel">
       <Link to={`/articles/${article._id}`}>
-        <img src="https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"/>
+        <img src="https://images.unsplash.com/photo-1508138221679-760a23a2285b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt='primary'/>
       </Link>
       <div className="home-primary-panel-text">
         <Link className="home-primary-title" to={`/articles/${article._id}`}>

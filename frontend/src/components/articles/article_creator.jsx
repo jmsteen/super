@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { EditorState, RichUtils, convertToRaw, CompositeDecorator } from 'draft-js';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './image_add';
 import { withRouter } from 'react-router-dom';

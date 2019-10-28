@@ -73,7 +73,7 @@ class ProfilePage extends React.Component {
             <p className="profile-header-description">{description}</p>
           </div>
           <div className="profile-image-container">
-            <img src={ image || require('../../assets/images/default_profile.svg')} />
+            <img alt="profile" src={ image || require('../../assets/images/default_profile.svg')} />
           </div>
         </header>
         <main>

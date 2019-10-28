@@ -8,7 +8,7 @@ import ArticleLikeContainer from './article_like';
 import ReactLoading from 'react-loading';
 import CommentIndex from '../comments/comment_index_container';
 import './article.scss';
-import Editor, { createEditorStateWithText } from 'draft-js-plugins-editor';
+import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
 import ImageAdd from './image_add';
 import {

@@ -1,6 +1,5 @@
 import { getUser, getUserByHandle, updateUser } from '../util/user_api_util';
 import * as APIUtil from '../util/session_api_util';
-import jwt_decode from 'jwt-decode';
 
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";

@@ -107,7 +107,7 @@ s
   };
 
   render() {
-    const { crop, croppedImageUrl, src } = this.state;
+    const { crop, src } = this.state;
 
     return (
       <div className="profile-image-form">

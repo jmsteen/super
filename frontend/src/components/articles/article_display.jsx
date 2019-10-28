@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { CompositeDecorator, convertFromRaw, Editor, EditorState, AtomicBlockUtils } from 'draft-js';
+import { CompositeDecorator, convertFromRaw, Editor, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchArticle } from '../../actions/article_actions';
@@ -114,7 +114,7 @@ class ArticleDisplay extends Component {
                     <div className="article-display">
                         <h1 className="article-display-title">{this.state.title}</h1>
                         <div className="article-display-meta">
-                            <Link className="article-display-meta-image-link" to={`/@${this.state.author.handle}`}><img src={ this.state.author.image || require('../../assets/images/default_profile.svg') }/></Link>
+                            <Link className="article-display-meta-image-link" to={`/@${this.state.author.handle}`}><img alt="author" src={ this.state.author.image || require('../../assets/images/default_profile.svg') }/></Link>
                             
                             <div className="article-display-meta-top">
                                 <h2><Link to={`/@${this.state.author.handle}`}>{this.state.author.displayName || this.state.author.handle}</Link></h2>

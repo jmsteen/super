@@ -2,7 +2,7 @@ import React from 'react';
 
 const Image = props => {
     if (!!props.src) {
-        return <img src={props.src} />;
+        return <img alt="" src={props.src} />;
     }
     return null;
 };
@@ -14,7 +14,7 @@ const Media = props => {
     let media = null;
 
     if (type === "IMAGE") {
-        media = <Image src={src} />;
+        media = <Image alt="" src={src} />;
     }
 
     return media;
