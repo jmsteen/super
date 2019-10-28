@@ -260,7 +260,7 @@ class ArticleEditor extends Component {
                                 }</InlineToolbar>
                             </div>
                         </div>
-                        <button onClick={this.delegateClick} className="image-publish-button">Main Image</button>
+                        <button onClick={this.delegateClick} className="image-publish-button">Cover Image</button>
                         <button onClick={this.handlePost} className="publish-button">Publish</button>
                         <input type="file" onChange={this.onSelectFile} id="image-publish-input" accept="image/*" />    
                     </div>
