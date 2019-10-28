@@ -5,7 +5,7 @@ import { makeFollow, unFollow } from '../../actions/follow_actions';
 
 const mapStateToProps = ({entities: { articles }, session}, ownProps) => {
     return {
-        currentUser: session.user.id,
+        currentUser: session.user,
         currentArticle: articles[ownProps.match.params.id]
     };
 };
@@ -40,7 +40,7 @@ class AuthorFollow extends React.Component {
     
     handleFollow() {
         this.props.makeFollow({
-            user: this.props.currentUser,
+            user: this.props.currentUser.id,
             author: this.props.currentArticle.author
         })
             .then((follow) => {
