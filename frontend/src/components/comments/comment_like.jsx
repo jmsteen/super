@@ -25,7 +25,8 @@ class CommentLike extends React.Component {
 
     this.state = {
       commentId: props.comment._id,
-      currentLike
+      currentLike,
+      loadingLike: false
     };
 
     this.handleErase = this.handleErase.bind(this);
