@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Article.findById(req.params.id).populate({ path: "comments", populate: { path: "likes" } }).populate("author")
+  Article.findById(req.params.id).populate({ path: "comments", populate: [{ path: "likes" }, { path: "author" }] }).populate("author")
     .then(article => {
       User.findById(article.author)
         .populate('follows')

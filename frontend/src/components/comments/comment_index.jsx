@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentIndexItem from './comment_index_item';
+import CommentIndexItem from './index_item_container';
 import CommentForm from './compose_comment_container';
 import './comments_index.scss'
 class CommentsIndex extends React.Component {
@@ -7,7 +7,7 @@ class CommentsIndex extends React.Component {
   render() {
     const comments = this.props.comments.map(comment => {
       return(
-        <CommentIndexItem key={comment._id} comment={comment}/>
+        <li className="comment-index-item" > <CommentIndexItem key={comment._id} comment={comment} /></li>
       )
     })
     return(

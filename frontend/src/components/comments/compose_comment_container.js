@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = ({ session: { user }, entities: { articles }}, ownProps) => (
   {
-  author: user.id,
+  name: user.handle,
+  image: user.image,
   article: articles[ownProps.match.params.id]
 })
 

@@ -21,6 +21,6 @@ export const composeComment = comment => dispatch => {
 
 export const eraseComment = id => dispatch => {
   deleteComment(id)
-    .then(comment => dispatch(receiveComment(comment)))
+    .then(comment => dispatch(removeComment(comment)))
     .catch(err => console.log(err))
 };

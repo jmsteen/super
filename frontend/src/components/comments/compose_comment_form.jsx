@@ -18,7 +18,7 @@ class CommentForm extends React.Component {
 
   clickListener(e) {
     e.stopPropagation();
-    if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response") {
+    if (e.target.classList[0] !== "large-response" && e.target.classList[0] !== "response" && e.target.classList[0] !=='comment-submit') {
       this.setState({ clicked: false })
     }
   }
@@ -44,7 +44,10 @@ class CommentForm extends React.Component {
       author: this.state.author,
       article: this.state.article
     });
-    this.setState({body: ""})
+    
+      this.setState({ body: "", clicked: false })
+  
+    
   }
 
   largeForm() {
@@ -53,6 +56,7 @@ class CommentForm extends React.Component {
       this.setState({
         clicked: true
       })
+     
     } 
   }
 
@@ -63,13 +67,14 @@ class CommentForm extends React.Component {
           <div className="response-author">{this.state.author}</div>
           <form onSubmit={this.handleSubmit}>
             <textarea className="large-response" cols="30" rows="10" value={this.state.body} onChange={this.update()}></textarea>
-          <input className="comment-submit"type="submit" value="Publish"/>
+          <input className="comment-submit" type="submit" value="Publish"/>
           </form>
         </div>
       )
     } else {
       return(
         <div className="response-container">
+          <img  src={this.props.image || require('../../assets/images/default_profile.svg')} /> 
           <div className="response-inner-container">
             <div>{this.state.author}</div>
             <input onClick={this.largeForm} className="response" type="text" value={this.state.body} placeholder="Write a response..." onChange={this.update()} />
