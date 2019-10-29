@@ -1,13 +1,13 @@
 .home-primary-panel {
-  padding: 20px;
+  padding: 5px;
   padding-top: 0;
+  padding-left: 0;
   object-fit: cover;
   background-repeat: none;
 }
 
 .home-primary-panel img {
   display: block;
-  margin: 0 auto;
   height: 200px;
   width: 90%;
 }
@@ -24,17 +24,17 @@
 .home-primary-title {
   font-size: 24px;
   font-weight: 600;  
-  margin-left: 10%;
+  margin-left: 3%;
   width: 80%
 }
 
 .home-primary-snippet {
-  margin-left: 10%;
+  margin-left: 3%;
   width: 80%;
 }
 
 .home-primary-author {
-  margin-left: 10%;
+  margin-left: 3%;
 }
 
 .home-primary-author a {
