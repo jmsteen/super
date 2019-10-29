@@ -43,6 +43,12 @@ class ProfilePage extends React.Component {
       this.setState(
         { profileUser: this.props.profileUser }
       );
+    } else if (this.props.currentUser && prevProps.currentUser === undefined) {
+      console.log('hey');
+      this.setState({ loaded: false })
+      this.props.fetchUserByHandle(this.props.match.params.handle)
+        .then(res => this.setState({ profileUser: res.user, loaded: true }))
+        .catch(() => this.setState({ loaded: true }))
     }
   }
 
