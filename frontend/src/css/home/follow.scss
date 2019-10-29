@@ -1,0 +1,52 @@
+.home-follow-feed {
+  padding: 20px;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+
+.home-follow-feed h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.home-follow-panel {
+  margin-bottom: 25px;
+}
+
+.home-follow-title {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.home-follow-title:hover {
+  color: gray;
+}
+
+.home-follow-author {
+  display: block;
+  font-size: 15px;
+}
+
+.home-follow-author:hover {
+  color: gray;
+}
+
+.welcome-message h3 {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.welcome-message p {
+  display: block;
+  line-height: 1.5;
+  margin-left: 3px;
+}
+
+.welcome-message ul {
+  list-style: disc;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}

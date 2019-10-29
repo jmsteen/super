@@ -19,7 +19,7 @@ class ArticleLike extends React.Component {
   constructor(props) {
     super(props);
     const { currentArticle, currentUser } = props;
-    const currentLike = currentArticle.likes.find(like => like.user === currentUser.id);
+    const currentLike = currentUser ? currentArticle.likes.find(like => like.user === currentUser.id) : undefined;
 
     this.state = { 
       articleId: props.articleId,

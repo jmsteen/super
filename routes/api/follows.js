@@ -30,6 +30,24 @@ router.post('/',
   }
 );
 
+router.get('/:id/', (req, res) => {
+  Follow.find({ user: req.params.id })
+    .select('author')
+    .populate({ 
+      path: 'author',
+      select: 'displayName handle _id articles',
+      populate: {
+        path: 'articles',
+        select: 'title date'
+      }
+    })
+    .then(follows => {
+      res.json(follows);
+    }).catch(err => {
+      return res.status(404).json({ followerror: 'Follow could not be found' });
+    })
+})
+
 // Removes follow
 router.delete('/:id',
   passport.authenticate('jwt', { session: false }),
