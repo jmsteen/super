@@ -74,6 +74,7 @@ class ArticleLike extends React.Component {
   }
 
   renderButton() {
+    if (!this.props.currentUser) { return <i className="far fa-heart" /> }
     if (this.state.currentLike) {
       return <i className="fas fa-heart" onClick={this.handleIncrement}/>
     } else {
