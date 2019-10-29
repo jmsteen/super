@@ -34,43 +34,26 @@ router.get("/:userId", (req, res) => {
 // Added so that the user can be fetched by the handle
 router.get("/handle/:handle", (req, res) => {
   User.findOne({handle: req.params.handle})
+    .select('-password -date -email')
     .populate('follows')
     .populate({
       path: 'comments',
       populate: {
-        path: 'author'
-      }
-    })
-    .populate({
-      path: 'comments',
-      populate: {
         path: 'article',
         populate: {
-          path: 'author'
+          path: 'author',
+          select: 'handle displayName'
         }
       }
     })
-    .populate({
-      path: 'articles',
-      populate: {
-        path: 'article',
-        populate: {
-          path: 'author'
-        }
-      }
-    })
-    .populate({
-      path: 'articles',
-      populate: {
-        path: 'author'
-      }
-    })
+    .populate('articles')
     .populate({
       path: 'likes',
       populate: {
         path: 'article',
         populate: {
-          path: 'author'
+          path: 'author',
+          select: 'image handle displayName'
         }
       }
     })
@@ -90,7 +73,8 @@ router.get("/handle/:handle", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'author'
+            path: 'author',
+            select: 'handle, displayName'
           }
         }
       }
@@ -102,7 +86,8 @@ router.get("/handle/:handle", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'likes'
+            path: 'likes',
+            select: '_id'
           }
         }
       }
@@ -114,7 +99,8 @@ router.get("/handle/:handle", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'comments'
+            path: 'comments',
+            select: '_id'
           }
         }
       }
@@ -147,34 +133,26 @@ router.patch("/:userId", (req, res) => {
   }
 
   User.findById(req.params.userId)
-    .populate(follows)
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'author'
-      }
-    })
+    .select('-password -date -email')
+    .populate('follows')
     .populate({
       path: 'comments',
       populate: {
         path: 'article',
         populate: {
-          path: 'author'
+          path: 'author',
+          select: 'handle displayName'
         }
       }
     })
-    .populate({
-      path: 'articles',
-      populate: {
-        path: 'author'
-      }
-    })
+    .populate('articles')
     .populate({
       path: 'likes',
       populate: {
         path: 'article',
         populate: {
-          path: 'author'
+          path: 'author',
+          select: 'image handle displayName'
         }
       }
     })
@@ -194,7 +172,8 @@ router.patch("/:userId", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'author'
+            path: 'author',
+            select: 'handle, displayName'
           }
         }
       }
@@ -206,7 +185,8 @@ router.patch("/:userId", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'likes'
+            path: 'likes',
+            select: '_id'
           }
         }
       }
@@ -218,7 +198,8 @@ router.patch("/:userId", (req, res) => {
         populate: {
           path: 'article',
           populate: {
-            path: 'comments'
+            path: 'comments',
+            select: '_id'
           }
         }
       }

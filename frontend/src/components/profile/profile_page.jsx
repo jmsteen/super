@@ -138,7 +138,7 @@ class ProfilePage extends React.Component {
           </div>
           <Route 
             exact path='/@:handle'
-            render={props => <ProfileMainFeed {...props} selfPage={this.state.selfPage} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
+            render={props => <ProfileMainFeed {...props} profileUser={this.props.profileUser} selfPage={this.state.selfPage} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
           />
           <Route 
             exact path='/@:handle/likes' 
@@ -146,7 +146,7 @@ class ProfilePage extends React.Component {
           />
           <Route
             exact path='/@:handle/comments'
-            render={props => <ProfileCommentFeed {...props} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+            render={props => <ProfileCommentFeed {...props} profileUser={this.props.profileUser} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
           />
         </main>
       </section>
