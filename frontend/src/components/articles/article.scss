@@ -261,8 +261,13 @@ div.DraftEditor-root {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+}
+
+.article-display-button-container {
+    width: 35%;
 }
 
 .article-display-button-container a {
-    margin-right: 20px;
+    margin-right: 10px;
 }

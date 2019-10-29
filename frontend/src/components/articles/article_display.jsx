@@ -141,11 +141,11 @@ class ArticleDisplay extends Component {
                                         className="article-edit-link"
                                         to={`/articles/${this.state.id}/edit`}
                                     >Edit</Link> }
-                                {(this.props.currentUser && this.props.currentUser.id === this.state.author._id) &&
+                                { (this.props.currentUser && this.props.currentUser.id === this.state.author._id) &&
                                     <button
                                         className="article-edit-link"
                                         onClick={this.handleDelete}
-                                    >Delete</button>}
+                                    >Delete</button> }
                             </div>
                         </div>
                         <div className="article-display-meta">
