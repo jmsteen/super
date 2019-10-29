@@ -41,7 +41,7 @@ class NavBar extends React.Component {
       return (
         <div className="navbar-container">
           {/* <Link to='/'><span className="navbar-logo">Super</span></Link> */}
-          <Link to='/'><img className="navbar-logo" src={require('../../assets/images/super-logo-01.png')}></img></Link>
+          <Link to='/'><img className="navbar-logo" alt="logo" src={require('../../assets/images/super-logo-01.png')}></img></Link>
           {buttons}           
         </div>
       );
