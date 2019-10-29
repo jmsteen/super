@@ -5,7 +5,8 @@ const LikeSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+    index: true
   },
 
   value: {
@@ -16,11 +17,13 @@ const LikeSchema = new Schema({
   article: {
     type: Schema.Types.ObjectId,
     ref: 'Article',
+    index: true
   },
 
   comment: {
     type: Schema.Types.ObjectId,
     ref: 'Comment',
+    index: true
   },
 
   date: {

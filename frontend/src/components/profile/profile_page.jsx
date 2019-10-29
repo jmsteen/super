@@ -9,8 +9,14 @@ import { isEqual } from 'lodash';
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { profileUser: undefined, loaded: false };
+    this.state = { 
+      profileUser: undefined, 
+      loaded: false,
+      loadingFollow: false
+    };
     this.openModal = this.openModal.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +24,8 @@ class ProfilePage extends React.Component {
       .then(res => this.setState({ 
         profileUser: res.user, 
         loaded: true,
-        selfPage: res.user._id === this.props.currentUser.id
+        selfPage: res.user._id === this.props.currentUser.id,
+        currentFollow: res.user.follows.find(follow => follow.user === this.props.currentUser.id) || null
        }))
       .catch(() => this.setState({ loaded: true }))
   }
@@ -39,6 +46,43 @@ class ProfilePage extends React.Component {
     }
   }
 
+  handleFollow() {
+    if (this.state.loadingFollow) {
+      return;
+    } else {
+      this.setState({ loadingFollow: true });
+    }
+    this.props.makeFollow({
+      user: this.props.currentUser.id,
+      authorId: this.props.profileUser._id
+    })
+      .then(res => {
+        this.setState({
+          currentFollow: res.data,
+          loadingFollow: false
+        })
+      });
+  }
+
+  handleUnfollow() {
+    if (this.state.loadingFollow) {
+      return;
+    } else {
+      this.setState({ loadingFollow: true });
+    }
+    if (this.state.currentFollow) {
+      this.props.unFollow(this.state.currentFollow._id)
+        .then(() => {
+          this.setState({
+            currentFollow: null,
+            loadingFollow: false
+          })
+        });
+    } else {
+      return;
+    }
+  }
+
   openModal(e) {
     e.preventDefault();
     this.props.openModal('profileEdit');
@@ -49,17 +93,23 @@ class ProfilePage extends React.Component {
     if (this.props.currentUser.id === this.props.profileUser._id) {
       return <button id="profile-edit-button" onClick={this.openModal}><i className="fas fa-user-edit" /></button>
     } else {
-      return <button>Follow (doesn't work yet)</button>
+      if (this.state.currentFollow) {
+        return <button onClick={this.handleUnfollow}>Unfollow</button>
+      } else {
+        return <button onClick={this.handleFollow}>Follow</button>
+      }
     }
   }
   
   render() {
     if (!this.state.loaded) {
       return <ReactLoading 
-        type={"bars"} 
-        color={"white"} 
+        type={"cubes"} 
+        color={"black"} 
         height={700} 
-        width={400} />
+        width={400} 
+        className="loading"
+        />
     } else if (!this.state.profileUser) {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
@@ -88,7 +138,7 @@ class ProfilePage extends React.Component {
           </div>
           <Route 
             exact path='/@:handle'
-            render={props => <ProfileMainFeed {...props} selfPage={this.state.selfPage} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
+            render={props => <ProfileMainFeed {...props} profileUser={this.props.profileUser} selfPage={this.state.selfPage} articles={ articles ? articles.sort((a, b) => new Date(b.date) - new Date(a.date)) : []} />}
           />
           <Route 
             exact path='/@:handle/likes' 
@@ -96,7 +146,7 @@ class ProfilePage extends React.Component {
           />
           <Route
             exact path='/@:handle/comments'
-            render={props => <ProfileCommentFeed {...props} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+            render={props => <ProfileCommentFeed {...props} profileUser={this.props.profileUser} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
           />
         </main>
       </section>

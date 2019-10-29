@@ -5,7 +5,8 @@ const CommentSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+    index: true
   },
 
   body: {
@@ -16,7 +17,8 @@ const CommentSchema = new Schema({
   article: {
     type: Schema.Types.ObjectId,
     ref: 'Article',
-    required: true
+    required: true,
+    index: true
   },
 
   date: {

@@ -12,12 +12,18 @@ const ProfileCommentPanel = props => {
     return null;
   }
 
+  const { profileUser } = props;
+
+  const showName = profileUser ? (profileUser.displayName || profileUser.handle) : (comment.author.displayName || comment.author.handle);
+  const handle = profileUser ? profileUser.handle : comment.author.handle;
+  const image = profileUser ? profileUser.image : comment.author.image;
+
   return (
     <li className="profile-comment-panel">
       <div className="profile-panel-top">
-        <Link to={`/@${comment.author.handle}`}><img alt="profile" src={comment.author.image || require('../../assets/images/default_profile.svg')} /></Link>
+        <Link to={`/@${handle}`}><img alt="profile" src={image || require('../../assets/images/default_profile.svg')} /></Link>
         <div className="profile-panel-info">
-          <span><Link className="author-link" to={`/@${comment.author.handle}`}>{comment.author.handle}</Link></span>
+          <span><Link className="author-link" to={`/@${handle}`}>{showName}</Link></span>
           <span>{month + "/" + day + "/" + year}</span>
         </div>
       </div>

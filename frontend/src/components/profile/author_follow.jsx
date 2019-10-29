@@ -22,7 +22,8 @@ class AuthorFollow extends React.Component {
         super(props)
     
         this.state = {
-            currentFollow: null
+            currentFollow: null,
+            loadingFollow: false
         };
         this.handleFollow = this.handleFollow.bind(this);
         this.handleUnfollow = this.handleUnfollow.bind(this);
@@ -34,30 +35,41 @@ class AuthorFollow extends React.Component {
             const { currentUser, currentArticle } = this.props;
             
             this.setState({
-                currentFollow: currentArticle.author.follows.find(follow => follow.user === currentUser)
+                currentFollow: currentArticle.author.follows.find(follow => follow.user === currentUser.id)
             })
         }
     }
     
     handleFollow() {
+        if (this.state.loadingFollow) {
+            return;
+        } else {
+            this.setState({ loadingFollow: true });
+        }
         this.props.makeFollow({
             user: this.props.currentUser.id,
-            author: this.props.currentArticle.author
+            authorId: this.props.currentArticle.author._id
         })
-            .then((follow) => {
+            .then(res => {
                 this.setState({
-                    currentFollow: follow
+                    currentFollow: res.data,
+                    loadingFollow: false
                 })
             });
     }
 
     handleUnfollow() {
+        if (this.state.loadingFollow) {
+            return;
+        } else {
+            this.setState({ loadingFollow: true });
+        }
         if (this.state.currentFollow) {
-            
             this.props.unFollow(this.state.currentFollow._id)
                 .then(() => {
                     this.setState({
-                        currentFollow: null
+                        currentFollow: null,
+                        loadingFollow: false
                     })
                 });
         } else {
