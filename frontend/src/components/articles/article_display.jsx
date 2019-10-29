@@ -166,6 +166,7 @@ class ArticleDisplay extends Component {
                             readOnly
                             blockRendererFn={mediaBlockRenderer} 
                             ref="editor"
+                            style={{overflow: 'none'}}
                         /></div>)}
                     </div>
                 
