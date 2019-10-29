@@ -241,6 +241,7 @@ class ArticleEditor extends Component {
                                     // ref="editor"
                                     onChange={this.onChange}
                                     handleKeyCommand={this.handleKeyCommand}
+                                    placeholder="Edit your story"
                                     plugins={plugins}
                                     ref={(element) => { this.editor = element; }}
                                 />
