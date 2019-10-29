@@ -36,22 +36,33 @@ class ProfilePage extends React.Component {
       this.setState({ loaded: false });
       window.scrollTo(0, 0);
       this.props.fetchUserByHandle(this.props.match.params.handle)
-        .then(res => this.setState({ profileUser: res.user, loaded: true }))
+        .then(res => this.setState({ 
+          profileUser: res.user, 
+          loaded: true,
+          selfPage: res.user._id === this.props.currentUser.id,
+          currentFollow: res.user.follows.find(follow => follow.user === this.props.currentUser.id) || null
+        }))
         .catch(() => this.setState({ loaded: true }))
-    } else if (this.props.profileUser && !isEqual(this.props.profileUser, prevProps.profileUser)) {
-      // if the profileUser is updated somehow
-      this.setState(
-        { profileUser: this.props.profileUser }
-      );
-    } else if (this.props.currentUser && prevProps.currentUser === undefined) {
-      console.log('hey');
-      this.setState({ loaded: false })
-      this.props.fetchUserByHandle(this.props.match.params.handle)
-        .then(res => this.setState({ profileUser: res.user, loaded: true }))
-        .catch(() => this.setState({ loaded: true }))
+      } else if (this.props.currentUser && prevProps.currentUser === undefined) {
+        this.setState({  
+          loaded: true,
+          selfPage: this.state.profileUser._id === this.props.currentUser.id,
+          currentFollow: this.state.profileUser.follows.find(follow => follow.user === this.props.currentUser.id) || null
+        })
+      } else if (prevProps.currentUser && this.props.currentUser === undefined) {
+          this.setState({ loaded: false });
+          this.setState({
+              loaded: true,
+              selfPage: false,
+              currentFollow: null
+            });
+      } else if (this.props.profileUser && !isEqual(this.props.profileUser, prevProps.profileUser)) {
+        // if the profileUser is updated somehow
+        this.setState(
+          { profileUser: this.props.profileUser, loaded: false },
+        );
+      }
     }
-  }
-
   handleFollow() {
     if (this.state.loadingFollow) {
       return;
