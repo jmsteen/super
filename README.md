@@ -2,6 +2,8 @@
 
 Link: [The Super App](https://thesuperapp.herokuapp.com)
 
+![Home Page](/assets/super-home-page.png)
+
 ## Background and Overview 
   Super is a content production platform for junior web developers inspired by Medium. Super is built with the MERN Stack and enables basic functionality of creating, editing and categorizing articles.
 
@@ -76,12 +78,14 @@ stored in the database.
 
 One tradeoff that we encountered was the decision to either use populate, which
 entails multiple queries to the database, or multiple API calls, which would
-also create loading speed issues.
+also create loading speed issues. 
 
 Although both affected speed negatively, we decided to use populate so that
-API calls would be minimized and the logic would be handled in a single request.
+API calls would be minimized and the logic would be handled in a single request. While this would mean a longer initial load time for the page, it would remove the necessity for additional API calls.
 
 #### Integrating Draft.js as an external library for text processing
+
+![Walkthrough](/assets/edit-article-walkthrough.gif)
 
 We used Draft.js as our primary text-processing tool to create articles in rich
 text format.
