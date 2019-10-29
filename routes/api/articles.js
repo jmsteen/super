@@ -75,8 +75,6 @@ router.patch('/:id',
       return res.status(422).json(errors);
     }
 
-    console.dir(req.body);
-
     Article.findById(req.body.id)
       .then(article => {
         article.title = req.body.title;
