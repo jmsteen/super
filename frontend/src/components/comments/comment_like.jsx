@@ -84,7 +84,7 @@ class CommentLike extends React.Component {
 
   render() {
     let valueArr;
-    let likesValue;
+    let likesValue = 0;
     if(this.props.comment.likes) {
       valueArr = this.props.comment.likes.map(like => like.value);
       likesValue = valueArr.length === 0 ? 0 : valueArr.reduce((a, b) => a + b, 0);

@@ -13,7 +13,7 @@ class CommentsIndex extends React.Component {
       )
     })
     return(
-      <div>
+      <div className="index-container">
         { this.props.currentUser && <CommentForm/>}
         <ul>
           {comments}

@@ -20,7 +20,11 @@ router.post('/',
         newComment.article = mongoose.Types.ObjectId(req.body.article)
         newComment.save()
           .then(comment => {
-            res.json(comment) 
+            User.findById(comment.author).then(author => {
+              comment.author = author
+              res.json(comment) 
+            })
+              
           }, err => err = res.status(400).json(err))         
       }).catch(err => {
         return res.status(404).json({ noarticlefound: "No article found with that ID"});
