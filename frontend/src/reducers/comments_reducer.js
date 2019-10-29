@@ -4,7 +4,7 @@ import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/like_actions';
 
 const commentsReducer = (state = {}, action) => {
   Object.freeze(state);
-  let newState = Object.assign({}, state);
+  let newState = {};
     switch(action.type) {
       case RECEIVE_COMMENT: 
         newState = Object.assign({}, state, { [action.comment.data._id]: action.comment.data});
