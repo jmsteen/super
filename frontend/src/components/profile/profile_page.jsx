@@ -56,10 +56,12 @@ class ProfilePage extends React.Component {
   render() {
     if (!this.state.loaded) {
       return <ReactLoading 
-        type={"bars"} 
-        color={"white"} 
+        type={"cubes"} 
+        color={"black"} 
         height={700} 
-        width={400} />
+        width={400} 
+        className="loading"
+        />
     } else if (!this.state.profileUser) {
       return <h2 className="profile-error">Profile does not exist</h2>
     }

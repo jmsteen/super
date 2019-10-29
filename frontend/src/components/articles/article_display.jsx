@@ -114,10 +114,12 @@ class ArticleDisplay extends Component {
     render() {
         if (!this.state.loaded) {
             return <ReactLoading
-                type={"bars"}
-                color={"white"}
+                type={"cubes"}
+                color={"black"}
                 height={700}
-                width={400} />
+                width={400}
+                className="loading"
+            />
         } else if (!this.props.currentArticle) {
             return <h2 className="profile-error">Article does not exist</h2>
         }

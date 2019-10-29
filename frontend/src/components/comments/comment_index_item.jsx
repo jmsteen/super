@@ -8,10 +8,6 @@ class CommentIndexItem extends React.Component {
     super(props)
   }
 
-  
-
- 
-
   render() {
     let deleteButton
 
