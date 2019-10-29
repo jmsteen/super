@@ -1,59 +1,99 @@
 # super
 
+Link: [The Super App](https://thesuperapp.herokuapp.com)
+
 ## Background and Overview 
-  Super is a content production platform for junior web developers inspired by Medium. Super is built with the MERN Stack and enables basic functionality of creating, editing and categorizing articles. 
+  Super is a content production platform for junior web developers inspired by Medium. Super is built with the MERN Stack and enables basic functionality of creating, editing and categorizing articles.
 
 ## Functionality and MVPs 
   1. User authentication
       * Authorized users can create, edit, comment on and like articles.
       * Unauthorized users can only read articles.
   2. Articles 
-      * Articles allow for basic text processing.
+      * Articles allow for basic text processing and styling.
       * Content can include text, images and code snippets.
+      * Articles contain an inline text-styling toolbar and image insertion.
   3. Commenting on articles 
-      * Users can leave comments on articles and reply to comments.
+      * Users can leave comments on articles.
   4. Follows and feed 
-      * Users can follow authors
-      * Feeds display articles by category
-  5. Likes 
-      * Users can like articles
-
-  BONUS: Text Editing Toolbar
-      * Allows for more advanced and preview features in the text editor.
+      * Users can follow authors.
+  5. User profiles
+      * Users can create and edit handle, profile image and display name.
+      * Users can access other profiles via linked profile images and author name.
+  6. Likes 
+      * Users can like articles and comments.
+      * Liked articles and comments appear on user's profile.
+ 
 
 ## Technologies and Technical Challenges
 
-Super will use the MERN stack, which includes MongoDb, Express, React and Node.js.
+Super uses the MERN stack, which includes MongoDb, Express, React and Node.js.
 
-### Front End (React/Node.js)
-Super uses React for front end client-side rendering and an external library
-for text processing.
+For text processing, the app utilizes Draft.js, a rich text editor framework.
 
-Technical challenges:
-    * Utilization of library for text processsing of articles and comments
-    * Implementing infinite scroll for the article feed, while maintaining an acceptable render speed.
+In order to upload and store images, we utilized Amazon S3. We used React Image
+Crop to allow users to resize images on upload.
 
-### Backend (MongoDb, Express)
-Super uses MongoDB for its database and Express as its server framework.
+### Challenges
+
+#### State management
+  In order to avoid errors related to empty state on mounting of React components,
+  we used conditional statements and default values related to our current user,
+  article, likes and comments until the asynchronous request had been fulfilled.
 
 
-## Group Members and Work Breakdown
+#### Populate with Mongoose
+  In order to avoid having unnecessary population in the user backend GET route,
+  we had to provide panel components in the user profile page with additional
+  information on the front end related to the profile currently being rendered.
 
-**John Steen**, **Alexander Crisel**, **Josh Kim**
+#### Multi-faceted API Call to Articles
 
-### Day 1
-  * User authentication (all)
+```JavaScript
+router.get('/:id', (req, res) => {
+  Article.findById(req.params.id)
+    .populate('likes')
+    .populate({ path: "comments", populate: { path: "likes" } })
+    .populate({ path: "comments", populate: { path: "author" } })
+    .populate({ path: "author", populate: { path: "follows" } })
+    .then(article => {
+      Like.find({ '_id': { $in: article.likes }})
+        .then(likes => {
+          article.likes = likes
+          return res.json(article);
+        }).catch(err => res.status(404).json({ error: "Encountered issue populating article likes"}))
+    })
+    .catch(err =>
+      res.status(404).json({ noarticlefound: 'No article found with that ID' })
+    )
+});
+```
 
-### Day 2
-  * Back end articles (John)
-  * Back end comments (Alexander)
-  * Back end likes (Josh)
-  * Meet and decide roles for future days. 
-### Day 3
-  * Front end articles (John)
-  * Front end comments (Alexander)
-  * Front end likes (Josh)
-### Day 4
-  * Finalize front for respective MVP features (All)
-### Day 5
-  * Review and debug
+In order to minimize API calls for multiple resources, we used nested population
+within our Article GET request. We wished to avoid cluttered Mongoose models,
+so we utilized virtual population to prevent redundant foreign keys from being
+stored in the database.
+
+One tradeoff that we encountered was the decision to either use populate, which
+entails multiple queries to the database, or multiple API calls, which would
+also create loading speed issues.
+
+Although both affected speed negatively, we decided to use populate so that
+API calls would be minimized and the logic would be handled in a single request.
+
+#### Integrating Draft.js as an external library for text processing
+
+We used Draft.js as our primary text-processing tool to create articles in rich
+text format.
+
+A separate editor state had to be created when the component mounted in order
+to store and edit content in rich text format. When articles were posted or
+fetched, content had to be converted into raw, stringified content and back.
+
+### Plans for Implementation
+
+  * Categories for articles (e.g. "JavaScript, Front End, etc.")
+  * Search bar for articles
+  * Estimated reading times for articles
+  * Bookmarks
+  * Publications
