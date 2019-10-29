@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const Article = require('../../models/Article');
+const Comment = require('../../models/Comment');
 const Like = require('../../models/Like');
 const User = require('../../models/User');
+
 const validateArticleInput = require('../../validation/articles');
 
 router.get('/', (req, res) => {
@@ -60,7 +62,11 @@ router.post('/',
 
 router.delete('/:id', (req, res) => {
   Article.findByIdAndDelete(req.params.id)
-    .then(like => res.json(like))
+    .then(article => {
+      Like.remove({ article: article._id }).exec();
+      Comment.remove( { article: article._id }).exec();
+      return res.json(article);
+    })
     .catch(err =>
       res.status(404).json({ couldnotdelete: 'Article could not be located and deleted' })
     );
