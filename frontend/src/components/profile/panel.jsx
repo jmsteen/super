@@ -8,12 +8,18 @@ const ProfileArticlePanel = props => {
   const day = date.getDate();
   var year = date.getFullYear();
 
+  const { profileUser } = props;
+  const showName = profileUser ? (profileUser.displayName || profileUser.handle) : (article.author.displayName || article.author.handle);
+  const handle = profileUser ? profileUser.handle : article.author.handle;
+  const image = profileUser ? profileUser.image : article.author.image;
+
+
   return (
     <li className="profile-article-panel">
       <div className="profile-panel-top">
-        <Link to={`/@${article.author.handle}`}><img alt="author" src={article.author.image || require('../../assets/images/default_profile.svg')} /></Link>
+        <Link to={`/@${handle}`}><img alt="author" src={ image || require('../../assets/images/default_profile.svg')} /></Link>
         <div className="profile-panel-info">
-          <span><Link className="author-link" to={`/@${article.author.handle}`}>{article.author.handle}</Link></span>
+          <span><Link className="author-link" to={`/@${handle}`}>{showName}</Link></span>
           <span>{month + "/" + day + "/" + year}</span>
         </div>
       </div>

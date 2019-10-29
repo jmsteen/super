@@ -6,7 +6,10 @@ class ProfileCommentFeed extends React.Component {
 
   render() {
     const commentLis = this.props.comments.map(comment => {
-        return <ProfileCommentPanel comment={comment} key={comment._id} />;
+        return <ProfileCommentPanel 
+          comment={comment}
+          profileUser={this.props.profileUser}
+          key={comment._id} />;
     });
 
     return (
