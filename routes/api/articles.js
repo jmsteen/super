@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id)
+    .populate('likes')
     .populate({ path: "comments", populate: { path: "likes" } })
     .populate({ path: "author", populate: { path: "follows" }})
     .then(article => {
@@ -73,8 +74,6 @@ router.patch('/:id',
     if (!isValid) {
       return res.status(422).json(errors);
     }
-
-    console.dir(req.body);
 
     Article.findById(req.body.id)
       .then(article => {
