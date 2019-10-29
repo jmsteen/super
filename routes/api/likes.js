@@ -48,8 +48,9 @@ router.patch('/:id',
     Like.findById(req.params.id)
       .then(like => {
         like.value = like.value + 1;
-        like.save();
-        res.json(like);
+        like.save().then(like => {
+          res.json(like);
+        });
       })
       .catch(err => {
         return res.status(404).json({ nolikefound: 'No like found with that ID' });

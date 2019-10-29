@@ -67,10 +67,12 @@ class CommentLike extends React.Component {
       this.setState({ loadingLike: true })
       if (this.state.currentLike.value < 50) {
         this.props.increaseLike(this.state.currentLike._id)
-          .then(res => this.setState({
-            loadingLike: false,
-            currentLike: res.like
-          }));
+          .then(res => {
+            this.setState({
+              loadingLike: false,
+              currentLike: res.like
+          })
+        });
       }}
   }
 

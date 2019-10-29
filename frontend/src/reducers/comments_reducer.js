@@ -5,6 +5,7 @@ import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/like_actions';
 const commentsReducer = (state = {}, action) => {
   Object.freeze(state);
   let newState = {};
+  let newerState = Object.assign({}, state);
     switch(action.type) {
       case RECEIVE_COMMENT: 
         newState = Object.assign({}, state, { [action.comment.data._id]: action.comment.data});
@@ -12,19 +13,21 @@ const commentsReducer = (state = {}, action) => {
       case RECEIVE_LIKE:
         if (action.like.comment) {
           const commentId = action.like.comment;
-          const comment = newState[commentId];
-          comment.likes = comment.likes.filter(like => like._id !== action.like._id);
-          comment.likes.push(action.like);
-          return newState;
+          const comment = newerState[commentId];
+          if (comment && comment.likes) {
+            comment.likes = comment.likes.filter(like => like._id !== action.like._id);
+            comment.likes.push(action.like);
+          }
+          return newerState;
         } else {
           return state;
         }
       case REMOVE_LIKE:
         if (action.like.comment) {
           const commentId = action.like.comment;
-          const comment = newState[commentId];
+          const comment = newerState[commentId];
           comment.likes = comment.likes.filter(like => like._id !== action.like._id);
-          return newState;
+          return newerState;
         } else {
           return state;
         }
