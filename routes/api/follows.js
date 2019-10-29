@@ -11,17 +11,17 @@ router.post('/',
 
     const newFollow = new Follow({
       user: req.user.id,
-      author: req.body.author._id
+      author: req.body.authorId
     });
 
-    User.findById(req.body.author._id)
+    User.findById(req.body.authorId)
       .then(() => {
-        newFollow.author = req.body.author._id
+        newFollow.author = req.body.authorId
         newFollow.save()
           .then(follow => {
-            User.findById(req.body.author._id).then((user)=>{
-              follow.author = user
-              res.json(follow)
+            User.findById(req.body.authorId).then((user)=>{
+              follow.author = user;
+              res.json(follow);
             })
           }, err => err = res.status(400).json(err));
       }).catch(err => {

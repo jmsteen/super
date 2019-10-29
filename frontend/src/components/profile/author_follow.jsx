@@ -34,7 +34,7 @@ class AuthorFollow extends React.Component {
             const { currentUser, currentArticle } = this.props;
             
             this.setState({
-                currentFollow: currentArticle.author.follows.find(follow => follow.user === currentUser)
+                currentFollow: currentArticle.author.follows.find(follow => follow.user === currentUser.id)
             })
         }
     }
@@ -42,18 +42,18 @@ class AuthorFollow extends React.Component {
     handleFollow() {
         this.props.makeFollow({
             user: this.props.currentUser.id,
-            author: this.props.currentArticle.author
+            authorId: this.props.currentArticle.author._id
         })
-            .then((follow) => {
+            .then(res => {
                 this.setState({
-                    currentFollow: follow
+                    currentFollow: res.data
                 })
             });
     }
 
     handleUnfollow() {
         if (this.state.currentFollow) {
-            
+            console.dir(this.state.currentFollower);
             this.props.unFollow(this.state.currentFollow._id)
                 .then(() => {
                     this.setState({
