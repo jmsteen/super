@@ -2,7 +2,7 @@ import React from 'react';
 import { ProtectedRoute } from '../util/route_util';
 import { Switch, Route } from 'react-router-dom';
 import NavBarContainer from './nav/navbar_container';
-import style from '../App.scss';
+import '../App.scss';
 
 import ArticleDisplay from './articles/article_display';
 import ProfileContainer from './profile/profile_page_container';

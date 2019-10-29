@@ -4,10 +4,7 @@ import CommentLikeContainer from './comment_like';
 
 
 class CommentIndexItem extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
+  
   render() {
    
     let deleteButton

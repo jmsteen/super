@@ -137,7 +137,7 @@
 
 div.DraftEditor-root {
     position: relative;
-    overflow: scroll;
+    overflow: none;
     line-height: 1.5;
 }
 
@@ -229,7 +229,7 @@ div.DraftEditor-root {
 }
 
 .add-edit-image {
-    margin-bottom: 90px;
+    margin-bottom: 77px;
     margin-left: 20px;
 }
 
@@ -257,12 +257,22 @@ div.DraftEditor-root {
     height: 50%;
 }
 
+.article-edit-link:hover {
+    border: 1px solid gray;
+    color: gray;
+}
+
 .article-title-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 90%;
+}
+
+.article-display-button-container {
+    width: 35%;
 }
 
 .article-display-button-container a {
-    margin-right: 20px;
+    margin-right: 10px;
 }

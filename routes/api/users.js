@@ -247,7 +247,7 @@ router.post("/signup", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "A user has already registered with this email address";
-      return res.status(400).json(errors);
+      return res.status(422).json(errors);
     } else {
       const newUser = new User({
         handle: req.body.handle,
@@ -288,7 +288,7 @@ router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(422).json(errors);
   }
   
   const email = req.body.email;
