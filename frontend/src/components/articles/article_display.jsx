@@ -140,12 +140,12 @@ class ArticleDisplay extends Component {
                                     <Link 
                                         className="article-edit-link"
                                         to={`/articles/${this.state.id}/edit`}
-                                    >Edit</Link> }
+                                ><i className="fas fa-pencil-ruler" /></Link> }
                                 { (this.props.currentUser && this.props.currentUser.id === this.state.author._id) &&
                                     <button
                                         className="article-edit-link"
                                         onClick={this.handleDelete}
-                                    >Delete</button> }
+                                ><i className="fas fa-trash-alt" /></button> }
                             </div>
                         </div>
                         <div className="article-display-meta">
