@@ -6,11 +6,10 @@ import CommentLikeContainer from './comment_like';
 class CommentIndexItem extends React.Component {
   
   render() {
+   
     let deleteButton
-
     if (this.props.currentUser && this.props.currentUser.id === this.props.comment.author.id) {
-     deleteButton = <button onClick={() => { this.props.removeComment(this.props.comment.id) }}>Delete Comment</button>
-
+     deleteButton = <button onClick={() => { this.props.removeComment(this.props.comment.id) }}>Remove Comment</button>
     }
     return( 
      
@@ -20,8 +19,8 @@ class CommentIndexItem extends React.Component {
           <p className="comment-body">{this.props.comment.body}</p>
         </div>
         <div className="comment-links">
-        {deleteButton}
-        <CommentLikeContainer comment={this.props.comment} />
+          <CommentLikeContainer comment={this.props.comment} />
+          {deleteButton}
         </div>
       </div>
     )
