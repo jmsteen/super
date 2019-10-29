@@ -257,6 +257,11 @@ div.DraftEditor-root {
     height: 50%;
 }
 
+.article-edit-link:hover {
+    border: 1px solid gray;
+    color: gray;
+}
+
 .article-title-container {
     display: flex;
     justify-content: space-between;
