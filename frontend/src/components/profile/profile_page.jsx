@@ -9,8 +9,14 @@ import { isEqual } from 'lodash';
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { profileUser: undefined, loaded: false };
+    this.state = { 
+      profileUser: undefined, 
+      loaded: false,
+      loadingFollow: false
+    };
     this.openModal = this.openModal.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
   }
 
   componentDidMount() {
@@ -18,7 +24,8 @@ class ProfilePage extends React.Component {
       .then(res => this.setState({ 
         profileUser: res.user, 
         loaded: true,
-        selfPage: res.user._id === this.props.currentUser.id
+        selfPage: res.user._id === this.props.currentUser.id,
+        currentFollow: res.user.follows.find(follow => follow.user === this.props.currentUser.id) || null
        }))
       .catch(() => this.setState({ loaded: true }))
   }
@@ -39,6 +46,43 @@ class ProfilePage extends React.Component {
     }
   }
 
+  handleFollow() {
+    if (this.state.loadingFollow) {
+      return;
+    } else {
+      this.setState({ loadingFollow: true });
+    }
+    this.props.makeFollow({
+      user: this.props.currentUser.id,
+      authorId: this.props.profileUser._id
+    })
+      .then(res => {
+        this.setState({
+          currentFollow: res.data,
+          loadingFollow: false
+        })
+      });
+  }
+
+  handleUnfollow() {
+    if (this.state.loadingFollow) {
+      return;
+    } else {
+      this.setState({ loadingFollow: true });
+    }
+    if (this.state.currentFollow) {
+      this.props.unFollow(this.state.currentFollow._id)
+        .then(() => {
+          this.setState({
+            currentFollow: null,
+            loadingFollow: false
+          })
+        });
+    } else {
+      return;
+    }
+  }
+
   openModal(e) {
     e.preventDefault();
     this.props.openModal('profileEdit');
@@ -49,7 +93,11 @@ class ProfilePage extends React.Component {
     if (this.props.currentUser.id === this.props.profileUser._id) {
       return <button id="profile-edit-button" onClick={this.openModal}><i className="fas fa-user-edit" /></button>
     } else {
-      return <button>Follow (doesn't work yet)</button>
+      if (this.state.currentFollow) {
+        return <button onClick={this.handleUnfollow}>Unfollow</button>
+      } else {
+        return <button onClick={this.handleFollow}>Follow</button>
+      }
     }
   }
   

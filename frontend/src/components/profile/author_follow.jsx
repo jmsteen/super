@@ -53,7 +53,6 @@ class AuthorFollow extends React.Component {
 
     handleUnfollow() {
         if (this.state.currentFollow) {
-            console.dir(this.state.currentFollower);
             this.props.unFollow(this.state.currentFollow._id)
                 .then(() => {
                     this.setState({

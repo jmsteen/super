@@ -34,6 +34,7 @@ router.get("/:userId", (req, res) => {
 // Added so that the user can be fetched by the handle
 router.get("/handle/:handle", (req, res) => {
   User.findOne({handle: req.params.handle})
+    .populate('follows')
     .populate({
       path: 'comments',
       populate: {
@@ -146,6 +147,7 @@ router.patch("/:userId", (req, res) => {
   }
 
   User.findById(req.params.userId)
+    .populate(follows)
     .populate({
       path: 'comments',
       populate: {
