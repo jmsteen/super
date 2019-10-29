@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id)
+    .populate('likes')
     .populate({ path: "comments", populate: { path: "likes" } })
     .populate({ path: "author", populate: { path: "follows" }})
     .then(article => {
