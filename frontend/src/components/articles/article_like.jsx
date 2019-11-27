@@ -92,7 +92,9 @@ class ArticleLike extends React.Component {
           {this.renderButton()}
           <span>{`${likesValue}`} Likes</span>
         </div>
-        <button onClick={this.handleErase}>Undo Like</button>
+        <div>
+          { this.state.currentLike && <button onClick={this.handleErase}>Undo Like</button> }
+        </div>
       </div>
     )
   }
