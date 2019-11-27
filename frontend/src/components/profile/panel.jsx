@@ -13,7 +13,6 @@ const ProfileArticlePanel = props => {
   const handle = profileUser ? profileUser.handle : article.author.handle;
   const image = profileUser ? profileUser.image : article.author.image;
 
-
   return (
     <li className="profile-article-panel">
       <div className="profile-panel-top">
@@ -28,7 +27,7 @@ const ProfileArticlePanel = props => {
         <h3>{article.title}</h3>
       </Link>
       <div className="profile-panel-bottom">
-        { props.selfPage && <Link to={`/articles/${article._id}/edit`}>Edit Article</Link>}
+        { profileUser._id === article.author._id && <Link to={`/articles/${article._id}/edit`}>Edit Article</Link>}
       </div>
     </li>
   );
