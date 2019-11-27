@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { CompositeDecorator, RichUtils, convertToRaw, convertFromRaw, EditorState } from 'draft-js';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { receiveImage, clearImage } from '../../actions/image_actions';
 import { uploadImage } from '../../util/image_api_util';
 import { openModal } from '../../actions/modal_actions';
@@ -42,6 +42,7 @@ const plugins = [
 
 const mapStateToProps = (state, ownProps) => {
     return {
+        currentUser: state.session.user,
         currentArticle: state.entities.articles[ownProps.match.params.id],
         image: state.image.pub
     };
@@ -204,6 +205,10 @@ class ArticleEditor extends Component {
                 width={400} />
         } else if (!this.props.currentArticle) {
             return <h2 className="profile-error">Article does not exist</h2>
+        }
+
+        if (this.props.currentUser.id !== this.state.article.author._id) {
+            return <Redirect to={`/articles/${this.props.currentArticle._id}`} />
         }
 
         const date = new Date(this.state.article.date);
