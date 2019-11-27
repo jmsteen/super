@@ -200,8 +200,8 @@ class ArticleEditor extends Component {
             return <ReactLoading
                 type={"bars"}
                 color={"white"}
-                height={700}
-                width={400} />
+                height={350}
+                width={200} />
         } else if (!this.props.currentArticle) {
             return <h2 className="profile-error">Article does not exist</h2>
         }
