@@ -53,8 +53,8 @@ class HomePage extends React.Component {
       return <ReactLoading
         type={"cubes"}
         color={"black"}
-        height={700}
-        width={400}
+        height={350}
+        width={200}
         className="loading"
       />
     };
