@@ -28,19 +28,19 @@ class NavBar extends React.Component {
   render() {
     const buttons = this.props.loggedIn ?
       <div className="navbar-buttons">
-        <Link to={`/new_article`}><i className="fas fa-book" /></Link>
-        <Link to={`/@${this.props.currentUser.handle}`}><i className="fas fa-user" /></Link>
-        <button className="navbar-signout-button" onClick={this.logoutUser}><i className="fas fa-sign-out-alt" /></button>
+        <Link to={`/new_article`}><i className="fas fa-book" />New Story</Link>
+        <Link to={`/@${this.props.currentUser.handle}`}><i className="fas fa-user" />Profile</Link>
+        <button className="navbar-signout-button" onClick={this.logoutUser}><i className="fas fa-sign-out-alt" />Sign Out</button>
       </div> :
       <div className="navbar-buttons">
-        <button className="navbar-login-button" onClick={this.loginModal}><i className="fas fa-sign-in-alt" /></button>
-        <button className="navbar-signup-button" onClick={this.signupModal}><i className="fas fa-user-plus" /></button>
+        <button className="navbar-login-button" onClick={this.loginModal}><i className="fas fa-sign-in-alt" />Login</button>
+        <button className="navbar-signup-button" onClick={this.signupModal}><i className="fas fa-user-plus" />New User</button>
       </div>
 
       return (
         <div className="navbar-container">
           {/* <Link to='/'><span className="navbar-logo">Super</span></Link> */}
-          <Link to='/'><img className="navbar-logo" alt="logo" src={require('../../assets/images/super-logo-01.png')}></img></Link>
+          <Link to='/'><img className="navbar-logo" alt="logo" src={require('../../assets/images/super-logo-02.png')}></img></Link>
           {buttons}           
         </div>
       );

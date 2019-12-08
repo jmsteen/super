@@ -46,3 +46,7 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+button {
+  transition: 0.2s;
+}

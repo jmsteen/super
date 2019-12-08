@@ -12,27 +12,26 @@
 .home-tertiary-panel {
   display: flex;
   justify-content: space-between;
-  min-height: 190px;
+  height: 150px;
   width: 100%;
   padding-left: 5px;
-  margin-top: 20px;
+  margin-bottom: 32px;
 }
 
 .home-tertiary-panel-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   box-sizing: border-box;
 }
 
 .home-tertiary-panel img {
-  height: 180px;
-  width: 180px;
+  height: 150px;
+  width: 150px;
   object-fit: cover;
 }
 
 .home-tertiary-panel h2 {
-  font-size: 24px;
+  font-size: 22px;
   max-width: 435px;
   font-weight: 600;
 }
@@ -62,6 +61,10 @@
   margin-top: 15px;
   font-size: 17px;
   padding-right: 10px;
+}
+
+.home-tertiary-panel span {
+  color: #545454;
 }
 
 .home-tertiary-panel span a:hover {

@@ -11,29 +11,28 @@
 }
 
 .navbar-logo {
-  height: 56px;
-  width: 140px;
+  width: 85px;
 }
 
 .navbar-buttons a {
-  margin-right: 25px;
-  font-size: 24px;
-  padding: 10px 20px;
-  padding-left: 25px;
+  font-size: 17px;
+  padding: 10px;
   border-radius: 10px;
+  transition: 0.2s;
+  i {
+      padding-right: 8px;
+  }
 }
 
 .navbar-buttons a:first-of-type:hover i:after{
-    content: 'New Story';
     margin-left: 8px;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 600;
 }
 
 .navbar-buttons a:last-of-type:hover i:after{
-    content: 'Profile';
     margin-left: 8px;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -42,9 +41,12 @@
 }
 
 .navbar-signout-button {
-  font-size: 24px;
-  padding: 10px 20px;
+  font-size: 17px;
+  padding: 10px;
   border-radius: 10px;
+  i {
+    padding-right: 8px;
+  }
 }
 
 .navbar-signout-button:hover{
@@ -52,31 +54,33 @@
 }
 
 .navbar-signout-button:hover:after {
-  content: 'Sign Out';
   margin-left: 8px;
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 600;
 }
 
 .navbar-login-button {
-  font-size: 24px;
-  padding: 10px 20px;
-  padding-left: 25px;
+  font-size: 17px;
+  padding: 10px;
   border-radius: 10px;
-  margin-right: 40px;
+  i {
+    padding-right: 8px;
+  }
 }
 
 .navbar-signup-button {
-  font-size: 24px;
-  padding: 10px 20px;
+  font-size: 17px;
+  padding: 10px;
   border-radius: 10px;
+  i {
+    padding-right: 8px;
+  }
 }
 
 .navbar-login-button:hover:after {
-  content: 'Log In';
   margin-left: 8px;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .navbar-login-button:hover{
@@ -84,10 +88,9 @@
 }
 
 .navbar-signup-button:hover:after {
-  content: 'New User';
   margin-left: 8px;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 17px;
 }
 
 .navbar-signup-button:hover{
