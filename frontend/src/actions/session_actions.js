@@ -53,7 +53,7 @@ export const login = user => dispatch => (
     })
         .catch(err => {
             console.dir(err);
-            dispatch(receiveErrors(err.message));
+            dispatch(receiveErrors(err.response.data));
         })
 );
 
