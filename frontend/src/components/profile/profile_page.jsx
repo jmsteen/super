@@ -36,7 +36,6 @@ class ProfilePage extends React.Component {
       // if url changes
       this.setState({ loaded: false });
       window.scrollTo(0, 0);
-
       // if url changes
       this.props.fetchUserByHandle(this.props.match.params.handle)
         .then(res => this.setState({ 
@@ -48,7 +47,6 @@ class ProfilePage extends React.Component {
         .catch((err) => { this.setState({ loaded: true, profileUser: undefined }) })
         // login
       } else if (this.props.currentUser && prevProps.currentUser === undefined) {
-        this.setState({ loaded: false });
         this.setState({
           profileUser: this.props.profileUser,  
           loaded: true,
@@ -57,7 +55,6 @@ class ProfilePage extends React.Component {
         })
         // logout
       } else if (prevProps.currentUser && this.props.currentUser === undefined) {
-          this.setState({ loaded: false })
           this.setState({
               loaded: true,
               profileUser: this.props.profileUser,  
