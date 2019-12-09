@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import './article.scss';
 import Editor from 'draft-js-plugins-editor';
 import createImagePlugin from 'draft-js-image-plugin';
-import ImageAdd from './image_add';
+// import ImageAdd from './image_add';
 import {
     ItalicButton,
     BoldButton,
@@ -153,6 +153,15 @@ class ArticleEditor extends Component {
         document.getElementById('image-publish-input').click();
     }
 
+    myBlockStyleFn(contentBlock) {
+        const type = contentBlock.getType();
+        if (type === 'blockquote') {
+            return 'superBlockquote';
+        } else if (type === 'code-block') {
+            return 'superCodeblock';
+        }
+    }
+
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
@@ -233,15 +242,16 @@ class ArticleEditor extends Component {
                             </div>
                         </div>                        
                         <div className="article-compose-container">
-                            <ImageAdd
+                            {/* <ImageAdd
                                 editorState={this.state.editorState}
                                 onChange={this.onChange}
                                 modifier={imagePlugin.addImage}
                                 addClass={"add-edit-image"}
-                            />
+                            /> */}
                             <div className="body-text-editor" onClick={this.focus}>
                                 <Editor 
                                     editorState={this.state.editorState}
+                                    blockStyleFn={this.myBlockStyleFn}
                                     blockRendererFn={mediaBlockRenderer} 
                                     // ref="editor"
                                     onChange={this.onChange}
@@ -256,9 +266,9 @@ class ArticleEditor extends Component {
                                             <BoldButton {...externalProps} />
                                             <ItalicButton {...externalProps} />
                                             <UnderlineButton {...externalProps} />
-                                            <LinkButton {...externalProps} />
                                             <Separator {...externalProps} />
-                                            <CodeButton {...externalProps} />
+                                            <LinkButton {...externalProps} />
+                                            {/* <CodeButton {...externalProps} /> */}
                                             <BlockquoteButton {...externalProps} />
                                             <CodeBlockButton {...externalProps} />
                                         </div>

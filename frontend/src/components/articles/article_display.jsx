@@ -111,6 +111,15 @@ class ArticleDisplay extends Component {
         }
     }
 
+    myBlockStyleFn(contentBlock) {
+        const type = contentBlock.getType();
+        if (type === 'blockquote') {
+            return 'superBlockquote';
+        } else if (type === 'code-block') {
+            return 'superCodeblock';
+        }
+    }
+
     render() {
         if (!this.state.loaded) {
             return <ReactLoading
@@ -163,6 +172,7 @@ class ArticleDisplay extends Component {
                         {this.state.body && (<div className="article-display-body">
                         <Editor 
                             editorState={this.convertToRichText(this.state.body)}
+                            blockStyleFn={this.myBlockStyleFn}
                             readOnly
                             blockRendererFn={mediaBlockRenderer} 
                             ref="editor"

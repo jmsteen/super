@@ -130,6 +130,15 @@ class ArticleCreator extends Component {
         document.getElementById('image-publish-input').click();
     }
 
+    myBlockStyleFn(contentBlock) {
+        const type = contentBlock.getType();
+        if (type === 'blockquote') {
+            return 'superBlockquote';
+        } else if (type === 'code-block') {
+            return 'superCodeblock';
+        }
+    }
+
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
@@ -159,6 +168,7 @@ class ArticleCreator extends Component {
                 <div className="body-text-editor" onClick={this.focus}>
                     <Editor
                         editorState={this.state.editorState}
+                        blockStyleFn={this.myBlockStyleFn}
                         placeholder={this.renderPlaceholder(this.props.placeholder, this.state.editorState)}
                         onChange={this.onChange}
                         handleKeyCommand={this.handleKeyCommand}
@@ -171,9 +181,8 @@ class ArticleCreator extends Component {
                                 <BoldButton {...externalProps} />
                                 <ItalicButton {...externalProps} />
                                 <UnderlineButton {...externalProps} />
-                                <LinkButton {...externalProps} />
                                 <Separator {...externalProps} />
-                                <CodeButton {...externalProps} />
+                                <LinkButton {...externalProps} />
                                 <BlockquoteButton {...externalProps} />
                                 <CodeBlockButton {...externalProps} />
                             </div>
