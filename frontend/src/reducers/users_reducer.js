@@ -9,7 +9,7 @@ const usersReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER: 
-      let newState = Object.assign({}, state, {[action.currentUser.id]: action.currentUser});
+      let newState = merge({}, state, {[action.currentUser.id]: action.currentUser});
       return newState;
     case RECEIVE_PROFILE:
       if (action.user) {

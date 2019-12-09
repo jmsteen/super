@@ -48,16 +48,19 @@ class ProfilePage extends React.Component {
         .catch((err) => { this.setState({ loaded: true, profileUser: undefined }) })
         // login
       } else if (this.props.currentUser && prevProps.currentUser === undefined) {
-        this.setState({  
+        this.setState({ loaded: false });
+        this.setState({
+          profileUser: this.props.profileUser,  
           loaded: true,
-          selfPage: this.state.profileUser._id === this.props.currentUser.id,
-          currentFollow: this.state.profileUser.follows.find(follow => follow.user === this.props.currentUser.id) || null
+          selfPage: this.props.currentUser && this.props.profileUser._id === this.props.currentUser.id,
+          currentFollow: (this.props.currentUser && this.props.profileUser.follows) ? this.props.profileUser.follows.find(follow => follow.user === this.props.currentUser.id) : null
         })
         // logout
       } else if (prevProps.currentUser && this.props.currentUser === undefined) {
-          this.setState({ loaded: false });
+          this.setState({ loaded: false })
           this.setState({
               loaded: true,
+              profileUser: this.props.profileUser,  
               selfPage: false,
               currentFollow: null
             });
@@ -132,11 +135,11 @@ class ProfilePage extends React.Component {
         width={200} 
         className="loading"
         />
-    } else if (!this.state.profileUser) {
+    } else if (!this.props.profileUser) {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
-    const { displayName, handle, description, image, comments, likes, articles, isFollowing } = this.state.profileUser;
+    const { displayName, handle, description, image, comments, likes, articles, isFollowing } = this.props.profileUser;
 
     return (
       <section className="profile-page">
