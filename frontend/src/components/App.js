@@ -14,7 +14,7 @@ import ArticleComposeContainer from './articles/article_compose_container';
 
 
 const App = () => (
-  <div>
+  <div id="app">
     <NavBarContainer />
     <Modal />
     <Switch>
