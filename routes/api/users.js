@@ -139,11 +139,14 @@ router.patch("/:userId", (req, res) => {
       user.handle = req.body.handle;
       user.displayName = req.body.displayName;
       user.image = req.body.image;
-      user.save((err, user) => {
+      user.save((err, u) => {
         if (err) {
-          res.status(422).json(err)
+          return res.status(422).json(err)
         } else{ 
-          const payload = { id: user.id, handle: user.handle, email: user.email };
+          const payload = { id: user.id, 
+            handle: user.handle, 
+            email: user.email, 
+            description: user.description };
           jwt.sign(
             payload,
             keys.secretOrKey,

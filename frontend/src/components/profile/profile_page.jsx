@@ -36,6 +36,7 @@ class ProfilePage extends React.Component {
       this.setState({ loaded: false });
       window.scrollTo(0, 0);
 
+      // if url changes
       this.props.fetchUserByHandle(this.props.match.params.handle)
         .then(res => this.setState({ 
           profileUser: res.user, 
@@ -62,7 +63,7 @@ class ProfilePage extends React.Component {
       } else if (this.props.profileUser && !isEqual(this.props.profileUser, prevProps.profileUser)) {
         // if the profileUser is updated somehow
         this.setState(
-          { profileUser: this.props.profileUser, loaded: false },
+          { profileUser: this.props.profileUser },
         );
       }
     }
