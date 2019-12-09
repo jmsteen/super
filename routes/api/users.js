@@ -37,6 +37,13 @@ router.get("/handle/:handle", (req, res) => {
     .select('-password -date -email')
     .populate('follows')
     .populate({
+      path: 'isFollowing',
+      populate: {
+        path:'author',
+        select: 'handle displayName _id image'
+      }
+    })
+    .populate({
       path: 'comments',
       populate: {
         path: 'article',
@@ -134,86 +141,19 @@ router.patch("/:userId", (req, res) => {
 
   User.findById(req.params.userId)
     .select('-password -date -email')
-    .populate('follows')
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'article',
-        populate: {
-          path: 'author',
-          select: 'handle displayName'
-        }
-      }
-    })
-    .populate('articles')
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'article',
-        populate: {
-          path: 'author',
-          select: 'image handle displayName'
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'author'
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'author',
-            select: 'handle, displayName'
-          }
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'likes',
-            select: '_id'
-          }
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'comments',
-            select: '_id'
-          }
-        }
-      }
-    })
     .then(user => {
       user.description = req.body.description;
       user.handle = req.body.handle;
       user.displayName = req.body.displayName;
       user.image = req.body.image;
-      user.save((err, user) => {
+      user.save((err, u) => {
         if (err) {
-          res.status(422).json(err)
+          return res.status(422).json(err)
         } else{ 
-          const payload = { id: user.id, handle: user.handle, email: user.email };
+          const payload = { id: user.id, 
+            handle: user.handle, 
+            email: user.email, 
+            description: user.description };
           jwt.sign(
             payload,
             keys.secretOrKey,
@@ -226,7 +166,6 @@ router.patch("/:userId", (req, res) => {
               });
             }
           );
-          //res.json(user)
         }
       })
     })

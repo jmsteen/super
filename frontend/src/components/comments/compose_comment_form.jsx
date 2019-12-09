@@ -52,7 +52,6 @@ class CommentForm extends React.Component {
 
   largeForm() {
     if(this.state.clicked === false) {
-      //console.log(this.state.clicked)
       this.setState({
         clicked: true
       })

@@ -1,11 +1,17 @@
 import { getUser, getUserByHandle, updateUser } from '../util/user_api_util';
 import * as APIUtil from '../util/session_api_util';
 
-export const RECEIVE_USER = "RECEIVE_USER";
+export const RECEIVE_USER = "RECEIVE_USER"; // this is for just the user
+export const RECEIVE_PROFILE = "RECEIVE_PROFILE"; // this is for more nested stuff
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 
 const receiveUser = user => ({
   type: RECEIVE_USER,
+  user
+});
+
+const receiveProfile = user => ({
+  type: RECEIVE_PROFILE,
   user
 });
 
@@ -34,6 +40,6 @@ export const fetchUser = id => dispatch => {
 
 export const fetchUserByHandle = handle => dispatch => {
   return getUserByHandle(handle)
-    .then(res => dispatch(receiveUser(res.data)))
+    .then(res => dispatch(receiveProfile(res.data)))
     .catch(err => console.log(err))
 };

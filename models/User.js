@@ -62,6 +62,12 @@ UserSchema.virtual('follows', {
   foreignField: 'author'
 });
 
+UserSchema.virtual('isFollowing', {
+  ref: 'Follow',
+  localField: '_id',
+  foreignField: 'user'
+});
+
 UserSchema.set('toObject', {
   virtuals: true
 });
