@@ -36,6 +36,7 @@ class ProfileForm extends React.Component {
 
   cancel(e) {
     e.stopPropagation();
+    e.preventDefault();
     this.props.closeModal();
   }
 

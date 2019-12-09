@@ -37,6 +37,13 @@ router.get("/handle/:handle", (req, res) => {
     .select('-password -date -email')
     .populate('follows')
     .populate({
+      path: 'isFollowing',
+      populate: {
+        path:'author',
+        select: 'handle displayName _id image'
+      }
+    })
+    .populate({
       path: 'comments',
       populate: {
         path: 'article',

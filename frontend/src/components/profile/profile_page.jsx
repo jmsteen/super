@@ -4,6 +4,7 @@ import { Route, NavLink } from 'react-router-dom';
 import ProfileMainFeed from './main_feed';
 import ProfileLikeFeed from './like_feed';
 import ProfileCommentFeed from './comment_feed';
+import ProfileFollowPage from './following_page';
 import { isEqual } from 'lodash';
 
 class ProfilePage extends React.Component {
@@ -111,7 +112,7 @@ class ProfilePage extends React.Component {
 
   renderButton() {
     if (!this.props.currentUser || !this.props.profileUser) { return null }
-    if (this.props.currentUser.id === this.props.profileUser._id) {
+    if (this.state.selfPage) {
       return <button id="profile-edit-button" onClick={this.openModal}><i className="fas fa-user-edit" /></button>
     } else {
       if (this.state.currentFollow) {
@@ -135,7 +136,7 @@ class ProfilePage extends React.Component {
       return <h2 className="profile-error">Profile does not exist</h2>
     }
 
-    const { displayName, handle, description, image, comments, likes, articles } = this.state.profileUser;
+    const { displayName, handle, description, image, comments, likes, articles, isFollowing } = this.state.profileUser;
 
     return (
       <section className="profile-page">
@@ -156,6 +157,7 @@ class ProfilePage extends React.Component {
             <NavLink className='profile-nav-tab' exact to={`/@${handle}`}>Profile</NavLink>
             <NavLink className='profile-nav-tab' to={`/@${handle}/likes`}>Likes</NavLink>
             <NavLink className='profile-nav-tab' to={`/@${handle}/comments`}>Comments</NavLink>
+            <NavLink className='profile-nav-tab' to={`/@${handle}/following`}>Followed Authors</NavLink>
           </div>
           <Route 
             exact path='/@:handle'
@@ -168,6 +170,10 @@ class ProfilePage extends React.Component {
           <Route
             exact path='/@:handle/comments'
             render={props => <ProfileCommentFeed {...props} profileUser={this.props.profileUser} selfPage={this.state.selfPage} comments={ comments ? comments.sort((a, b) => new Date(b.date) - new Date(a.date)) : [] } />}
+          />
+          <Route
+            exact path='/@:handle/following'
+            render={props => <ProfileFollowPage {...props} isFollowing={isFollowing} />}
           />
         </main>
       </section>
