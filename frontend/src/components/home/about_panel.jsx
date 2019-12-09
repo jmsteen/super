@@ -17,6 +17,7 @@ const AboutPanel = props => {
         <a
           href="https://github.com/jmsteen/super"
           target="_blank"
+          rel="noopener noreferrer"
           className="git"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 117">
@@ -33,6 +34,7 @@ const AboutPanel = props => {
             id="linkedin"
             href="https://www.linkedin.com/in/joshhk72/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               className="about-team-member-img"
@@ -47,6 +49,7 @@ const AboutPanel = props => {
             id="linkedin"
             href="https://www.linkedin.com/in/alexander-crisel-316b79121/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               className="about-team-member-img"
@@ -61,6 +64,7 @@ const AboutPanel = props => {
             href="https://www.linkedin.com/in/johnmsteen/"
             target="_blank"
             id="linkedin"
+            rel="noopener noreferrer"
           >
             <img
               className="about-team-member-img"
