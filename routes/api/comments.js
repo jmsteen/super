@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Comment = require('../../models/Comment');
 const Article = require('../../models/Article');
+const User = require("../../models/User");
 const Like = require('../../models/Like');
 
 router.post('/',

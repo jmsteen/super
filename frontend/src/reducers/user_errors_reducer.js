@@ -1,4 +1,4 @@
-import { RECEIVE_USER_ERRORS, RECEIVE_USER } from '../actions/user_actions';
+import { RECEIVE_USER_ERRORS, RECEIVE_USER, RECEIVE_PROFILE } from '../actions/user_actions';
 
 export default function userErrorsReducer(state = {}, action) {
   Object.freeze(state);
@@ -10,6 +10,8 @@ export default function userErrorsReducer(state = {}, action) {
         return action.errors;
       };
     case RECEIVE_USER:
+      return {};
+    case RECEIVE_PROFILE:
       return {};
     default:
       return state;

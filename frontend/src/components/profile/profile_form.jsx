@@ -6,6 +6,7 @@ import { editUser } from '../../actions/user_actions';
 import { updateCurrentUser } from '../../actions/session_actions';
 import ProfileImageForm from './profile_image_form';
 import { uploadImage } from '../../util/image_api_util';
+import _ from 'lodash';
 
 const mapStateToProps = (state, ownProps) => {
   const profileUser = Object.values(state.entities.users).find(user => user.handle === ownProps.match.params.handle);
@@ -56,7 +57,7 @@ class ProfileForm extends React.Component {
               this.props.updateCurrentUser({ handle: res.user.handle });
               this.props.history.push(`/@${res.user.handle}`);
             }
-            window.location.reload();
+            //window.location.reload();
             this.props.closeModal();
           };
         })

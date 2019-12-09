@@ -134,76 +134,6 @@ router.patch("/:userId", (req, res) => {
 
   User.findById(req.params.userId)
     .select('-password -date -email')
-    .populate('follows')
-    .populate({
-      path: 'comments',
-      populate: {
-        path: 'article',
-        populate: {
-          path: 'author',
-          select: 'handle displayName'
-        }
-      }
-    })
-    .populate('articles')
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'article',
-        populate: {
-          path: 'author',
-          select: 'image handle displayName'
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'author'
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'author',
-            select: 'handle, displayName'
-          }
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'likes',
-            select: '_id'
-          }
-        }
-      }
-    })
-    .populate({
-      path: 'likes',
-      populate: {
-        path: 'comment',
-        populate: {
-          path: 'article',
-          populate: {
-            path: 'comments',
-            select: '_id'
-          }
-        }
-      }
-    })
     .then(user => {
       user.description = req.body.description;
       user.handle = req.body.handle;
@@ -226,7 +156,6 @@ router.patch("/:userId", (req, res) => {
               });
             }
           );
-          //res.json(user)
         }
       })
     })

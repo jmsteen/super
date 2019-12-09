@@ -27,7 +27,7 @@ const ProfileArticlePanel = props => {
         <h3>{article.title}</h3>
       </Link>
       <div className="profile-panel-bottom">
-        { profileUser._id === article.author._id && <Link to={`/articles/${article._id}/edit`}>Edit Article</Link>}
+        { profileUser && profileUser._id === article.author._id && <Link to={`/articles/${article._id}/edit`}>Edit Article</Link>}
       </div>
     </li>
   );
