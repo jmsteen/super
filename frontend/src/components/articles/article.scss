@@ -259,10 +259,11 @@ div.DraftEditor-root {
     align-items: center;
     position: absolute;
     background-color: lightgray;
-    top: -20px;
-    left: -100px;
-    width: 1000px;
-    height: 550px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 61em;
+    height: 32em;
+    padding: 0.8em;
 }
 
 .article-image-form button {
