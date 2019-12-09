@@ -14,7 +14,7 @@ class CommentIndexItem extends React.Component {
     return( 
      
       <div className="comment-container">
-        <div>
+        <div className="comment-container-inner">
           <img className="comment-author" src={this.props.comment.author.image || require('../../assets/images/default_profile.svg')} alt="profile-pic"/> 
           <p className="comment-body">{this.props.comment.body}</p>
         </div>

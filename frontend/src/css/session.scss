@@ -1,3 +1,7 @@
+.login-form-inputs {
+  padding-top: 20px;
+}
+
 .session-form-container {
   position: absolute;
   min-width: 400px;
@@ -16,6 +20,7 @@
   padding: 20px;
   background-image: none;
   background-color: #eceae7;
+  box-shadow: 4px 4px 6px rgba(68, 68, 68, 0.5)
 }
 
 .session-form input {
@@ -24,6 +29,7 @@
   width: 80%;
   background-color: white;
   line-height: 1.5;
+  padding: 5px 10px;
 }
 
 .session-button {
@@ -49,5 +55,10 @@
 }
 
 .session-errors-list li {
-  margin-left: 50px;
+  list-style: none;
+  font-size: 14px;
+  color: #ff0303;
+  margin: 10px auto 0 auto;
+  width: 80%;
+  text-align: center;
 }

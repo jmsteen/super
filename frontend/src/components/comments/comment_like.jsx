@@ -100,7 +100,7 @@ class CommentLike extends React.Component {
           <span>{`${likesValue}`} Likes</span>
         </div>
         <div>
-          { this.state.currentLike && <button onClick={this.handleErase}>Undo Upvote</button> }
+          { this.state.currentLike && <button onClick={this.handleErase}>Undo Like</button> }
         </div>
       </div>
     )

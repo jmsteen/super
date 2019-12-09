@@ -58,10 +58,10 @@
 }
 
 .article-display-meta-top button {
-    padding: 1px 3px;
+    padding: 3px 8px;
     margin-left: 10px;
-    border-radius: 3px;
-    border: 1px solid red;
+    border-radius: 6px;
+    border: 1px solid #43af43;
 }
 
 .article-display-meta-top h2:hover {
@@ -216,11 +216,16 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container i {
-    font-size: 48px;
+    font-size: 25px;
     cursor: pointer;
 }
 
 .article-display-like-container div {
+    display: flex;
+}
+
+.article-display-like-container div:first-of-type {
+    align-items: center;
     display: flex;
 }
 
@@ -229,8 +234,18 @@ div.DraftEditor-root {
 }
 
 .article-display-like-container button {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    height: fit-content;
     padding: 5px;
+    font-size: 14px;
+    margin-left: 5px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.article-display-like-container button:hover {
+    color: rgba(0, 0, 0, 0.7)
 }
 
 .add-edit-image {
