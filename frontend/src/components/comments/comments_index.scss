@@ -25,6 +25,10 @@
   padding-top: 10px;
 }
 
+.comment-like-container:first-of-type {
+  font-size: 13px;
+}
+
 .comment-links button {
   border: 1px solid rgba(0,0,0,.3);
   border-radius: 3px;
@@ -46,10 +50,14 @@
   justify-content: space-between;
 }
 
+.comment-container-inner {
+  align-items: center;
+}
 
 .comment-body {
   display: block;
   margin-left: 10px;
+  padding: 15px 0;
   width: 100%;
   height: fit-content;
 }
@@ -69,3 +77,17 @@
   cursor: pointer;
 }
 
+.fa-thumbs-up:before {
+  content: "\f164";
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #487fd1;
+}
+
+.fa-thumbs-up:hover {
+  color: #487fd1;
+}
+
+#thumbs-bold::before {
+  -webkit-text-stroke-width: 2px;
+}

@@ -74,11 +74,24 @@ class ArticleLike extends React.Component {
   }
 
   renderButton() {
-    if (!this.props.currentUser) { return <i className="far fa-heart" /> }
+    // if (!this.props.currentUser) { return <i className="far fa-heart" /> }
+    if (!this.props.currentUser) { return <i className="far fa-thumbs-up" id="thumbs-bold"/> }
     if (this.state.currentLike) {
-      return <i className="fas fa-heart" onClick={this.handleIncrement}/>
+      return (
+        <i
+          className="fas fa-thumbs-up"
+          id="thumbs-bold"
+           onClick={this.handleIncrement}
+        />
+      );
     } else {
-      return <i className="far fa-heart" onClick={this.handleCreate} />
+      return (
+        <i
+          className="far fa-thumbs-up"
+          id="thumbs-bold"
+          onClick={this.handleCreate}
+        />
+      );
     }
   }
 
