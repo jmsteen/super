@@ -27,7 +27,7 @@
 
 .article-display-meta {
     height: 55px;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
     display: grid;
     grid-template-columns: 55px auto;
     grid-template-rows: 1fr 1fr;
@@ -302,11 +302,12 @@ div.DraftEditor-root {
 }
 
 .article-display-button-container {
-    width: 35%;
+    // width: 35%;
+    display: flex;
 }
 
 .article-display-button-container a {
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .superBlockquote {
@@ -337,3 +338,12 @@ div.DraftEditor-root {
     padding: 5px;
 }
 
+.read-time {
+    margin-bottom: 40px;
+    color: gray;
+    font-style: italic;
+}
+
+.standard-class {
+    
+}
