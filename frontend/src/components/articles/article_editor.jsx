@@ -23,10 +23,10 @@ import {
 } from 'draft-js-buttons';
 import createLinkPlugin from 'draft-js-anchor-plugin';
 import 'draft-js/dist/Draft.css';
-import createMarkdownPlugin from 'draft-js-markdown-plugin';
 import './article.scss';
 import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
+import createMarkdownPlugin from 'draft-js-markdown-plugin';
 
 const linkPlugin = createLinkPlugin({ placeholder: 'Enter your link here...' });
 const { LinkButton } = linkPlugin;
@@ -104,6 +104,7 @@ class ArticleEditor extends Component {
         this.handlePost = this.handlePost.bind(this);
         this.focus = this.focus.bind(this);
         this.onSelectFile = this.onSelectFile.bind(this);
+        this.myBlockStyleFn = this.myBlockStyleFn.bind(this);
     }
 
     componentDidMount() {
@@ -159,6 +160,8 @@ class ArticleEditor extends Component {
             return 'superBlockquote';
         } else if (type === 'code-block') {
             return 'superCodeblock';
+        } else {
+            return '';
         }
     }
 
@@ -191,6 +194,7 @@ class ArticleEditor extends Component {
     handlePost() {
         const content = this.state.editorState.getCurrentContent();
         const contentString = JSON.stringify(convertToRaw(content));
+        
         uploadImage(this.props.image).then(res => {
             const entry = {
                 body: contentString,
@@ -269,7 +273,7 @@ class ArticleEditor extends Component {
                                             <Separator {...externalProps} />
                                             <LinkButton {...externalProps} />
                                             {/* <CodeButton {...externalProps} /> */}
-                                            <BlockquoteButton {...externalProps} />
+                                            {/* <BlockquoteButton {...externalProps} /> */}
                                             <CodeBlockButton {...externalProps} />
                                         </div>
                                     )

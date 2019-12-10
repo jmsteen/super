@@ -183,7 +183,7 @@ class ArticleCreator extends Component {
                                 <UnderlineButton {...externalProps} />
                                 <Separator {...externalProps} />
                                 <LinkButton {...externalProps} />
-                                <BlockquoteButton {...externalProps} />
+                                {/* <BlockquoteButton {...externalProps} /> */}
                                 <CodeBlockButton {...externalProps} />
                             </div>
                         )
