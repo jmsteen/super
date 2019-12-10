@@ -7,7 +7,7 @@ const ArticlePanel = props => {
 
   return (
     <li className="search-article-panel">
-      <Link to={`/articles/${_id}`}>
+      <Link to={`/articles/${_id}`} onClick={() => console.log('whoa')}>
         <div style={style} className="search-article-panel-image"/>
         <div className="search-article-panel-text">
           <h4>{title}</h4>

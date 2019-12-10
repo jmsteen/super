@@ -3,9 +3,9 @@ import UserPanel from './user_panel';
 import ArticlePanel from './article_panel';
 
 const SearchSection = props => {
-  const { articles, users } = props;
-  const userPanels = users.map(user => <UserPanel key={user._id} user={user} />);
-  const articlePanels = articles.map(article => <ArticlePanel key={article._id} article={article}/>)
+  const { articles, users, close } = props;
+  const userPanels = users.map(user => <UserPanel close={close} key={user._id} user={user} />);
+  const articlePanels = articles.map(article => <ArticlePanel close={close} key={article._id} article={article}/>)
   return (
     <div className="search-section">
       { users.length > 0 && 

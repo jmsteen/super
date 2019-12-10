@@ -7,7 +7,7 @@ const UserPanel = props => {
 
   return (
     <li className="search-user-panel">
-      <Link to={`/@${handle}`}>
+      <Link to={`/@${handle}`} >
         <div style={style}/>
         <span>{displayName || `@${handle}`}</span>
       </Link>
