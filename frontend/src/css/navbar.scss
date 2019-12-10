@@ -14,30 +14,57 @@
   width: 85px;
 }
 
-.navbar-buttons a {
-  font-size: 17px;
-  padding: 10px;
-  border-radius: 10px;
-  transition: 0.2s;
-  i {
-      padding-right: 8px;
+.navbar-buttons {
+  display: flex;
+  .navbar-search {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    input {
+      box-sizing: border-box;
+      background-color: white;
+      padding: 0.3em;
+      width: 88%;
+      -webkit-transition: width 1s;
+      transition: width 1s;
+      &.closed {
+        visibility: hidden;
+        width: 0px;
+        padding: 0;
+      }
+    }
+    i {
+      cursor: pointer;
+      margin-right: 0.6em;
+      color: gray;
+      &:hover {
+        color: black;
+      }
+    }
   }
-}
-
-.navbar-buttons a:first-of-type:hover i:after{
+  > a {
+    font-size: 17px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.2s;
+    i {
+        padding-right: 8px;
+    }
+    &:hover {
+      background-color: lightsteelblue;
+    }
+  }
+  a:first-of-type:hover i:after {
     margin-left: 8px;
     font-size: 17px;
-    font-weight: 600;
-}
-
-.navbar-buttons a:last-of-type:hover i:after{
+    font-weight: 600; 
+  }
+  a:last-of-type:hover i:after {
     margin-left: 8px;
     font-size: 17px;
-    font-weight: 600;
-}
-
-.navbar-buttons a:hover{
-  background-color: lightsteelblue;
+    font-weight: 600;    
+  }
 }
 
 .navbar-signout-button {

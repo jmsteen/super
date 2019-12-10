@@ -9,8 +9,9 @@ const articles = require("./routes/api/articles");
 const likes = require('./routes/api/likes');
 const images = require('./routes/api/images');
 const passport = require("passport");
-const comments = require("./routes/api/comments")
-const follows = require("./routes/api/follows")
+const comments = require("./routes/api/comments");
+const follows = require("./routes/api/follows");
+const search = require("./routes/api/search");
 
 app.use(bodyParser.urlencoded({ limit: '16mb', extended: true }));
 app.use(bodyParser.json({ limit: '16mb', extended: true }));
@@ -30,6 +31,7 @@ app.use("/api/likes", likes);
 app.use("/api/comments", comments);
 app.use("/api/images", images);
 app.use("/api/follows", follows);
+app.use("/api/search", search);
 
 mongoose
     .connect(db, { useNewUrlParser: true })
