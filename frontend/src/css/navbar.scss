@@ -1,13 +1,18 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  max-width: 1050px;
-  min-width: 500px;
+  width: 100%;
   margin: 0 auto;
   padding-top: 15px;
   height: 75px;
   box-sizing: border-box;
   align-items: center;
+  @include lg {
+    padding: 0 2.2em;
+  }
+  @include xl {
+    padding: 0 6.1em;
+  }
 }
 
 .navbar-logo {

@@ -5,6 +5,14 @@
   display: grid;
   grid-column-gap: 0.4em;
   grid-template-columns: 39% 35% 24% auto;
+  @include lg {
+    max-width: 42em;
+    min-width: 28em;
+  }
+  @include xl {
+    max-width: 68em;
+    min-width: 52em;
+  }
 }
 
 .home-secondary-panel-container {
