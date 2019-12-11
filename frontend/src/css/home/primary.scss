@@ -5,18 +5,21 @@
   object-fit: cover;
   background-repeat: none;
   box-sizing: border-box;
-}
-
-.home-primary-panel h2 {
-  font-size: 22px;
-}
-
-.home-primary-panel img {
-  display: block;
-  object-fit: cover;
-  border: 1px solid lightgray;
-  height: 10.6em;
-  width: 100%;
+  h2 {
+    font-size: 22px; 
+  }
+  img {
+    display: block;
+    object-fit: cover;
+    border: 1px solid lightgray;
+    width: 100%;
+    @include xs {
+      height: 7.2em;
+    } 
+    @include md {
+      height: 10.6em;  
+    }   
+  }
 }
 
 .home-primary-panel-text {
@@ -28,6 +31,12 @@
   margin-top: 0.6em;
   padding: 0.4em;
   padding-left: 0;
+  @include xs {
+  justify-content: space-around;
+  }
+  @include md {
+    justify-content: space-between;
+  }
 }
 
 .home-primary-title {
@@ -42,6 +51,12 @@
   width: 80%;
   font-size: 16px;
   margin-top: 1.2em;
+  @include xs {
+    display: none;
+  } 
+  @include md {
+    display: block;
+  }   
 }
 
 .home-primary-author {

@@ -1,10 +1,20 @@
 .home-secondary-panel {
   display: flex;
   img {
-    height: 100%;
-    width: 6.5em;
     object-fit: cover; 
     margin-right: 0.8em;
+    @include xs {
+      height: 5.6em;
+      width: 5.6em;
+    } 
+    @include md {
+      height: 6.8em;
+      width: 6.8em
+    }
+    @include lg {
+      height: 7.2em;
+      width: 7.2em;   
+    }   
   }
   .home-secondary-panel-text {
     display: flex;

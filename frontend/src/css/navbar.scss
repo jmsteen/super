@@ -1,17 +1,28 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   margin: 0 auto;
   padding-top: 15px;
   height: 75px;
   box-sizing: border-box;
   align-items: center;
+  @include xs {
+    padding: 0 0.1em;
+    max-width: 32em;
+    min-width: 20em
+  }
+  @include md {
+    min-width: 32em;
+    max-width: 42em;
+  }
   @include lg {
-    padding: 0 2.2em;
+    min-width: 34em;
+    max-width: 42em;
   }
   @include xl {
-    padding: 0 6.1em;
+    padding: 0 0.2em;
+    min-width: 56em;
+    max-width: 69em;
   }
 }
 
@@ -21,33 +32,6 @@
 
 .navbar-buttons {
   display: flex;
-  .navbar-search {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    input {
-      box-sizing: border-box;
-      background-color: white;
-      padding: 0.3em;
-      width: 88%;
-      -webkit-transition: width 1s;
-      transition: width 1s;
-      &.closed {
-        visibility: hidden;
-        width: 0px;
-        padding: 0;
-      }
-    }
-    i {
-      cursor: pointer;
-      margin-right: 0.6em;
-      color: gray;
-      &:hover {
-        color: black;
-      }
-    }
-  }
   > a {
     font-size: 17px;
     padding: 10px;

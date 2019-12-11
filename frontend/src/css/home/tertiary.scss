@@ -2,11 +2,25 @@
   display: grid;
   margin: 0 auto;
   margin-bottom: 3em;
-  max-width: 1100px;
-  min-width: 600px;
   border-top: 1px solid #8080804a;
   padding-top: 2em;
-  grid-template-columns: 60% auto;
+  @include xs {
+    max-width: 32em;
+    min-width: 20em
+  }
+  @include md {
+    grid-template-columns: 60% auto;
+    min-width: 32em;
+    max-width: 42em;
+  }
+  @include lg {
+    min-width: 34em;
+    max-width: 42em;
+  }
+  @include xl {
+    min-width: 56em;
+    max-width: 69em;
+  }
 }
 
 .home-tertiary-panel {
@@ -22,6 +36,15 @@
     object-fit: cover;
     object-position: center;  
   }
+  @include xs {
+    margin-bottom: 1.5em;
+  }
+  @include sm {
+    margin-bottom: 1.5em;
+  }
+  @include lg {
+    margin-bottom: 1em;
+  }
 }
 
 .home-tertiary-panel-text {
@@ -33,14 +56,32 @@
   h2 {
     font-size: 22px;
     max-width: 20em;
-    font-weight: 600;    
+    font-weight: 600;
+    @include xs {
+      font-size: 19px;
+    }
+    @include lg {
+      font-size: 22px;
+    }
   }
   p {
     max-width: 22em;
     margin: 10px 0;
-    margin-bottom: 15px;
+    margin-bottom: 0.6em;
     font-size: 17px;
-    line-height: 1.4;
+    @include xs {
+      line-height: 1.1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    @include md {
+      line-height: 1.4;
+      overflow: hidden;  
+    }
+    @include xl {
+      -webkit-line-clamp: 3;
+    }
   }
   span {
     display: block;
@@ -55,55 +96,62 @@
 
 #about-panel {
   height: 400px;
-  width: 380px;
   top: 0;
   padding-left: 50px;
-}
+  h3 {
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 1px solid gray;
+    padding: 15px 5px;
+    box-sizing: border-box;
+    &:last-of-type {
+      font-size: 15px;
+      border: none;
+      padding: 20px 0 5px;
+      color: #2b2b2b;
+    }
+  }
+  p {
+    margin-top: 15px;
+    font-size: 17px;
+    padding-right: 10px;
+  }
 
-.about-team a {
-  margin-right: 10px;
+  svg {
+    height: 50px;
+    width: 50px;
+    fill: #7e7e7e;
+    cursor: pointer;
+  }
+  svg:hover {
+    fill: #545454;
+  }
+  @include xs {
+    display: none;
+  }
+  @include md {
+    display: block;
+    width: 250px;
+  }
+  @include lg {
+    width: 275px;
+  }
+  @include xl {
+    width: 375px;
+  }
 }
 
 #linkedin {
   margin: 0;
-}
-
-#about-panel h3 {
-  font-size: 24px;
-  font-weight: 500;
-  border-bottom: 1px solid gray;
-  padding: 15px 5px;
-  box-sizing: border-box;
-}
-
-#about-panel h3:last-of-type {
-  font-size: 15px;
-  border: none;
-  padding: 20px 0 5px;
-  color: #2b2b2b;
-}
-
-#about-panel p {
-  margin-top: 15px;
-  font-size: 17px;
-  padding-right: 10px;
-}
-
-#about-panel svg {
-  height: 50px;
-  width: 50px;
-  fill: #7e7e7e;
-  cursor: pointer;
-}
-
-#about-panel svg:hover {
-  fill: #545454;
 }
       
 .about-team {
   display: flex;
   margin: 20px 0;
   align-items: center;
+  a {
+    margin-right: 10px;
+  }
 }
 
 .about-team-member {
@@ -122,97 +170,89 @@
 .tooltip-josh {
   position: relative;
   display: inline-block;
+  .josh {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px; 
+  }
+  &:hover .josh {
+    visibility: visible;
+  }
 }
 
 .tooltip-john {
   position: relative;
   display: inline-block;
+  .john {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  &:hover .john {
+    visibility: visible;
+  }
 }
 
 .tooltip-alex {
   position: relative;
   display: inline-block;
+  .alex {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px;
+  }
+  &:hover .alex {
+    visibility: visible;  
+  }
 }
 
 .git {
   position: relative;
   display: inline-block;
-}
-
-.tooltip-josh .josh {
-  visibility: hidden;
-  width: 120px;
-  background-color: darkslategray;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  top: 110%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip-josh:hover .josh {
-  visibility: visible;
-}
-
-.tooltip-alex .alex {
-  visibility: hidden;
-  width: 120px;
-  background-color: darkslategray;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  top: 110%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip-alex:hover .alex {
-  visibility: visible;
-}
-
-.tooltip-john .john {
-  visibility: hidden;
-  width: 120px;
-  background-color: darkslategray;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  top: 110%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip-john:hover .john {
-  visibility: visible;
-}
-
-.git .git-text {
-  visibility: hidden;
-  width: 120px;
-  background-color: darkslategray;
-  color: white;
-  text-align: center;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  z-index: 1;
-  top: 110%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.git:hover .git-text {
-  visibility: visible;
+  .git-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px;  
+  }
+  &:hover .git-text {
+    visibility: visible;
+  }
 }
 
 .tooltip-josh .josh::after {

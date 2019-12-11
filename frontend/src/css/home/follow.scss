@@ -34,18 +34,30 @@
   color: gray;
 }
 
-.welcome-message h3 {
-  font-size: 20px;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 10px;
-}
-
-.welcome-text {
-  display: block;
-  line-height: 1.5;
-  font-size: 16px;
-  margin-left: 3px;
+.welcome-message {
+  h3 {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .welcome-text {
+    display: block;
+    line-height: 1.5;
+    font-size: 16px;
+    margin-left: 3px;
+  }
+  ul {
+    list-style: disc;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  @include xs {
+    display: none;
+  }
+  @include lg {
+    display: block;
+  }
 }
 
 .welcome-message ul {

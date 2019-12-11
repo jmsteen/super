@@ -1,17 +1,23 @@
 .home-main {
   margin: 1em auto 1.4em auto;
-  max-width: 1100px;
-  min-width: 700px;
   display: grid;
   grid-column-gap: 0.4em;
   grid-template-columns: 39% 35% 24% auto;
-  @include lg {
+  @include xs {
+    max-width: 32em;
+    min-width: 20em
+  }
+  @include md {
+    min-width: 32em;
     max-width: 42em;
-    min-width: 28em;
+  }
+  @include lg {
+    min-width: 34em;
+    max-width: 42em;
   }
   @include xl {
-    max-width: 68em;
-    min-width: 52em;
+    min-width: 56em;
+    max-width: 69em;
   }
 }
 
@@ -20,6 +26,13 @@
   grid-template-rows: 1fr 1fr 1fr;
   grid-row-gap: 0.6em;
   margin-left: 10px;
+  grid-column-start: 2;
+  @include xs {
+    grid-column-end: 4;
+  }
+  @include lg {
+    grid-column-end: 3;
+  }
 }
 
 .home-follow-feed {
