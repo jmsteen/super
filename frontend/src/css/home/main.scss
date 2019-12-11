@@ -17,7 +17,7 @@
   }
   @include xl {
     min-width: 56em;
-    max-width: 69em;
+    max-width: 68em;
   }
 }
 
@@ -38,4 +38,10 @@
 .home-follow-feed {
   grid-column-start: 3;
   grid-column-end: 4;
+  @include xs {
+    display: none;
+  }
+  @include lg {
+    display: block;
+  }
 }
