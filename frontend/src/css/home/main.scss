@@ -1,17 +1,16 @@
 .home-main {
-  margin: 20px auto 30px auto;
-  height: 50px;
+  margin: 1em auto 1.4em auto;
   max-width: 1100px;
   min-width: 700px;
-  height: 400px;
   display: grid;
+  grid-column-gap: 0.4em;
   grid-template-columns: 39% 35% 24% auto;
 }
 
 .home-secondary-panel-container {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-row-gap: 10px;
+  grid-row-gap: 0.6em;
   margin-left: 10px;
 }
 

@@ -1,45 +1,56 @@
 .home-feed {
   display: grid;
   margin: 0 auto;
-  margin-bottom: 50px;
+  margin-bottom: 3em;
   max-width: 1100px;
   min-width: 600px;
   border-top: 1px solid #8080804a;
-  padding-top: 50px;
+  padding-top: 2em;
   grid-template-columns: 60% auto;
 }
 
 .home-tertiary-panel {
   display: flex;
   justify-content: space-between;
-  height: 150px;
+  height: 10em;
   width: 100%;
   padding-left: 5px;
-  margin-bottom: 32px;
+  margin-bottom: 1em;
+  img {
+    height: 9.4em;
+    width: 9.4em;
+    object-fit: cover;
+    object-position: center;  
+  }
 }
 
 .home-tertiary-panel-text {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1em;
   box-sizing: border-box;
-}
-
-.home-tertiary-panel img {
-  height: 150px;
-  width: 150px;
-  object-fit: cover;
-}
-
-.home-tertiary-panel h2 {
-  font-size: 22px;
-  max-width: 435px;
-  font-weight: 600;
-}
-
-.home-tertiary-panel p {
-  max-width: 435px;
-  margin: 10px 0;
-  margin-bottom: 15px;
+  h2 {
+    font-size: 22px;
+    max-width: 25em;
+    font-weight: 600;    
+  }
+  p {
+    max-width: 25em;
+    margin: 10px 0;
+    margin-bottom: 15px;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  span {
+    display: block;
+    color: #545454;
+    font-size: 17px;
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: black;
+    }  
+  }
 }
 
 #about-panel {
@@ -106,14 +117,6 @@
   min-height: 50px;
   height: 50px;
   border-radius: 100%;
-}
-
-.home-tertiary-panel span {
-  color: #545454;
-}
-
-.home-tertiary-panel span a:hover {
-  border-bottom: 1px solid black;
 }
 
 .tooltip-josh {

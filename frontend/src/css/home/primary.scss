@@ -1,9 +1,10 @@
 .home-primary-panel {
-  padding: 5px;
+  width: 97%;
   padding-top: 0;
   padding-left: 0;
   object-fit: cover;
   background-repeat: none;
+  box-sizing: border-box;
 }
 
 .home-primary-panel h2 {
@@ -12,17 +13,21 @@
 
 .home-primary-panel img {
   display: block;
-  height: 200px;
-  width: 90%;
+  object-fit: cover;
+  border: 1px solid lightgray;
+  height: 10.6em;
+  width: 100%;
 }
 
 .home-primary-panel-text {
   display: flex;
   box-sizing: border-box;
-  flex-direction: column;
-  height: 50%;
   justify-content: space-between;
-  padding: 15px;
+  flex-direction: column;
+  height: 10em;
+  margin-top: 0.6em;
+  padding: 0.4em;
+  padding-left: 0;
 }
 
 .home-primary-title {
@@ -35,11 +40,15 @@
 .home-primary-snippet {
   margin-left: 3%;
   width: 80%;
+  font-size: 16px;
+  margin-top: 1.2em;
 }
 
 .home-primary-author {
   margin-left: 3%;
   color: #545454;
+  font-size: 16px;
+  margin-top: 1em;
 }
 
 .home-primary-author a {
