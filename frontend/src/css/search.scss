@@ -1,6 +1,10 @@
 .navbar-search {
   z-index: 9;
   position: relative;
+  font-size: 18px;
+  i {
+    font-size: 18px;
+  }
   .search-section {
     padding: 0.8em;
     border: 1px solid lightgray;
@@ -8,6 +12,7 @@
     position: absolute;
     width: 100%;
     top: 120%;
+    font-size: 17px;
     .search-user-panel {
       margin-bottom: 0.4em;
     }
