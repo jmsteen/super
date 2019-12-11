@@ -40,7 +40,18 @@
       font-size: 17px;
     }
     i {
-        padding-right: 8px;
+        padding-right: 2px;
+        @include md {
+          padding-right: 8px;
+        }
+    }
+    h3 {
+      display: none;
+    }
+    @include md {
+      h3 {
+        display: inline-block;
+      }
     }
     &:hover {
       background-color: lightsteelblue;
@@ -62,11 +73,16 @@
   font-size: 14px;
   padding: 10px;
   border-radius: 10px;
+  h3 {
+    display: inline-block;
+  }
   i {
     padding-right: 8px;
   }
   @include md {
     font-size: 17px;
+    i {
+    }
   }
 }
 

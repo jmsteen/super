@@ -24,3 +24,14 @@
 @import 'css/profile/following';
 @import 'css/ReactCrop.scss';
 @import 'css/load.scss';
+
+body {
+    @include xs {
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+    }
+
+    @include md {
+        padding: 0;
+    }
+}

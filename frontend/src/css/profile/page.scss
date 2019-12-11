@@ -26,13 +26,24 @@
 }
 
 .profile-header-description {
-  font-size: 20px;
+  @include xs {
+    font-size: 17px;
+  }
+  @include md {
+    font-size: 20px;
+  }
 }
 
 .profile-name-container h1 {
   font-size: 32px;
   font-family: sans-serif;
   font-weight: 600;
+  @include xs {
+    font-size: 24px;
+  }
+  @include md {
+    font-size: 32px;
+  }
 }
 
 .profile-name-container button {
