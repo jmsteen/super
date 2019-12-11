@@ -1,21 +1,46 @@
 .home-main {
-  margin: 20px auto 30px auto;
-  height: 50px;
-  max-width: 1100px;
-  min-width: 700px;
-  height: 400px;
+  margin: 1em auto 1.4em auto;
   display: grid;
+  grid-column-gap: 0.4em;
   grid-template-columns: 39% 35% 24% auto;
+  @include xs {
+    max-width: 520px;
+  }
+  @include md {
+    min-width: 576px;
+    max-width: 700px;
+  }
+  @include lg {
+    min-width: 768px;
+    max-width: 900px;
+  }
+  @include xl {
+    min-width: 992px;
+    max-width: 1100px;
+  }
 }
 
 .home-secondary-panel-container {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-row-gap: 10px;
+  grid-row-gap: 0.6em;
   margin-left: 10px;
+  grid-column-start: 2;
+  @include xs {
+    grid-column-end: 4;
+  }
+  @include lg {
+    grid-column-end: 3;
+  }
 }
 
 .home-follow-feed {
   grid-column-start: 3;
   grid-column-end: 4;
+  @include xs {
+    display: none;
+  }
+  @include lg {
+    display: block;
+  }
 }

@@ -39,6 +39,18 @@
       background-position: center;
       margin-bottom: 0.4em;
       border: 1px solid lightgray;
+      @include xs {
+        min-height: 50px;
+        min-width: 50px;
+        max-height: 75px;
+        max-width: 75px;
+      }
+      @include md {
+        min-height: 75px;
+        min-width: 75px;
+        max-height: 100px;
+        max-width: 100px;
+      }
     }
     span {
         display: block;

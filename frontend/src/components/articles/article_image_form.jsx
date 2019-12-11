@@ -112,14 +112,14 @@ class ArticleImageForm extends React.Component {
           <ReactCrop
             src={src}
             crop={crop}
-            imageStyle={{ maxHeight: '500px'}}
+            imageStyle={{ maxHeight: '75vh'}}
             keepSelection
             onImageLoaded={this.onImageLoaded}
             onComplete={this.onCropComplete}
             onChange={this.onCropChange}
           />
         )}
-        <button onClick={this.handleSubmit}>Submit Image</button>
+        <button onClick={this.handleSubmit}>Submit</button>
       </div>
     )
   }

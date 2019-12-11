@@ -1,13 +1,28 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  max-width: 1050px;
-  min-width: 500px;
   margin: 0 auto;
   padding-top: 15px;
   height: 75px;
   box-sizing: border-box;
   align-items: center;
+  padding-left: 0.15em;
+  padding-right: 0.15em;
+  @include xs {
+    max-width: 520px;
+  }
+  @include md {
+    min-width: 576px;
+    max-width: 700px;
+  }
+  @include lg {
+    min-width: 768px;
+    max-width: 900px;
+  }
+  @include xl {
+    min-width: 992px;
+    max-width: 1100px;
+  }
 }
 
 .navbar-logo {
@@ -16,40 +31,27 @@
 
 .navbar-buttons {
   display: flex;
-  .navbar-search {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    input {
-      box-sizing: border-box;
-      background-color: white;
-      padding: 0.3em;
-      width: 88%;
-      -webkit-transition: width 1s;
-      transition: width 1s;
-      &.closed {
-        visibility: hidden;
-        width: 0px;
-        padding: 0;
-      }
-    }
-    i {
-      cursor: pointer;
-      margin-right: 0.6em;
-      color: gray;
-      &:hover {
-        color: black;
-      }
-    }
-  }
   > a {
-    font-size: 17px;
     padding: 10px;
     border-radius: 10px;
     transition: 0.2s;
+    font-size: 14px;
+    @include md {
+      font-size: 17px;
+    }
     i {
-        padding-right: 8px;
+        padding-right: 2px;
+        @include md {
+          padding-right: 8px;
+        }
+    }
+    h3 {
+      display: none;
+    }
+    @include md {
+      h3 {
+        display: inline-block;
+      }
     }
     &:hover {
       background-color: lightsteelblue;
@@ -68,11 +70,19 @@
 }
 
 .navbar-signout-button {
-  font-size: 17px;
+  font-size: 14px;
   padding: 10px;
   border-radius: 10px;
+  h3 {
+    display: inline-block;
+  }
   i {
     padding-right: 8px;
+  }
+  @include md {
+    font-size: 17px;
+    i {
+    }
   }
 }
 

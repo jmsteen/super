@@ -51,7 +51,7 @@ class SignupForm extends React.Component {
           <li key={`error-${i}`}>
             {error}
           </li>
-        ))}
+        )).slice(0,2)}
       </ul>
     );
   }
@@ -59,8 +59,8 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className="session-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="session-form">
+        <form className="session-form" onSubmit={this.handleSubmit}>
+          <div>
             <br />
             <input type="text"
               value={this.state.email}
@@ -86,7 +86,9 @@ class SignupForm extends React.Component {
               placeholder="Confirm Password"
             />
             <br />
-            <button className="session-button">Sign Up</button>
+            <div className="session-button-container">
+              <button className="session-button">Sign Up</button>
+            </div>
             {this.renderErrors()}
           </div>
         </form>

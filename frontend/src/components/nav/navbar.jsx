@@ -30,9 +30,9 @@ class NavBar extends React.Component {
     const buttons = this.props.loggedIn ?
       <div className="navbar-buttons">
         <SearchInput />
-        <Link to={`/new_article`}><i className="fas fa-book" />New Story</Link>
-        <Link to={`/@${this.props.currentUser.handle}`}><i className="fas fa-user" />Profile</Link>
-        <button className="navbar-signout-button" onClick={this.logoutUser}><i className="fas fa-sign-out-alt" />Sign Out</button>
+        <Link to={`/new_article`}><i className="fas fa-book" /><h3>New Story</h3></Link>
+        <Link to={`/@${this.props.currentUser.handle}`}><i className="fas fa-user" /><h3>Profile</h3></Link>
+        <button className="navbar-signout-button" onClick={this.logoutUser}><i className="fas fa-sign-out-alt" /><h3>Sign Out</h3></button>
       </div> :
       <div className="navbar-buttons">
         <SearchInput />

@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
           <li key={`error-${i}`}>
             {error}
           </li>
-        ))}
+        )).slice(0, 2)}
       </ul>
     );
   }

@@ -1,3 +1,17 @@
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+@import 'break';
 @import 'css/modals';
 @import 'css/navbar';
 @import 'css/reset';
@@ -10,3 +24,14 @@
 @import 'css/profile/following';
 @import 'css/ReactCrop.scss';
 @import 'css/load.scss';
+
+body {
+    @include xs {
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+    }
+
+    @include md {
+        padding: 0;
+    }
+}
