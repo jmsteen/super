@@ -5,13 +5,16 @@
 
 .session-form-container {
   position: absolute;
+  display: flex;
+  align-items: center;
+  top: 6vh;
   left: 50%;
-  top: 1.4em;
   transform: translate(-50%, 0);
-  min-width: 42em;
-  max-width: 56em;
+  min-width: 40em;
+  max-width: 52em;
   width: 100%;
-  height: 28em;
+  min-height: 23em;
+  height: 78vh;
   background: #eee url('../assets/images/modal-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,7 +24,6 @@
   display: block;
   width: 50%;
   margin: 0 auto;
-  margin-top: 5.6em;
   padding: 20px;
   background-image: none;
   background-color: #eceae7;
@@ -40,11 +42,10 @@
 .session-button-container {
   display: flex;
   justify-content: center;
-  width: 45%;
   margin: 0 auto;
   .session-button {
     display: block;
-    padding: 8px;
+    padding: 7px 8px;
     background-color: white;
     border: 1px solid gray;
     border-radius: 3px;
@@ -63,9 +64,9 @@
 
 .session-errors-list li {
   list-style: none;
-  font-size: 14px;
+  font-size: 13px;
   color: #ff0303;
-  margin: 10px auto 0 auto;
+  margin: 5px auto 0 auto;
   width: 80%;
   text-align: center;
 }

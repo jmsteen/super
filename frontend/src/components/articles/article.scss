@@ -271,11 +271,12 @@ div.DraftEditor-root {
     justify-content: center;
     align-items: center;
     position: absolute;
-    background-color: lightgray;
+    background-color: white;
     left: 50%;
+    top: 5vh;
     transform: translate(-50%, 0);
-    width: 61em;
-    height: 32em;
+    width: 85vw;
+    height: 80vh;
     padding: 0.8em;
 }
 

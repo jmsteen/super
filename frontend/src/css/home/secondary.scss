@@ -12,8 +12,8 @@
       width: 6.8em
     }
     @include lg {
-      height: 7.2em;
-      width: 7.2em;   
+      height: 7.4em;
+      width: 7.4em;   
     }   
   }
   .home-secondary-panel-text {
@@ -34,6 +34,13 @@
       a:hover {
         border-bottom: 1px solid black;
       }     
+    }
+    @include lg {
+      padding-bottom: 1.2em;
+    }
+
+    @include xl {
+      padding-bottom: 0.1em;
     }
   }
 }
