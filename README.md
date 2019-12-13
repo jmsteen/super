@@ -5,27 +5,7 @@ Link: [The Super App](https://thesuperapp.herokuapp.com)
 ![Home Page](/assets/super-home-page.png)
 
 ## Background and Overview 
-  Super is a content production platform for junior web developers inspired by Medium. Super is built with the MERN Stack and enables basic functionality of creating, editing and categorizing articles.
-
-## Functionality and MVPs 
-  1. User authentication
-      * Authorized users can create, edit, comment on and like articles.
-      * Unauthorized users can only read articles.
-  2. Articles 
-      * Articles allow for basic text processing and styling.
-      * Content can include text, images and code snippets.
-      * Articles contain an inline text-styling toolbar and image insertion.
-  3. Commenting on articles 
-      * Users can leave comments on articles.
-  4. Follows and feed 
-      * Users can follow authors.
-  5. User profiles
-      * Users can create and edit handle, profile image and display name.
-      * Users can access other profiles via linked profile images and author name.
-  6. Likes 
-      * Users can like articles and comments.
-      * Liked articles and comments appear on user's profile.
- 
+  Super is a content production platform for junior web developers inspired by Medium. Super is built with the MERN Stack and enables basic functionality of creating, editing and categorizing articles.  
 
 ## Technologies and Technical Challenges
 
@@ -93,6 +73,27 @@ text format.
 A separate editor state had to be created when the component mounted in order
 to store and edit content in rich text format. When articles were posted or
 fetched, content had to be converted into raw, stringified content and back.
+
+## Functionality 
+  1. User authentication
+      * Authorized users can create, edit, comment on and like articles.
+      * Unauthorized users can only read articles.
+  2. Articles 
+      * Articles allow for basic text processing and styling.
+      * Content can include text, images and code snippets.
+      * Articles contain an inline text-styling toolbar and image insertion.
+  3. Commenting on articles 
+      * Users can leave comments on articles.
+  4. Follows and feed 
+      * Users can follow authors.
+  5. User profiles
+      * Users can create and edit handle, profile image and display name.
+      * Users can access other profiles via linked profile images and author name.
+  6. Likes 
+      * Users can like articles and comments.
+      * Liked articles and comments appear on user's profile.
+ 
+
 
 ### Plans for Implementation
 
