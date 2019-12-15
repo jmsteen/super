@@ -33,7 +33,7 @@ const SearchInput = props => {
     let x = event.target;
     let notransition = false;
     while (x.parentNode) {
-      if (x.tagName == "A") notransition = true;
+      if (x.tagName === "A") notransition = true;
       x = x.parentNode;
     }
     if (notransition) inp.classList.add('notransition');
@@ -50,7 +50,7 @@ const SearchInput = props => {
     div.onclick = event => {
       let x = event.target;
       while (x.parentNode) {
-        if (x.tagName == "A") return;
+        if (x.tagName === "A") return;
         x = x.parentNode;
       }
       event.stopPropagation();

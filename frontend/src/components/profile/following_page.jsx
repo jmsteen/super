@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import FollowingPanel from './following_panel';
 
 const FollowingPage = props => {

@@ -17,8 +17,6 @@ import {
     ItalicButton,
     BoldButton,
     UnderlineButton,
-    CodeButton,
-    BlockquoteButton,
     CodeBlockButton
 } from 'draft-js-buttons';
 import createLinkPlugin from 'draft-js-anchor-plugin';
@@ -272,8 +270,6 @@ class ArticleEditor extends Component {
                                             <UnderlineButton {...externalProps} />
                                             <Separator {...externalProps} />
                                             <LinkButton {...externalProps} />
-                                            {/* <CodeButton {...externalProps} /> */}
-                                            {/* <BlockquoteButton {...externalProps} /> */}
                                             <CodeBlockButton {...externalProps} />
                                         </div>
                                     )

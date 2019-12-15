@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const UserPanel = props => {
-  const { handle, displayName, image, _id } = props.user;
+  const { handle, displayName, image } = props.user;
   const style = { backgroundImage: `url(${image || require('../../../assets/images/default_profile.svg')})` }
 
   return (

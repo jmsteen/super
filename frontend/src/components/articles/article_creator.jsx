@@ -13,8 +13,6 @@ import {
     ItalicButton,
     BoldButton,
     UnderlineButton,
-    CodeButton,
-    BlockquoteButton,
     CodeBlockButton
 } from 'draft-js-buttons';
 import createInlineToolbarPlugin, { Separator } from 'draft-js-inline-toolbar-plugin';
@@ -22,7 +20,7 @@ import createLinkPlugin from 'draft-js-anchor-plugin';
 import 'draft-js/dist/Draft.css';
 import createMarkdownPlugin from 'draft-js-markdown-plugin';
 import './article.scss';
-import 'draft-js-inline-toolbar-plugin/lib/plugin.css'
+import 'draft-js-inline-toolbar-plugin/lib/plugin.css';
 
 const linkPlugin = createLinkPlugin({placeholder: 'Enter your link here...'});
 const { LinkButton } = linkPlugin;
@@ -35,8 +33,6 @@ const plugins = [
     createMarkdownPlugin(),
     imagePlugin
 ];
-
-
 
 const mapStateToProps = state => ({
     image: state.image.pub
@@ -154,7 +150,7 @@ class ArticleCreator extends Component {
         const currentContent = editorState.getCurrentContent();
         const hideContent = currentContent.hasText() || currentContent.getBlockMap()
             .first().getType() !== "unstyled";
-        return hideContent ? '' : placeholder;
+        return hideContent ? "" : <div className="placeholder">{placeholder}</div>;
     }
 
     render() {
@@ -183,7 +179,6 @@ class ArticleCreator extends Component {
                                 <UnderlineButton {...externalProps} />
                                 <Separator {...externalProps} />
                                 <LinkButton {...externalProps} />
-                                {/* <BlockquoteButton {...externalProps} /> */}
                                 <CodeBlockButton {...externalProps} />
                             </div>
                         )
