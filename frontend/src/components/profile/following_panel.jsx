@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FollowingPanel = props => {
-  const { handle, displayName, image, _id } = props.author;
+  const { handle, displayName, image } = props.author;
   const style = { backgroundImage: `url(${image || require('../../assets/images/default_profile.svg')})`};
   return (
     <li className="follow-list-item">

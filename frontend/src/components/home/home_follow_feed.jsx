@@ -47,7 +47,7 @@ class HomeFollowFeed extends React.Component {
       <div className="home-follow-feed">
         { this.props.articles.length > 0 && <h2>From your follows...</h2> }
         <ul>
-          { panels }
+          { this.props.articles.length > 0 && (panels) }
         </ul>
       </div>
     ) : (
