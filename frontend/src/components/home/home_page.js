@@ -25,27 +25,6 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     this.props.fetchArticles().then(() => this.setState({ loaded: true }));
-    this.throttledHandleScroll = throttle(this.handleScroll, 50);
-    window.addEventListener("scroll", this.throttledHandleScroll);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.throttledHandleScroll);
-  }
-
-  handleScroll() {
-    const aboutPanel = document.getElementById("about-panel");
-    const firstCol = document.getElementById("home-feed-first-col");
-
-    if (firstCol) {
-    const homePos = firstCol.getBoundingClientRect();
-
-      if (homePos.top <= 0) {
-        aboutPanel.setAttribute("style", "position:fixed;");
-      } else {
-        aboutPanel.setAttribute("style", "position:static;");
-      }
-    }
   }
 
   render() {
