@@ -22,6 +22,25 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ noarticlesfound: 'No articles found' }));
 });
 
+router.get('/page/:page', async (req, res) => {
+  const page = parseInt(req.params.page);
+  const perPage = (page === 1) ? 9 : 5;
+  const skipFirst = (page === 1) ? 0 : 9;
+  const skipRest = Math.max(0, 5 * (page - 2));
+  const total = await Article.count();
+
+  Article.find().populate('author')
+    .skip(skipFirst + skipRest)
+    .limit(perPage)
+    .sort({ date: -1 })
+    .then(articles => {
+      const articleObj = {};
+      articles.forEach(article => { articleObj[article._id] = article });
+      return res.json({ articles: articleObj, total })
+    })
+    .catch(err => res.status(404).json({ noarticlesfound: 'No articles found' }));
+});
+
 router.get('/:id', (req, res) => {
   Article.findById(req.params.id)
     .populate('likes')

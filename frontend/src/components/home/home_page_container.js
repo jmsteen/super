@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import HomePage from './home_page';
-import { fetchArticles } from '../../actions/article_actions';
+import { fetchArticlePage, clearArticles } from '../../actions/article_actions';
 
 const mapStateToProps = state => ({
   articles: Object.values(state.entities.articles).sort((a, b) => new Date(b.date) - new Date(a.date))
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchArticles: () => dispatch(fetchArticles())
+  fetchArticlePage: page => dispatch(fetchArticlePage(page)),
+  clearArticles: () => dispatch(clearArticles())
 });
 
 export default connect(

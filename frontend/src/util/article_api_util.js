@@ -8,6 +8,10 @@ export const getArticle = (id) => {
     return axios.get(`/api/articles/${id}`);
 };
 
+export const getArticlePage = page => {
+    return axios.get(`/api/articles/page/${page}`);
+};
+
 export const getUserArticles = id => {
     return axios.get(`/api/user/${id}/articles`);
 };
