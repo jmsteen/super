@@ -39,6 +39,9 @@ class HomeFollowFeed extends React.Component {
       return <div className="home-follow-feed"></div>
     }
 
+    // While this fetches all articles from followed authors, perhaps API pagination
+    // could be used in the future (for scalability, etc).
+
     const panels = this.props.articles.slice(0, 4).map(article => {
       return <FollowPanel key={article._id} article={article} author={this.props.authors.find(author => author._id === article.author)} />
     })
