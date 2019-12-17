@@ -1,17 +1,19 @@
-import { RECEIVE_ARTICLES, RECEIVE_USER_ARTICLES, RECEIVE_ARTICLE } from '../actions/article_actions';
+import { RECEIVE_ARTICLES, RECEIVE_USER_ARTICLES, RECEIVE_ARTICLE, CLEAR_ARTICLES } from '../actions/article_actions';
 import { RECEIVE_LIKE, REMOVE_LIKE } from '../actions/like_actions';
+import { merge } from 'lodash';
 
 const ArticlesReducer = (state = {}, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
-    
     switch (action.type) {
         case RECEIVE_ARTICLES:
-            return action.articles.data;
+            return merge(newState, action.articles);
         case RECEIVE_USER_ARTICLES:
             return action.articles.data;
         case RECEIVE_ARTICLE:
            return { [action.article.data._id]: action.article.data };
+        case CLEAR_ARTICLES:
+            return {};
         case RECEIVE_LIKE:
             if (action.like.article) {
                 const articleId = action.like.article;

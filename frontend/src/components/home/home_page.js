@@ -3,49 +3,24 @@ import HomeMain from './home_main';
 import HomeFeed from './home_feed';
 import ReactLoading from 'react-loading';
 
-
-const throttle = (func, limit) => {
-  let inThrottle
-  return function () {
-    const args = arguments
-    const context = this
-    if (!inThrottle) {
-      func.apply(context, args)
-      inThrottle = true
-      setTimeout(() => inThrottle = false, limit)
-    }
-  }
-};
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loaded: false };
+    this.state = { loaded: false, total: 0 };
+    this.loadMore = this.loadMore.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchArticles().then(() => this.setState({ loaded: true }));
-    this.throttledHandleScroll = throttle(this.handleScroll, 50);
-    window.addEventListener("scroll", this.throttledHandleScroll);
+    this.props.fetchArticlePage(1)
+      .then(res => this.setState({ loaded: true, total: res.total }))
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.throttledHandleScroll);
+    this.props.clearArticles();
   }
 
-  handleScroll() {
-    const aboutPanel = document.getElementById("about-panel");
-    const firstCol = document.getElementById("home-feed-first-col");
-
-    if (firstCol) {
-    const homePos = firstCol.getBoundingClientRect();
-
-      if (homePos.top <= 0) {
-        aboutPanel.setAttribute("style", "position:fixed;");
-      } else {
-        aboutPanel.setAttribute("style", "position:static;");
-      }
-    }
+  loadMore(page) {
+    this.props.fetchArticlePage(page);
   }
 
   render() {
@@ -61,11 +36,12 @@ class HomePage extends React.Component {
 
     const topArticles = this.props.articles.slice(0, 4);
     const botArticles = this.props.articles.slice(4);
+    const hasMore = this.props.articles.length < this.state.total;
     
     return (
       <div className="home-page">
           <HomeMain articles={topArticles}/>
-          <HomeFeed articles={botArticles}/>
+          <HomeFeed articles={botArticles} hasMore={hasMore} loadMore={this.loadMore}/>
       </div>
     );
   }
