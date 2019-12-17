@@ -98,6 +98,11 @@
 }
 
 #about-panel {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
   height: 400px;
   top: 0;
   padding-left: 50px;
