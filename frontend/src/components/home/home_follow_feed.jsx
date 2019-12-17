@@ -58,7 +58,7 @@ class HomeFollowFeed extends React.Component {
           <div className="welcome-message">
             <h3>Welcome to Super!</h3>
             <div className="welcome-text">
-              You can 
+              You can...
               <ul>
                 <li>Write stories for other developers</li>
                 <li>Follow your favorite writers</li>
