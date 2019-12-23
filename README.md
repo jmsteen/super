@@ -9,7 +9,7 @@ Link: [The Super App](https://thesuperapp.herokuapp.com)
 
 ## Technologies and Technical Challenges
 
-Super uses the MERN stack, which includes MongoDb, Express, React and Node.js.
+Super uses the MERN stack, which includes MongoDB, Express, React and Node.js.
 
 For text processing, the app utilizes Draft.js, a rich text editor framework.
 
